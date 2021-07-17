@@ -1,0 +1,12 @@
+<app-header></app-header>
+
+
+
+
+
+<!-- this outlet is not named, so, only one can be present in the template-->
+<div [@routeAnimation]="getAnimationData(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
+
+<!-- Use to declare secondary routs -->

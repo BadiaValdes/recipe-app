@@ -1,0 +1,30 @@
+
+
+.overAll{
+    position: absolute;
+    z-index: 10;
+    height: fit-content;
+    min-width: 100%;
+    min-height: fit-content !important;   
+}
+
+@media (max-width: 600px){
+    .overAll{
+        position: absolute;
+        z-index: 10;
+        height: fit-content;
+        min-width: 100%;
+        min-height: fit-content !important;   
+    }
+
+}
+
+.padding-lr-5{
+    margin-left: 5px;
+    margin-right: 5px;
+   
+}
+
+.width-100{
+    min-width: 100%;
+}
