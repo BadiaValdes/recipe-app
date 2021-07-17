@@ -1,0 +1,26 @@
+.container{
+    width: 80%;
+    margin: auto;
+}
+
+.min-height-100{
+    min-height: 93vh;
+ 
+}
+
+.width-sidenav-40vh{
+    width: 30vh;
+}
+
+.sideBTN{
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+}
+
+.sideBTNicon{
+    font-size: 2em;
+    border-radius: 0 5px 5px 0 !important;
+    max-width: 5px !important;  
+}

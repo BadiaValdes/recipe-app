@@ -1,1 +1,21 @@
-<p>recipe-list works!</p>
+
+
+ <div fxLayout="row wrap" fxLayoutGap="10px"  fxLayout.xs="column" fxLayoutAlign="center" style="padding-top: 15px; padding-bottom: 20px;" >
+
+    <mat-card *ngFor="let recip of recipes$ | async"  fxFlex="20%" fxFlex.md="30%" fxFlex.sm="40%" fxFlex.lt-sm="100%" fxFlex.xs="100%" class="pd-b">
+        <mat-card-header>
+            <mat-card-title>{{recip.name}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{recip.img}}  width="150" height="250">
+        <mat-card-content>
+            <p>
+                {{recip.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Action</button>
+            <button mat-button>Action</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

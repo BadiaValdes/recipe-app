@@ -15,10 +15,20 @@ import {Recipe} from '../interfaces/recipe'
 })
 export class RecipeService {
   recipeURL = environment.baseURL;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    //headers: new HttpHeaders({      
+      //'Access-Control-Allow-Origin': '*',
+      //'Access-Control-Allow-Credentials': 'true',
+      //'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+      //'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+    //})
+  };
   constructor(private http : HttpClient) { }
 
   getRecipe() : Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(`${this.recipeURL}/recipe/`).pipe(
+    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`, this.httpOptions).pipe(
       catchError(this.handleError<Recipe[]>('getRecipe', []))
     );
   }
