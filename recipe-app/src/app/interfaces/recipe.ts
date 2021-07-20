@@ -8,5 +8,6 @@ export interface Recipe {
     fk_difficult: string,
     fk_category: string,
     steps: string,
+    recipe_ingredient: any[],
 
 }

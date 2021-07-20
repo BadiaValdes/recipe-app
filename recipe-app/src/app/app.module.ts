@@ -36,11 +36,12 @@ import { RecipeModule } from './recipes/recipe.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,    
     PageNotFoundComponent, 
-    HeaderComponent,
+    HeaderComponent, 
   ],
   // The order of imports is very important
   imports: [

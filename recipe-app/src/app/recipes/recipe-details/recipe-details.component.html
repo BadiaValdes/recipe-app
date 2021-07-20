@@ -1,12 +1,12 @@
 <div *ngIf="recipe_details$ | async as recipe_details" fxLayout="column">
 
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding-top: 15px; padding-bottom: 20px;">
-    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="40%" fxLayoutAlign="center center" >
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center" >
   
             <img src={{recipe_details.img}} class="img-thumb" width="300" height="300" alt="recipe image">
          
     </div>
-    <div  fxLayoutAlign="start up" fxFlex="79.1%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="50%" fxFlexAlign="stretch" class="background-gray-white">
+    <div  fxLayoutAlign="start up" fxFlex="79%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="63%" fxFlexAlign="stretch" class="background-gray-white">
         <mat-list role="list" style="width: 97%; padding-left: 10px;" >
             <mat-list-item role="listitem">Nombre: {{recipe_details.name}}</mat-list-item>
             <mat-divider></mat-divider>
@@ -20,13 +20,18 @@
             <mat-list-item role="listitem">
                 <blockquote>
                     {{recipe_details.description}}   
+                    
                 </blockquote>
             </mat-list-item>
             
           </mat-list>          
     </div>
 </div>
-<app-recipe-steps></app-recipe-steps>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%" fxLayoutGap="10px" style="padding-bottom: 10px;">
+    <app-recipe-ingredient fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [recipe_ingredients]="recipe_details.recipe_ingredient"></app-recipe-ingredient>
+<app-recipe-steps fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
+</div>
+
 </div>
 <div *ngIf="!recipe_details$ | async as recipe_details">
     <H3>No existe</H3>

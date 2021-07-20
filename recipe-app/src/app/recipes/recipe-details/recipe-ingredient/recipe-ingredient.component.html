@@ -1,0 +1,23 @@
+<div fxLayout="column" fxLayoutGap="10px" fxFlex="100%" class="background-gray-white">
+    <div fxLayoutAlign="center start">
+        <h3>Ingredients</h3>
+    </div>
+    <div fxLayoutAlign="start start"> 
+
+<mat-list style="width: 95%; margin-left: 5px;">
+    <div *ngFor="let ingredient of recipe_ingredients; index as i">
+        
+        <mat-list-item  >
+            <i mat-list-icon class="bi bi-egg-fried"></i>
+            <div mat-line>{{ingredient | titlecase | splitInterface: "-": 0 }}</div>
+            <div mat-line>{{ingredient | titlecase | splitInterface: "-": 1 }}</div>
+        </mat-list-item>
+ 
+    </div>
+  
+</mat-list>
+     
+    </div>
+    
+    
+</div>

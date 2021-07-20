@@ -18,6 +18,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
 
+// Pipe
+
+
 
 // FLEX
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -31,6 +34,9 @@ import { RecipeDescriptionComponent } from './recipe-details/recipe-description/
 import { RecipeStepsComponent } from './recipe-details/recipe-steps/recipe-steps.component';
 import { RecipeCreateComponent } from './recipe-create/recipe-create.component';
 import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
+import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
+import { SplitInterfacePipe } from './split-interface.pipe';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +47,10 @@ import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
     RecipeDescriptionComponent,
     RecipeStepsComponent,
     RecipeCreateComponent,
-    RecipeModifyComponent
-  ],
+    RecipeModifyComponent,
+    RecipeIngredientComponent,
+    SplitInterfacePipe,
+   ],
   imports: [
     CommonModule,
     FormsModule,

@@ -1,14 +1,7 @@
-
-.img-thumb {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: whitesmoke;
-    padding: 5px;
-  }
-
-  .background-gray-white{
+.background-gray-white{
     background-color: rgba(208, 211, 212, 0.1);
     border-radius: 10px;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
 border: 1px solid #bbbbbb77;
 }
