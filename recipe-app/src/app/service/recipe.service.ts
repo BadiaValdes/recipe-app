@@ -33,6 +33,11 @@ export class RecipeService {
     );
   }
 
+  getRecipeDitails(id:number | string) :  Observable<Recipe>{
+    return this.http.get<Recipe>(`${this.recipeURL}recipe/${id}`, this.httpOptions).pipe(
+      catchError(this.handleError<Recipe>('getRecipe')))
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
