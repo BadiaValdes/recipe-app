@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {UserService} from '../../../service/user.service'
 
 @Component({
   selector: 'app-recipe-ingredient',
@@ -9,9 +10,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RecipeIngredientComponent implements OnInit {
   @Input() recipe_ingredients : string[];
 
-  constructor() { }
+  public token = this.us.token; 
+
+  constructor(private us : UserService) { }
 
   ngOnInit(): void {
   }
+
+
 
 }

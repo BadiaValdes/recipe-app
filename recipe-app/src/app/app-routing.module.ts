@@ -11,7 +11,7 @@ const routes: Routes = [
   //{path: 'crisis-center', component: CrisisListComponent},
   //{path: 'hero', component: HeroListComponent},
   // Default rout for the app
-  { path: '',   redirectTo: '/recipe', pathMatch: 'full' },
+  { path: '',   redirectTo: '/recipes', pathMatch: 'full' },
   {path: '**', component: PageNotFoundComponent },
   
 ];

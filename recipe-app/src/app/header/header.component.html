@@ -28,8 +28,8 @@
 
     <mat-toolbar *ngIf="showUnderMenu" [@inOutAnimation] color="primary" class="overAll" >
         <div fxLayoutAlign.gt-xs="center center" fxLayout="row"  fxLayout.xs="column" fxFill >
-            <button [@inOutMenuAnimation] fxFlex="100"  mat-button color="basic" >Primary</button>
-            <button  [@inOutMenuAnimation] fxFlex="100" mat-button color="basic" >Primary</button>
+            <a [@inOutMenuAnimation]  routerLink="" mat-button color="primary" routerLinkActive="active">Recipe</a>
+            <button  [@inOutMenuAnimation]  routerLink="login/" fxFlex="100" mat-button color="basic" >Login</button>
             <button [@inOutMenuAnimation]  fxFlex="100" mat-button color="basic" >Primary</button>
             <button  [@inOutMenuAnimation] fxFlex="100" mat-button color="basic" >Primary</button>
         </div>

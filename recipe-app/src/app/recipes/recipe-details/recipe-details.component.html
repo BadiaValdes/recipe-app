@@ -27,9 +27,9 @@
           </mat-list>          
     </div>
 </div>
-<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%" fxLayoutGap="10px" style="padding-bottom: 10px;">
-    <app-recipe-ingredient fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [recipe_ingredients]="recipe_details.recipe_ingredient"></app-recipe-ingredient>
-<app-recipe-steps fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%" fxLayoutGap="10px" style="padding-bottom: 10px; ">
+    <app-recipe-ingredient style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [recipe_ingredients]="recipe_details.recipe_ingredient"></app-recipe-ingredient>
+<app-recipe-steps style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
 </div>
 
 </div>

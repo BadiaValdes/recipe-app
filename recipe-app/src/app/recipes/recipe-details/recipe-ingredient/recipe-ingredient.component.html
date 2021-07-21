@@ -1,13 +1,13 @@
-<div fxLayout="column" fxLayoutGap="10px" fxFlex="100%" class="background-gray-white">
-    <div fxLayoutAlign="center start">
+<div fxLayout="column" fxLayoutGap="10px" fxFlex="100%" class="background-gray-white" >
+    <div fxLayoutAlign="center start" class="under-line">
         <h3>Ingredients</h3>
     </div>
-    <div fxLayoutAlign="start start"> 
+    <div fxLayoutAlign="start start" style="overflow: auto;"> 
 
-<mat-list style="width: 95%; margin-left: 5px;">
-    <div *ngFor="let ingredient of recipe_ingredients; index as i">
+<mat-list style="width: 100%; margin-left: 5px; overflow: auto;">
+    <div *ngFor="let ingredient of recipe_ingredients; index as i" >
         
-        <mat-list-item  >
+        <mat-list-item  class="hover-item">
             <i mat-list-icon class="bi bi-egg-fried"></i>
             <div mat-line>{{ingredient | titlecase | splitInterface: "-": 0 }}</div>
             <div mat-line>{{ingredient | titlecase | splitInterface: "-": 1 }}</div>
@@ -21,3 +21,5 @@
     
     
 </div>
+
+{{token}}

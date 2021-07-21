@@ -30,6 +30,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 import { RecipeModule } from './recipes/recipe.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -57,7 +58,9 @@ import { RecipeModule } from './recipes/recipe.module';
     //HttpClientModule,
     //HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}), // Tells to the HttpClient to use the service InMemory for the API
     // HTTP CALL ******* END   
+    AuthModule,
     RecipeModule,
+   
     AppRoutingModule,
     MatTabsModule,
     MatToolbarModule,
@@ -66,6 +69,7 @@ import { RecipeModule } from './recipes/recipe.module';
     FlexLayoutModule,
     MatButtonModule,
     MatMenuModule,
+  
     
     
   ],

@@ -1,0 +1,28 @@
+
+.under-line{
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+    border-bottom: 1px solid gray;
+    z-index: 1;
+}
+.under-line::after{
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 0.2em;
+    background-color: hotpink;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+    z-index: 2;
+}
+
+.under-line:hover::after {
+    transform: scaleX(1);
+    transform-origin: center;
+    z-index: 2;
+  }

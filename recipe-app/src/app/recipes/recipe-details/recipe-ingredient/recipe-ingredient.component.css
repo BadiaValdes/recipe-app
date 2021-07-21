@@ -1,7 +1,13 @@
+@import '../../../assest/underline.css';
+
 .background-gray-white{
     background-color: rgba(208, 211, 212, 0.1);
     border-radius: 10px;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
 border: 1px solid #bbbbbb77;
+}
+
+.hover-item:hover{
+background-color: rgba(0, 153, 255, 0.2);
 }
