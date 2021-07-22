@@ -1,11 +1,33 @@
-<mat-form-field  appearance="fill">
-    <mat-label>UserName</mat-label>
-    <input matInput [(ngModel)]="user.username">
-  
-</mat-form-field>
-<mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="user.password">
-</mat-form-field>
-<button mat-button color="primary" (click)="login()">Login</button>
+<div style="height: 90vh; margin: 0 auto; width: 80%;" fxLayoutAlign="center center" class="">
+
+
+    <div *ngIf="!user_service.getLocalSotrageToken()" fxLayout="row wrap" fxFlex="50" fxFlex.xs="80" class="login_container">
+        <div fxFlex="40" fxFlex.sm="100" fxLayoutAlign.xs="center stretch"  fxFlex.xs="100" class="img_container">
+            <img src="assets/img/cooking.jpg" class="image_login">
+        </div>
+        <div class="" fxFlex="58" fxFlex.sm="100" fxFlex.xs="100" fxLayoutAlign="center stretch">
+            <div fxLayout="column" class="" fxFlex="70" fxFlexAlign="center"  >
+                <p fxFlexAlign="center" class="login_text">Log In</p>
+                <mat-form-field  appearance="fill">
+                    <mat-label>UserName</mat-label>
+                    <input matInput [(ngModel)]="user.username">          
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password"[(ngModel)]="user.password">
+                </mat-form-field>
+                <button mat-button color="primary" (click)="login()">Login</button>
+            </div>
+            
+        </div>
+        
+    
+    </div>
+    <div  *ngIf="user_service.getLocalSotrageToken()" fxLayoutAlign="center center" fxLayout="column">
+        <p class="goodby_recipe">Terminaste de cocinar?</p>
+        <button mat-raised-button color="accent" (click)="logout()">logout</button>
+    </div>
+
+</div>
+
 

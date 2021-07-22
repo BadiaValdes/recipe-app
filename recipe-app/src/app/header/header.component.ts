@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {inOutAnimation, inOutMenuAnimation} from '../animations'
 
+import{UserService} from '../service/user.service';
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,13 +13,21 @@ import {inOutAnimation, inOutMenuAnimation} from '../animations'
 export class HeaderComponent implements OnInit {
   showUnderMenu : boolean = false;
 
-  constructor() { }
+  constructor(private userServ : UserService) { }
 
   ngOnInit(): void {
   }
 
   setShowUnderMenu(){
     this.showUnderMenu = this.showUnderMenu ? false: true;
+  }
+
+  get isAuth(){
+    return this.userServ.isAuth();
+  }
+
+  logOUt(){
+    this.userServ.logout();
   }
 
 }

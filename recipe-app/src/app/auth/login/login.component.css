@@ -1,0 +1,72 @@
+.image_login{
+    position: relative;
+    overflow: hidden;
+    height:100%;
+    width:100%;
+    object-fit: cover;
+    object-position: left;
+    border-radius: 10px 0 0 10px ;
+    transition: all ease 0.5s;
+}
+
+
+.login_container{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px 8px rgba(0, 0, 0, 0.09);
+    min-height: 40%;
+    transition: all ease 0.5s;
+    
+    
+}
+
+@media screen and (min-width: 604px) and (max-width: 960px){
+    .image_login{
+        position: relative;
+        overflow: hidden;
+        height:100%;
+        width:100%;
+        object-fit: cover;
+        object-position: left;
+        border-radius: 10px 10px 0 0 ;
+    }
+}
+
+@media screen and (max-width: 605px){
+    .img_container{
+        position: relative;
+        padding-bottom: 30px;
+    }
+    .image_login{
+        position: absolute;
+        top: -50px;
+        overflow: hidden;
+        height:100px;
+        width:100px;
+        object-fit: cover;
+        object-position: left;
+        border-radius: 50%;
+    }
+
+    .login_container{
+        padding-bottom: 20px;
+    }
+}
+
+.mainContainer{
+    border: red 1px solid;
+}
+
+.secondContainer{
+    border: blue 1px solid;
+}
+
+
+.login_text{
+    font-size: 1.5em;
+}
+
+.goodby_recipe{
+    text-shadow: 2px 3px 6px rgba(25, 136, 247, 0.58);
+    font-size: 2em;
+}

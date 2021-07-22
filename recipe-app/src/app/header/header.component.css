@@ -6,6 +6,12 @@
     height: fit-content;
     min-width: 100%;
     min-height: fit-content !important;   
+
+}
+
+.backdropfilter{
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px);
 }
 
 @media (max-width: 600px){

@@ -10,7 +10,10 @@ import { SingupComponent } from './singup/singup.component';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+// FLEX
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    FlexLayoutModule,
+    MatSnackBarModule,
     
   ]
 })

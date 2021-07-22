@@ -12,10 +12,14 @@
         <i class="bi bi-person-circle" style="font-size:2em;"></i>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="login/"  *ngIf="!isAuth">
+          
           <span>Log In</span>
+          
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item *ngIf="isAuth"><span (click)="logOUt()">Log Out</span></button>
+        
+        <button mat-menu-item *ngIf="!isAuth">
           <span>Sing up</span>
         </button>
       </mat-menu>
@@ -26,12 +30,12 @@
   
 </mat-toolbar>
 
-    <mat-toolbar *ngIf="showUnderMenu" [@inOutAnimation] color="primary" class="overAll" >
+    <mat-toolbar *ngIf="showUnderMenu" [@inOutAnimation]  class="overAll " color="primary">
         <div fxLayoutAlign.gt-xs="center center" fxLayout="row"  fxLayout.xs="column" fxFill >
-            <a [@inOutMenuAnimation]  routerLink="" mat-button color="primary" routerLinkActive="active">Recipe</a>
-            <button  [@inOutMenuAnimation]  routerLink="login/" fxFlex="100" mat-button color="basic" >Login</button>
-            <button [@inOutMenuAnimation]  fxFlex="100" mat-button color="basic" >Primary</button>
-            <button  [@inOutMenuAnimation] fxFlex="100" mat-button color="basic" >Primary</button>
+            <button [@inOutMenuAnimation] fxFlex="100" routerLink="" mat-button >Recipe</button>
+            <button  [@inOutMenuAnimation]   fxFlex="100" mat-button color="basic" >Primary</button>
+            <button [@inOutMenuAnimation]  fxFlex="100" mat-button >Primary</button>
+            <button  [@inOutMenuAnimation]  fxFlex="100" mat-button  >Primary</button>
         </div>
    </mat-toolbar>
 
