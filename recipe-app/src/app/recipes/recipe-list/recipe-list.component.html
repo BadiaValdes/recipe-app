@@ -7,11 +7,6 @@
             <mat-card-title>{{recip.name}}</mat-card-title>
         </mat-card-header>
         <img mat-card-image src={{recip.img}}  width="150" height="250">
-        <mat-card-content>
-            <p>
-                {{recip.description}}
-            </p>
-        </mat-card-content>
         <mat-card-actions>
             <a mat-stroked-button [routerLink]="['/',recip.id]" color="primary">Detalles</a>
             <button mat-button>Action</button>

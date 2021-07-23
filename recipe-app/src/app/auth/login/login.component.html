@@ -24,6 +24,10 @@
     
     </div>
     <div  *ngIf="user_service.getLocalSotrageToken()" fxLayoutAlign="center center" fxLayout="column">
+        <div fxAlign="center" fxLayoutAlign="center center">
+            <img class="byebye" src="assets/img/byebye.png">
+        </div>
+        
         <p class="goodby_recipe">Terminaste de cocinar?</p>
         <button mat-raised-button color="accent" (click)="logout()">logout</button>
     </div>

@@ -20,6 +20,12 @@
     
 }
 
+.byebye{
+    width: 40%;
+    height: 40%;
+    transition: all ease 0.5s;
+}
+
 @media screen and (min-width: 604px) and (max-width: 960px){
     .image_login{
         position: relative;
@@ -29,6 +35,11 @@
         object-fit: cover;
         object-position: left;
         border-radius: 10px 10px 0 0 ;
+    }
+
+    .byebye{
+        width: 50%;
+        height: 50%;  
     }
 }
 
@@ -51,6 +62,10 @@
     .login_container{
         padding-bottom: 20px;
     }
+    .byebye{
+        width: 90%;
+        height: 90%;  
+    }
 }
 
 .mainContainer{
@@ -62,11 +77,9 @@
 }
 
 
-.login_text{
-    font-size: 1.5em;
-}
 
 .goodby_recipe{
     text-shadow: 2px 3px 6px rgba(25, 136, 247, 0.58);
     font-size: 2em;
 }
+

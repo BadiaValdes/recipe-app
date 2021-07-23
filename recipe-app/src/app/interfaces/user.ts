@@ -1,6 +1,6 @@
 export interface User {
     id: string,
-    is_superuser: boolean,
+    last_login: string,
     user_name : string,
     first_name: string,
     last_name:string,

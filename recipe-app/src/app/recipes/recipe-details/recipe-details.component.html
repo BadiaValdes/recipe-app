@@ -1,9 +1,12 @@
 <div *ngIf="recipe_details$ | async as recipe_details" fxLayout="column">
 
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding-top: 15px; padding-bottom: 20px;">
-    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center" >
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center" style="position: relative;">
   
             <img src={{recipe_details.img}} class="img-thumb" width="300" height="300" alt="recipe image">
+            <div style="position: absolute; bottom: 0; right:0; font-size: 2em; color: white; width: 50px; height: 50px; background-color: cornflowerblue;">
+                <i fxLayoutAlign="center end" class="bi bi-gear-fill"></i>
+            </div>
          
     </div>
     <div  fxLayoutAlign="start up" fxFlex="79%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="63%" fxFlexAlign="stretch" class="background-gray-white">

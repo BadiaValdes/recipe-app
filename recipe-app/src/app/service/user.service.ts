@@ -16,9 +16,12 @@ import {LocalStorageService} from './local-storage.service'
   providedIn: 'root'
 })
 export class UserService {
+  private userData : User = null;
+
   private local_storage : Storage;
   private code_status : number;
   recipeURL = environment.authURL;
+  recipeApiUrl = environment.baseURL;
   public token : string;
   public error: any [];
   public token_expires: Date;
@@ -68,6 +71,8 @@ export class UserService {
     return this.local_storage.getItem("token")? true : false;
   } 
 
+  
+
   public refreshToken() {
     this.http.post(`${this.recipeURL}auth/refresh-token/`, JSON.stringify({token: this.token}), this.httpOptions).subscribe(
       data => {
@@ -78,6 +83,7 @@ export class UserService {
 
   public logout() {
     this.local_storage.removeItem('token');
+    this.local_storage.removeItem('user');
     this.token = null;
     this.token_expires = null;
     this.username = null;
@@ -99,16 +105,68 @@ export class UserService {
     return this.code_status;
   }
 
+  public getDecodeToken(token){
+    const token_parts = token.split(/\./);
+    return JSON.parse(window.atob(token_parts[1]));
+  }
 
 
+  getHttpOpeion(){
+    if (this.getLocalSotrageToken()){
+      return {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json',
+        'Authorization': 'JWT ' + this.getLocalSotrageToken()}),
+      };
+    }
+    else {
+      return {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json',
+        }),
+        
+      };
+    }
+    
+
+  }
+
+  get LogedUser(){
+    return JSON.parse(this.local_storage.getItem('user'))
+  }
+    
+
+  public getUserData(){
+    let userid = this.getDecodeToken(this.local_storage.getItem('token')).user_id;
+    this.http.get<User>(`${this.recipeURL}users/${userid}`, this.getHttpOpeion()).toPromise().then(data =>{
+      this.userData = {
+        id: data['id'],
+        last_login: data['last_login'],
+        user_name : data['username'],
+        first_name: data['first_name'],
+        last_name:data['last_name'],
+        mail: data['email'],
+        date_joined : data['date_joined'],
+        avatar: data['avatar'],
+        groups: data['groups'], 
+      }
+
+      this.local_storage.setItem('user', JSON.stringify(this.userData));
+      // The oposite process 
+      
+      console.log(this.userData)
+    });
+  
+  }
+
+  
 
   private updateData(token) {
     this.token = token;
     this.local_storage.setItem('token',this.token);
     // decode the token to read the username and expiration timestamp
-    const token_parts = this.token.split(/\./);
-    const token_decoded = JSON.parse(window.atob(token_parts[1]));
-    console.log(token_decoded);
+    
+    const token_decoded = this.getDecodeToken(this.token);
+    this.getUserData();
+   
     this.token_expires = new Date(token_decoded.exp * 1000);
     this.username = token_decoded.username;
   }

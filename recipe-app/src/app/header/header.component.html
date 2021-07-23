@@ -4,20 +4,42 @@
         <h4>Recipe APP</h4>
         
        
-     
+
 </mat-toolbar-row>  
 <mat-toolbar-row  fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
     <button mat-icon-button color="accent" (click)="setShowUnderMenu()" ><i class="bi bi-list"  style="font-size:2em;"></i></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <i class="bi bi-person-circle" style="font-size:2em;"></i>
+        <i *ngIf="!isAuth" class="bi bi-person-circle" style="font-size:2em;"></i>
+        <img class="avatar" *ngIf="isAuth" src="{{userData.avatar}}" alt="User avatar">
       </button>
       <mat-menu #menu="matMenu">
+        <div *ngIf="isAuth" >
+          
+          <mat-list >
+      
+            <mat-list-item>
+             
+              <div mat-line class="login_welcome">Let's cook as</div>
+              <div mat-line class="login_mail"> {{userData.mail}} </div>
+           
+            </mat-list-item>
+
+          </mat-list>
+     
+
+            <mat-divider style="margin: 5px"></mat-divider>        
+         
+          <button mat-menu-item  class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-person-circle menu_icon"></i><span>Profile</span></button>
+          <button mat-menu-item class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-journal-richtext menu_icon"></i><span>My recipe</span></button>
+          <mat-divider style="margin: 5px"></mat-divider>
+          <button mat-menu-item class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-box-arrow-right menu_icon"></i><span (click)="logOUt()">Log Out</span></button>
+        </div>
         <button mat-menu-item routerLink="login/"  *ngIf="!isAuth">
           
           <span>Log In</span>
           
         </button>
-        <button mat-menu-item *ngIf="isAuth"><span (click)="logOUt()">Log Out</span></button>
+        
         
         <button mat-menu-item *ngIf="!isAuth">
           <span>Sing up</span>
@@ -38,6 +60,7 @@
             <button  [@inOutMenuAnimation]  fxFlex="100" mat-button  >Primary</button>
         </div>
    </mat-toolbar>
+
 
 
 

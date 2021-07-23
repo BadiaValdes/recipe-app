@@ -1,4 +1,20 @@
+.avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 60%;
+}
 
+.font_menu_text{
+    font-size: 1em;
+    color: rgba(77, 74, 74);
+    
+}
+
+
+.menu_icon{
+    font-size: 1.3em;
+    padding-right: 20px;
+}
 
 .overAll{
     position: absolute;
@@ -33,4 +49,16 @@
 
 .width-100{
     min-width: 100%;
+}
+
+.login_text{
+    font-size: 1.4em;
+}
+
+.login_welcome{
+    font-size: 1.2em;
+}
+
+.login_mail{
+    font-size: 1em;
 }
