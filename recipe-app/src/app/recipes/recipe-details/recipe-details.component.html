@@ -1,12 +1,11 @@
 <div *ngIf="recipe_details$ | async as recipe_details" fxLayout="column">
 
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding-top: 15px; padding-bottom: 20px;">
-    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center" style="position: relative;">
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding-top: 15px; padding-bottom: 20px; ">
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center">
   
             <img src={{recipe_details.img}} class="img-thumb" width="300" height="300" alt="recipe image">
-            <div style="position: absolute; bottom: 0; right:0; font-size: 2em; color: white; width: 50px; height: 50px; background-color: cornflowerblue;">
-                <i fxLayoutAlign="center end" class="bi bi-gear-fill"></i>
-            </div>
+
+
          
     </div>
     <div  fxLayoutAlign="start up" fxFlex="79%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="63%" fxFlexAlign="stretch" class="background-gray-white">
@@ -22,20 +21,31 @@
             </mat-list-item>
             <mat-list-item role="listitem">
                 <blockquote>
-                    {{recipe_details.description}}   
+                    {{recipe_details.description}}  
+                    
                     
                 </blockquote>
             </mat-list-item>
             
-          </mat-list>          
+          </mat-list>     
+
     </div>
 </div>
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%" fxLayoutGap="10px" style="padding-bottom: 10px; ">
     <app-recipe-ingredient style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [recipe_ingredients]="recipe_details.recipe_ingredient"></app-recipe-ingredient>
 <app-recipe-steps style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
-</div>
 
 </div>
-<div *ngIf="!recipe_details$ | async as recipe_details">
+<p *ngIf="isAuth()">Lo esta</p>
+<div *ngIf="isAuth() && (userID().id == recipe_details.fk_user)"  style="position: absolute; bottom: 0; right:0; font-size: 2em; color: white; width: 50px; height: 50px;">
+    <button mat-mini-fab  color="primary" (click)="openSheet()">
+    <i class="bi bi-gear-fill"></i>
+   
+    </button>
+</div>
+</div>
+<div *ngIf="!recipe_details$">
     <H3>No existe</H3>
 </div>  
+
+

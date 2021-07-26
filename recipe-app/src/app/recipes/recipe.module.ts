@@ -36,6 +36,8 @@ import { RecipeCreateComponent } from './recipe-create/recipe-create.component';
 import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
 import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
 import { SplitInterfacePipe } from './split-interface.pipe';
+import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet'
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { SplitInterfacePipe } from './split-interface.pipe';
     RecipeModifyComponent,
     RecipeIngredientComponent,
     SplitInterfacePipe,
+    RecipeOptionsComponent,
    ],
   imports: [
     CommonModule,
@@ -64,7 +67,7 @@ import { SplitInterfacePipe } from './split-interface.pipe';
     MatButtonModule,
     MatCardModule,
     MatStepperModule,  
-
+    MatBottomSheetModule,
     MatExpansionModule,
   ]
 })

@@ -8,12 +8,19 @@ import { switchMap } from 'rxjs/operators';
 
 // Service 
 import {RecipeService} from '../../service/recipe.service';
+import {UserService} from '../../service/user.service'
 
 // Observable
 import { Observable } from 'rxjs';
 
 // Interface
 import {Recipe} from '../../interfaces/recipe';
+
+// Child components
+import {RecipeOptionsComponent} from './recipe-options/recipe-options.component'
+
+// Buton Sheet
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-recipe-details',
@@ -27,12 +34,27 @@ export class RecipeDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: RecipeService,
+    private buttonSheet: MatBottomSheet,
+    private userService : UserService,
   ) { }
 
   ngOnInit(): void {
     this.recipe_details$ = this.route.paramMap.pipe(
       switchMap((param: ParamMap)=> this.service.getRecipeDitails(param.get('id')!))
     )
+  }
+
+  openSheet():void{
+    this.buttonSheet.open(RecipeOptionsComponent);
+  }
+
+  isAuth(){
+    return this.userService.isAuth();
+  }
+
+  userID(){
+    if(this.userService.isAuth())
+      return JSON.parse(this.userService.getLocalSotrage().getItem('user'))    
   }
 
 }

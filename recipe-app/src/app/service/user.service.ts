@@ -155,9 +155,7 @@ export class UserService {
       console.log(this.userData)
     });
   
-  }
-
-  
+  }  
 
   private updateData(token) {
     this.token = token;
