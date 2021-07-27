@@ -12,13 +12,16 @@ import {User} from '../interfaces/user'
 //Service
 import {LocalStorageService} from './local-storage.service'
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private userData : User = null;
+  private userData : User;
 
   private local_storage : Storage;
+
+
   private code_status : number;
   recipeURL = environment.authURL;
   recipeApiUrl = environment.baseURL;
@@ -32,7 +35,7 @@ export class UserService {
 
 
   constructor(private http : HttpClient, private localStorage : LocalStorageService) { 
-    this.local_storage = localStorage.localStorage;
+    this.local_storage = localStorage.localStorage(1);
   }
 
 //  public  logIn(user){
@@ -70,6 +73,11 @@ export class UserService {
   public isAuth(): boolean{
     return this.local_storage.getItem("token")? true : false;
   } 
+
+  public clearLocalStorage(){
+
+    this.local_storage.clear();
+  }
 
   
 
@@ -152,7 +160,6 @@ export class UserService {
       this.local_storage.setItem('user', JSON.stringify(this.userData));
       // The oposite process 
       
-      console.log(this.userData)
     });
   
   }  

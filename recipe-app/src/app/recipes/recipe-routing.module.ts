@@ -10,10 +10,8 @@ import {AuthGuard} from '../auth/guard/auth.guard'
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'recipe',
     component: RecipeMainComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['limol']},
     children: [
       { path: '',  component: RecipeListComponent },
       { path: ':id',  component: RecipeDetailsComponent },

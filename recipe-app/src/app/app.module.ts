@@ -26,13 +26,16 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 // Flex Layout END
 
 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 //animation
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 import { RecipeModule } from './recipes/recipe.module';
 import { AuthModule } from './auth/auth.module';
+
+// Interceptor
+import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor';
 
 
 
@@ -77,7 +80,10 @@ import { AuthModule } from './auth/auth.module';
     
     
   ],
-  providers: [],
+  providers: [
+    // HTTP INTERCEPTOR for ERROR handle
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

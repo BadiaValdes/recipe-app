@@ -4,12 +4,22 @@ function getLocalStorage():Storage {
   return localStorage;  
 }
 
+function getSessionStorage(): Storage{
+  return sessionStorage;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
-  get localStorage(){
-    return getLocalStorage();
+  localStorage(num: number){
+    if(num == 0){
+      return getLocalStorage();
+    }
+ 
+      return getSessionStorage();
+  
+      
   }
   constructor() { }
 }
