@@ -14,12 +14,19 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list'; 
 import {MatStepperModule} from '@angular/material/stepper'; 
 import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select'; 
 
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
 
 // Pipe
 
+//Form
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 // FLEX
@@ -37,7 +44,8 @@ import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
 import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
 import { SplitInterfacePipe } from './split-interface.pipe';
 import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet'
+
+
 
 
 @NgModule({
@@ -69,6 +77,11 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet'
     MatStepperModule,  
     MatBottomSheetModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ]
 })
 export class RecipeModule { }

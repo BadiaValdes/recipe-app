@@ -1,1 +1,54 @@
-<p>recipe-create works!</p>
+<div mat-dialog-content>
+    <form [formGroup]="recipeForm">
+        <div fxFlex="100%">
+
+       
+        <mat-form-field appearance="fill">
+            <label for="recipe_name">Recipe name</label>
+            <input  matInput  id="recipe_name" type="text" formControlName="recipe_name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <label for="slug">Slug</label>
+            <input  matInput  id="slug" type="text" formControlName="slug">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <label for="img">Image</label>
+            <input  matInput  id="img" type="file" accept="image/*" formControlName="img">
+        </mat-form-field>
+    </div>
+        <mat-form-field appearance="fill">
+            <label for="description">Description</label>
+            <textarea  matInput  id="description"  formControlName="description"> </textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Difficulty</mat-label>
+            <mat-select formControlName="difficulty">
+                <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
+                    {{difficulty.name}}
+                  </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <label for="steps">Steps</label>
+            <textarea  matInput  id="steps" formControlName="steps" > </textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <label for="ingredients">Ingredient</label>
+            <textarea  matInput  id="ingredients" formControlName="ingredients" > </textarea>
+        </mat-form-field>
+          
+</form>
+
+
+</div>
+
+{{this.recipeForm.value | json}}  
+

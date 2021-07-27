@@ -1,4 +1,3 @@
-
 export interface Recipe {
     id: string,
     slug: string,

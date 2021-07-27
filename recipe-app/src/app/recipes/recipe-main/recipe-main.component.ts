@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+// Dialog
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+// Component
+import {RecipeCreateComponent} from '../recipe-create/recipe-create.component'
+
 @Component({
   selector: 'app-recipe-main',
   templateUrl: './recipe-main.component.html',
@@ -13,7 +19,11 @@ export class RecipeMainComponent implements OnInit {
     this.opened = this.opened ? false : true;
   }
 
-  constructor() { }
+  constructor(public matDialog : MatDialog) { }
+
+  openCreateDialog(){
+    this.matDialog.open(RecipeCreateComponent);
+  }
 
   ngOnInit(): void {
   }

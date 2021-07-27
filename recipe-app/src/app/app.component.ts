@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Like a variable for the html
 import { RouterOutlet } from '@angular/router';
