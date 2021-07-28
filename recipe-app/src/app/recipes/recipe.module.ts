@@ -44,6 +44,7 @@ import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
 import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
 import { SplitInterfacePipe } from './split-interface.pipe';
 import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
+import {MatRadioModule} from '@angular/material/radio'; 
 
 
 
@@ -82,6 +83,7 @@ import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-o
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatRadioModule,
   ]
 })
 export class RecipeModule { }

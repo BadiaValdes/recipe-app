@@ -22,7 +22,9 @@ export class RecipeMainComponent implements OnInit {
   constructor(public matDialog : MatDialog) { }
 
   openCreateDialog(){
-    this.matDialog.open(RecipeCreateComponent);
+    this.matDialog.open(RecipeCreateComponent, {
+      width: '900px',
+    });
   }
 
   ngOnInit(): void {

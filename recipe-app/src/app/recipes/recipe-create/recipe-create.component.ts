@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl,  FormGroupDirective,  NgForm, NgControl} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl,  FormGroupDirective,  NgForm, NgControl, FormArray} from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 //Interface
@@ -27,6 +27,7 @@ export class RecipeCreateComponent implements OnInit {
   difficulty_options$ :  Observable<Difficulty[]> ;
   measurement_options$ :  Observable<Measurement[]> ;
 
+  principal : boolean = false;
 
   // Form
   recipeForm = new FormGroup({
@@ -37,16 +38,42 @@ export class RecipeCreateComponent implements OnInit {
     difficulty: new FormControl,
     category: new FormControl,
     steps: new FormControl,
-    ingredients: new FormControl,
+    ingredients: this.formB.array([]),
   });
 
-  constructor(private generalAPI: GeneralApiServicesService) { }
+  constructor(private generalAPI: GeneralApiServicesService, private formB : FormBuilder) { }
+
+
+
 
   ngOnInit(): void {
     this.product_options$ = this.generalAPI.getProducts()
     this.category_options$ = this.generalAPI.getCategory()
     this.difficulty_options$ = this.generalAPI.getDifficulty()
     this.measurement_options$= this.generalAPI.getMeasurement()
+  }
+
+  // Devolver el arreglo actual de ingredietnes
+  ingredients() : FormArray {
+    return this.recipeForm.get('ingredients') as FormArray
+  }
+
+  // Crear parametros internos del array
+  newIngredients() : FormGroup{
+    return this.formB.group({
+      product: "",
+      cantidad: "",
+      measurement: "",
+      principal : this.principal,
+    })
+  }
+
+  adicionarIngrediente() {
+    this.ingredients().push(this.newIngredients());
+  }
+
+  removeIngredient(i:number){
+    this.ingredients().removeAt(i);
   }
 
 }
