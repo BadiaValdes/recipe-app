@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
@@ -62,6 +63,8 @@ import {MatRadioModule} from '@angular/material/radio';
     RecipeIngredientComponent,
     SplitInterfacePipe,
     RecipeOptionsComponent,
+
+  
    ],
   imports: [
     CommonModule,
@@ -84,6 +87,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ReactiveFormsModule,
     MatSelectModule,
     MatRadioModule,
+    MatSlideToggleModule,
   ]
 })
 export class RecipeModule { }

@@ -45,16 +45,50 @@ export class RecipeService {
   getRecipe() : Observable<Recipe[]>{
 
     let httpOptions = this.getHttpOpeion()
-    console.log(httpOptions)
+
     return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`, httpOptions).pipe(
       catchError(this.handleError<Recipe[]>('getRecipe', []))
     );
   }
 
+  existRecipe(name: string){
+    let httpOptions = this.getHttpOpeion()
+    let find : boolean = false;
+    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`, httpOptions)
+    
+    
+    /*.toPromise().then((data)=>{
+      data.forEach(element => {
+        if(element.name === name)
+        find = true;
+      });
+      return find;
+    })*/
+    
+    .pipe(
+      map(dat => {
+       
+      dat.forEach(dat=>{
+        if(dat.name===name)
+        {
+          find = true
+        }
+      })
+      return find;
+
+      }),
+
+    )
+
+    
+  }
+
+  
+
 
   getRecipeDitails(id:number | string) :  Observable<Recipe>{
     let httpOptions = this.getHttpOpeion()
-    console.log(httpOptions)
+
     return this.http.get<Recipe>(`${this.recipeURL}recipe/${id}`, httpOptions).pipe(
       catchError(this.handleError<Recipe>('getRecipe')))
   }

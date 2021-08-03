@@ -1,15 +1,23 @@
 
-<div mat-dialog-content fxShow.gt-sm="" fxShow="false">
+<div mat-dialog-content class="form-dialog-height">
   <h1 mat-dialog-title>Let's cook something</h1>
+  <div  fxShow.gt-sm="" fxShow="false">
     <form [formGroup]="recipeForm">      
-      <mat-stepper linear orientation="vertical">
+      <mat-stepper linear orientation="horizontal">
         <mat-step >
           
           <ng-template matStepLabel>General Data</ng-template>
           <div fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label for="recipe_name">Recipe name</mat-label>
-            <input  matInput  id="recipe_name" type="text" formControlName="recipe_name">
+            <input  matInput  id="recipe_name" name="recipe_name" type="text"  formControlName="recipe_name" required>           
+                  
+            <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
+            <mat-error *ngIf="recipe_name.errors?.value">Ya existe</mat-error>
+          
+       
+ 
+           
         </mat-form-field>
 
 
@@ -36,6 +44,7 @@
 
     <mat-step>
       <ng-template matStepLabel>How can i do it</ng-template>
+      <div fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label>Difficulty</mat-label>
             <mat-select formControlName="difficulty">
@@ -60,12 +69,12 @@
             <label for="steps">Steps</label>
             <textarea  matInput  id="steps" formControlName="steps" > </textarea>
         </mat-form-field>
-
+      </div>
       </mat-step>
     <mat-step>
       <ng-template matStepLabel>What is inside</ng-template>
-        <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="100%">
-        <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxFlex="100%" fxLayout="row">
+        <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
+        <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxLayout="row">
 
         <mat-form-field appearance="fill" fxFlex="25%">
           <mat-label>Producto</mat-label>
@@ -89,114 +98,117 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-slide-toggle
+        class="example-margin" 
+        formControlName="principal"      
+        (click)="mainIngredientSlide(i)"
+        >
+      Slide me!
+    </mat-slide-toggle>
 
-
-        <button mat-flat-button color="warn" (click)="removeIngredient(i)" fxFlex="25%"><i class="bi bi-trash"></i></button>
+        <!--<mat-radio-button formControlName="principal" name="principal" [value]="!principal" (click)="mainIngredient(i)">Ingrediente Principal</mat-radio-button>
+        --><button mat-flat-button color="warn" (click)="removeIngredient(i)" fxFlex="25%"><i class="bi bi-trash"></i></button>
         </div>
       </div>
       <button mat-flat-button color="warn" (click)="adicionarIngrediente()">Adicionar Ingrediente</button>  
       <button mat-flat-button color="primary">Cocinar</button>
     </mat-step>
-    </mat-stepper>
-       
-        
-          
+    </mat-stepper>      
 </form>
-</div>
+  </div>
+  <!-- vista reducida -->
+  <div  fxShow.sm="" fxShow.xs="" fxShow="false">
+    <form [formGroup]="recipeForm" fxLayout="column">   
 
-<div mat-dialog-content fxShow.xs="" fxShow="false" >
-  <h1 mat-dialog-title>Let's cook something</h1>
-
-  <form [formGroup]="recipeForm" fxLayout="column">   
-
-  <mat-form-field appearance="fill">
-    <mat-label for="recipe_name">Recipe name</mat-label>
-    <input  matInput  id="recipe_name" type="text" formControlName="recipe_name">
-</mat-form-field>
-
-
-<mat-form-field appearance="fill">
-  <mat-label for="slug">Slug</mat-label>
-  <input  matInput  id="slug" type="text" formControlName="slug">
-</mat-form-field>
-
-
-<mat-form-field appearance="fill">
-  <mat-label for="img">Image</mat-label>
-  <input  matInput  id="img" type="file" accept="image/*" formControlName="img">
-</mat-form-field>
-
-
-<mat-form-field appearance="fill">
-  <mat-label for="description">Description</mat-label>
-  <textarea  matInput  id="description"  formControlName="description"> </textarea>
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-  <mat-label>Difficulty</mat-label>
-  <mat-select formControlName="difficulty">
-      <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
-          {{difficulty.name}}
-        </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<mat-form-field appearance="fill">
-  <mat-label>Category</mat-label>
-  <mat-select formControlName="category">
-    <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
-      {{category.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<mat-form-field appearance="fill">
-  <label for="steps">Steps</label>
-  <textarea  matInput  id="steps" formControlName="steps" > </textarea>
-</mat-form-field>
-
-<div formArrayName="ingredients" fxLayout="row wrap"  fxFlex="100%">
-  
-  <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxFlex="100%" fxLayout="column" style="border-radius: 15px; position: relative; border: solid gray 1px; padding: 10px ; margin-bottom: 10px;"  >
+      <mat-form-field appearance="fill">
+        <mat-label for="recipe_name">Recipe name</mat-label>
+        <input  matInput  id="recipe_name" type="text" formControlName="recipe_name">
+    </mat-form-field>
     
-    <p style="color: gray ;position: absolute; top: -25px; left: 10px; background-color: white; padding: 2px; border-radius: 15px;">Ingredient {{i+1}}</p>
-  
+    
     <mat-form-field appearance="fill">
-    <mat-label>Producto</mat-label>
-    <mat-select formControlName="product">
-      <mat-option *ngFor="let product of product_options$ | async" [value]="product.id">
-        {{product.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" >
-    <mat-label for="cantidad">Cantidad</mat-label>
-    <input  matInput  id="cantidad" type="number" formControlName="cantidad">
-</mat-form-field>
-
-  <mat-form-field appearance="fill" >
-    <mat-label>Medida</mat-label>
-    <mat-select formControlName="measurement">
-      <mat-option *ngFor="let measurement of measurement_options$ | async" [value]="measurement.id">
-        {{measurement.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-
-  <mat-radio-button formControlName="principal" value="{{principal}}" >Ingrediente Principal</mat-radio-button>
-
-  <button mat-flat-button color="warn" (click)="removeIngredient(i)" ><i class="bi bi-trash"></i></button>
+      <mat-label for="slug">Slug</mat-label>
+      <input  matInput  id="slug" type="text" formControlName="slug">
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill">
+      <mat-label for="img">Image</mat-label>
+      <input  matInput  id="img" type="file" accept="image/*" formControlName="img">
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill">
+      <mat-label for="description">Description</mat-label>
+      <textarea  matInput  id="description"  formControlName="description"> </textarea>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty">
+          <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
+              {{difficulty.name}}
+            </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill">
+      <label for="steps">Steps</label>
+      <textarea  matInput  id="steps" formControlName="steps" > </textarea>
+    </mat-form-field>
+    
+    <div formArrayName="ingredients" fxLayout="row wrap"  fxFlex="100%">
+      
+      <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxFlex="100%" fxLayout="column" style="border-radius: 15px; position: relative; border: solid gray 1px; padding: 10px ; margin-bottom: 10px;"  >
+        
+        <p style="color: gray ;position: absolute; top: -25px; left: 10px; background-color: white; padding: 2px; border-radius: 15px;">Ingredient {{i+1}}</p>
+      
+        <mat-form-field appearance="fill">
+        <mat-label>Producto</mat-label>
+        <mat-select formControlName="product">
+          <mat-option *ngFor="let product of product_options$ | async" [value]="product.id">
+            {{product.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field appearance="fill" >
+        <mat-label for="cantidad">Cantidad</mat-label>
+        <input  matInput  id="cantidad" type="number" formControlName="cantidad">
+    </mat-form-field>
+    
+      <mat-form-field appearance="fill" >
+        <mat-label>Medida</mat-label>
+        <mat-select formControlName="measurement">
+          <mat-option *ngFor="let measurement of measurement_options$ | async" [value]="measurement.id">
+            {{measurement.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+    
+      <mat-radio-button formControlName="principal" value="{{principal}}" >Ingrediente Principal</mat-radio-button>
+    
+      <button mat-flat-button color="warn" (click)="removeIngredient(i)" ><i class="bi bi-trash"></i></button>
+      </div>
+    </div>
+    
+    
+    </form>
   </div>
 </div>
 
 
-</form>
-<button mat-flat-button color="warn" (click)="adicionarIngrediente()">Adicionar Ingrediente</button>  
-<button mat-flat-button color="primary">Cocinar</button>
-</div>
-
 {{this.recipeForm.value | json}} 
+{{recipe_name.errors?.exist}}

@@ -13,15 +13,20 @@ import{UserService} from '../service/user.service';
 export class HeaderComponent implements OnInit {
   showUnderMenu : boolean = false;
 
-  userData? = this.userServ.LogedUser;
+  
 
   constructor(private userServ : UserService) { }
 
   ngOnInit(): void {
+    
   }
 
   setShowUnderMenu(){
     this.showUnderMenu = this.showUnderMenu ? false: true;
+  }
+
+  getUserData(){
+    return this.userServ.getLogedUser();
   }
 
 

@@ -17,8 +17,7 @@ import {LocalStorageService} from './local-storage.service'
   providedIn: 'root'
 })
 export class UserService {
-  private userData : User;
-
+  
   private local_storage : Storage;
 
 
@@ -137,15 +136,18 @@ export class UserService {
 
   }
 
-  get LogedUser(){
+  getLogedUser(){
     return JSON.parse(this.local_storage.getItem('user'))
   }
+  
     
 
   public getUserData(){
+    
     let userid = this.getDecodeToken(this.local_storage.getItem('token')).user_id;
     this.http.get<User>(`${this.recipeURL}users/${userid}`, this.getHttpOpeion()).toPromise().then(data =>{
-      this.userData = {
+    
+      this.local_storage.setItem('user', JSON.stringify({
         id: data['id'],
         last_login: data['last_login'],
         user_name : data['username'],
@@ -156,8 +158,7 @@ export class UserService {
         avatar: data['avatar'],
         groups: data['groups'], 
       }
-
-      this.local_storage.setItem('user', JSON.stringify(this.userData));
+));
       // The oposite process 
       
     });

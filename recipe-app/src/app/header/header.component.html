@@ -10,7 +10,7 @@
     <button mat-icon-button color="accent" (click)="setShowUnderMenu()" ><i class="bi bi-list"  style="font-size:2em;"></i></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <i *ngIf="!isAuth" class="bi bi-person-circle" style="font-size:2em;"></i>
-        <img class="avatar" *ngIf="isAuth" src="{{userData.avatar}}" alt="User avatar">
+        <img class="avatar" *ngIf="isAuth" src="{{getUserData().avatar}}" alt="User avatar">
       </button>
       <mat-menu #menu="matMenu">
         <div *ngIf="isAuth" >
@@ -20,7 +20,7 @@
             <mat-list-item>
              
               <div mat-line class="login_welcome">Let's cook as</div>
-              <div mat-line class="login_mail"> {{userData.mail}} </div>
+              <div mat-line class="login_mail"> {{getUserData().mail}} </div>
            
             </mat-list-item>
 
@@ -60,6 +60,8 @@
             <button  [@inOutMenuAnimation]  fxFlex="100" mat-button  >Primary</button>
         </div>
    </mat-toolbar>
+
+   
 
 
 

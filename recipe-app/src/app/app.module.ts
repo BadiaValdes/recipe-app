@@ -36,6 +36,9 @@ import { AuthModule } from './auth/auth.module';
 
 // Interceptor
 import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor';
+import { PrincipalCheckDirective } from './directive/arra-form/principal-check.directive';
+import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.directive';
+
 
 
 
@@ -47,7 +50,7 @@ import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor
   declarations: [
     AppComponent,    
     PageNotFoundComponent, 
-    HeaderComponent, 
+    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective,
   ],
   // The order of imports is very important
   imports: [
