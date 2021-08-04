@@ -23,10 +23,16 @@ export class RecipeService {
 
 
   getHttpOpeion(){
-    if (this.user_service.getLocalSotrageToken()){
+    if (this.user_service.isAuth()){
       return {
+        // multipart/form-data
+        //application/json
+        //application/x-www-form-urlencoded
+        // application/x-www-form-urlencoded;charset=UTF-8
         headers: new HttpHeaders({ 'Content-Type': 'application/json',
-        'Authorization': 'JWT ' + this.user_service.getLocalSotrageToken()}),
+        'Authorization': 'JWT ' + this.user_service.getLocalSotrage().getItem('token'),
+        'Accept': 'application/json',
+        }), 
         
       };
     }
@@ -82,6 +88,26 @@ export class RecipeService {
 
     
   }
+
+  postRecipe(data){
+    let httpOptions = {
+      // multipart/form-data
+      //application/json
+      //application/x-www-form-urlencoded
+      // application/x-www-form-urlencoded;charset=UTF-8
+      headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+      'Authorization': 'JWT ' + this.user_service.getLocalSotrage().getItem('token'),
+      }), 
+      
+    }
+    console.log("Datos: " +  JSON.stringify(data))
+    return this.http.post<any>(`${this.recipeURL}recipe/create`, data, httpOptions).subscribe(
+      data => console.log(data),
+      error => console.log(error));
+  }
+
+  
+
 
   
 

@@ -1,3 +1,9 @@
 .form-dialog-height{
     transition: all ease 0.5s;
 }
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb:before { 
+    content: url(icons/crown-solid.svg) !important;
+    color: white !important;
+    font: normal normal normal 14px/1 !important;
+}

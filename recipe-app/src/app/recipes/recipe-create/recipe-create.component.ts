@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl,  FormGroupDirective,  NgForm, NgControl, FormArray, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 import {checkPrincipalValidator} from '../../directive/arra-form/principal-check.directive'
 import {existRecipe} from '../../directive/exist-field/recipe/recipe-name.directive'
 import {AsyncValServiceService} from '../../directive/exist-field/async-val-service.service'
+import { elementAt } from 'rxjs/operators';
 
 
 @Component({
@@ -29,6 +30,7 @@ import {AsyncValServiceService} from '../../directive/exist-field/async-val-serv
 export class RecipeCreateComponent implements OnInit {
 
   lastIndex : number = 0;
+  cant_ingredients: number = 0;
 
   // Select options
   product_options$ :  Observable<Product[]> ;
@@ -36,9 +38,15 @@ export class RecipeCreateComponent implements OnInit {
   difficulty_options$ :  Observable<Difficulty[]> ;
   measurement_options$ :  Observable<Measurement[]> ;
 
+  slug_in_construction:string= "";
+
   principal : boolean = true;
 
-  constructor(private generalAPI: GeneralApiServicesService,private formB : FormBuilder, private rs : RecipeService, private asyncValDirective : AsyncValServiceService) { }
+  constructor(private generalAPI: GeneralApiServicesService,
+    private formB : FormBuilder, 
+    private rs : RecipeService, 
+    private asyncValDirective : AsyncValServiceService,
+    private cd : ChangeDetectorRef) { }
 
 
   // Form
@@ -62,6 +70,10 @@ export class RecipeCreateComponent implements OnInit {
     this.category_options$ = this.generalAPI.getCategory()
     this.difficulty_options$ = this.generalAPI.getDifficulty()
     this.measurement_options$= this.generalAPI.getMeasurement()
+
+    this.recipe_name.valueChanges.subscribe((value: string)=>{
+      this.slug.setValue(this.replaceAll(value));
+    })
   }
 
   // Devolver el arreglo actual de ingredietnes
@@ -71,12 +83,25 @@ export class RecipeCreateComponent implements OnInit {
 
   // Crear parametros internos del array
   newIngredients() : FormGroup{
+    this.cant_ingredients ++;
     return this.formB.group({
       product : new FormControl(null, Validators.required),
       cantidad: new FormControl(null, Validators.required),
       measurement: new FormControl(null, Validators.required),
       principal : new FormControl(this.principal, Validators.required),
     })
+  }
+
+  replaceAll(text: string){
+    let char = [...text];
+    let new_text = ""
+    char.forEach(element => {
+      if(element === " ")
+      new_text += "_";
+      else
+      new_text += element;
+    })
+    return new_text.toLowerCase();
   }
 
   adicionarIngrediente() {
@@ -103,11 +128,91 @@ export class RecipeCreateComponent implements OnInit {
    this.lastIndex = i;
   }
 
-  // Errors geters
+  // geters form Control
 
   get recipe_name(){
-    console.log(this.recipeForm.get("recipe_name").errors)
     return this.recipeForm.get("recipe_name")}
+
+  get slug(){
+      return this.recipeForm.get("slug")}
+  
+  get description(){
+    return this.recipeForm.get("description")}
+  
+
+  get image(){
+    return this.recipeForm.get("img")}
+  
+  get difficulty(){
+    return this.recipeForm.get("difficulty")}  
+
+  get category(){
+    return this.recipeForm.get("category")}
+
+  get steps(){
+    return this.recipeForm.get("steps")}
+
+  get ingredientsArray(){
+    return this.recipeForm.get("ingredients")}
+  
+
+  //Create new recipe
+
+  
+  onSubmit(): void{
+    let form = new FormData();
+
+    let data = {
+      'slug':this.recipeForm.get('slug').value,
+      'name':this.recipeForm.get('recipe_name').value,
+      'img': this.recipeForm.get('img').value,
+      'description': this.recipeForm.get('description').value,
+      'fk_difficult':  this.recipeForm.get('difficulty').value,
+      'fk_category': this.recipeForm.get('category').value,
+      'steps':  this.recipeForm.get('steps').value,
+      'recipe_ingredient': this.recipeForm.get('ingredients').value,
+    }
+    form.append('slug', this.recipeForm.get('slug').value);
+    form.append('name', this.recipeForm.get('recipe_name').value);
+    form.append('img', this.recipeForm.get('img').value);
+    form.append('description', this.recipeForm.get('description').value);
+    form.append('fk_difficult', this.recipeForm.get('difficulty').value);
+    form.append('fk_category', this.recipeForm.get('category').value);
+    form.append('steps', this.recipeForm.get('steps').value);
+    form.append('ingredients', this.recipeForm.get('ingredients').value);
+    this.rs.postRecipe(data);
+  }
+
+   onFileSelect(event) {
+    let reader = new FileReader();
+    if (event.target.files.length > 0 && event.target.files) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file)
+
+      reader.onload = () => {
+        this.recipeForm.patchValue({
+          img: reader.result
+        })
+
+        this.cd.markForCheck;
+      }     
+      /*this.recipeForm.patchValue({
+        img: event.target.files.item(0)
+      })*/
+ 
+    }
+    //this.recipeForm.get('img').setValue(event.target.files[0]);
+  }
+  sendInfo(){
+    this.rs.postRecipe({"name":"emilio","slug":"juan"});
+  }
+
+}
+  
+  
+
+
+
 
 
 
@@ -134,5 +239,3 @@ export class RecipeCreateComponent implements OnInit {
     }
   }
 */
-
-}
