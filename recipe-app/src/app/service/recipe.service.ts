@@ -91,17 +91,20 @@ export class RecipeService {
 
   postRecipe(data){
     let httpOptions = {
-      // multipart/form-data
+      // multipart/form-data;  boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
       //application/json
       //application/x-www-form-urlencoded
       // application/x-www-form-urlencoded;charset=UTF-8
-      headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+      headers: new HttpHeaders({
       'Authorization': 'JWT ' + this.user_service.getLocalSotrage().getItem('token'),
       }), 
       
     }
-    console.log("Datos: " +  JSON.stringify(data))
-    return this.http.post<any>(`${this.recipeURL}recipe/create`, data, httpOptions).subscribe(
+    console.log("AUI")
+    return this.http.post<any>(`${this.recipeURL}recipe/create`, 
+    //JSON.stringify(data), 
+    data,
+    httpOptions).subscribe(
       data => console.log(data),
       error => console.log(error));
   }

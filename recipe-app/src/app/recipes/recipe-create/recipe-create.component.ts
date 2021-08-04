@@ -11,6 +11,7 @@ import {Measurement} from '../../interfaces/measurement';
 
 // General API
 import {GeneralApiServicesService} from '../../service/general-api-services.service';
+import {UserService} from '../../service/user.service';
 import {RecipeService} from '../../service/recipe.service';
 import { Observable } from 'rxjs';
 
@@ -37,7 +38,7 @@ export class RecipeCreateComponent implements OnInit {
   category_options$ :  Observable<Category[]> ;
   difficulty_options$ :  Observable<Difficulty[]> ;
   measurement_options$ :  Observable<Measurement[]> ;
-
+  image_data;
   slug_in_construction:string= "";
 
   principal : boolean = true;
@@ -46,7 +47,8 @@ export class RecipeCreateComponent implements OnInit {
     private formB : FormBuilder, 
     private rs : RecipeService, 
     private asyncValDirective : AsyncValServiceService,
-    private cd : ChangeDetectorRef) { }
+    private cd : ChangeDetectorRef,
+    private us : UserService) { }
 
 
   // Form
@@ -157,36 +159,53 @@ export class RecipeCreateComponent implements OnInit {
   
 
   //Create new recipe
-
+  
   
   onSubmit(): void{
-    let form = new FormData();
-
+    const form = new FormData();
+    let p = JSON.parse(this.us.getLocalSotrage().getItem('user'));
     let data = {
       'slug':this.recipeForm.get('slug').value,
       'name':this.recipeForm.get('recipe_name').value,
       'img': this.recipeForm.get('img').value,
       'description': this.recipeForm.get('description').value,
-      'fk_difficult':  this.recipeForm.get('difficulty').value,
-      'fk_category': this.recipeForm.get('category').value,
+     // 'fk_difficult':  this.recipeForm.get('difficulty').value,
+     // 'fk_category': this.recipeForm.get('category').value,
       'steps':  this.recipeForm.get('steps').value,
       'recipe_ingredient': this.recipeForm.get('ingredients').value,
-    }
-    form.append('slug', this.recipeForm.get('slug').value);
-    form.append('name', this.recipeForm.get('recipe_name').value);
-    form.append('img', this.recipeForm.get('img').value);
-    form.append('description', this.recipeForm.get('description').value);
-    form.append('fk_difficult', this.recipeForm.get('difficulty').value);
-    form.append('fk_category', this.recipeForm.get('category').value);
-    form.append('steps', this.recipeForm.get('steps').value);
-    form.append('ingredients', this.recipeForm.get('ingredients').value);
-    this.rs.postRecipe(data);
+     // 'fk_user': p['id'],
+    };
+    console.log(this.recipeForm.get('ingredients').value)
+    form.set('slug', this.recipeForm.get('slug').value);
+    form.set('name', this.recipeForm.get('recipe_name').value);
+    form.append('img', this.recipeForm.get('img').value, this.image_data.name);
+    form.set('description', this.recipeForm.get('description').value);
+    form.set('fk_difficult', this.recipeForm.get('difficulty').value);
+    form.set('fk_category', this.recipeForm.get('category').value);
+    form.set('steps', this.recipeForm.get('steps').value);
+    let d = this.recipeForm.get("ingredients").value;
+    let cc : any = {};
+    //d.forEach(element => {
+    //  let c = {
+     //   'main_ingredient': element.principal,
+     //   'amount': element.cantidad,
+     //   'fk_measurement_unit_id': element.measurement,
+     //   'fk_product_id': element.product,
+    //  }
+     // cc.      
+    //});
+    form.append('recipe_ingredient', JSON.stringify(this.recipeForm.get("ingredients").value));
+    
+    //form.append('recipe_ingredient', this.recipeForm.get("ingredients").value); 
+    form.set('fk_user', p['id']);
+
+    this.rs.postRecipe(form);
   }
 
    onFileSelect(event) {
     let reader = new FileReader();
     if (event.target.files.length > 0 && event.target.files) {
-      const [file] = event.target.files;
+      /*const [file] = event.target.files;
       reader.readAsDataURL(file)
 
       reader.onload = () => {
@@ -199,12 +218,32 @@ export class RecipeCreateComponent implements OnInit {
       /*this.recipeForm.patchValue({
         img: event.target.files.item(0)
       })*/
+      //const file = event.target.files[0]
+      const file = event.target.files[0]
+      this.image_data = file;
+      this.recipeForm.patchValue({
+        img: file
+      })
+      this.recipeForm.get('img').updateValueAndValidity()
  
     }
     //this.recipeForm.get('img').setValue(event.target.files[0]);
   }
   sendInfo(){
-    this.rs.postRecipe({"name":"emilio","slug":"juan"});
+    console.warn("Hola")
+    console.log(this.recipeForm.get("ingredients").value)
+    let p = this.recipeForm.get("ingredients").value;
+    p.forEach(element => {
+      let c = {
+        main_ingredient: element.principal,
+        amount: element.cantidad,
+        fk_measurement_unit_id: element.measurement,
+        fk_product_id: element.product,
+      }
+      console.log(c)
+        
+    });
+   
   }
 
 }
