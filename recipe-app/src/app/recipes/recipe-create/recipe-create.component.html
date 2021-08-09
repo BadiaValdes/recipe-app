@@ -29,7 +29,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label for="img">Image</mat-label>
-            <input  matInput  id="img" type="file" accept="image/*" formControlName="img" (change)="onFileSelect($event)">
+            <input  matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
         </mat-form-field>
  
 
@@ -116,6 +116,7 @@
       <!-- Prevent default to avoid the early validation -->
       <button mat-flat-button color="warn" (click)="$event.preventDefault(); adicionarIngrediente()">Adicionar Ingrediente</button>  
       <button mat-flat-button color="primary" [disabled]="cant_ingredients == 0" type="submit">Cocinar</button>
+
     </mat-step>
     </mat-stepper>      
 </form>
@@ -214,6 +215,6 @@
 </div>
 
 
-
-
+<img [src]="img_to_show">
+<button mat-flat-button color="primary" type="button" (click)="closeDialog()">Cocinar</button>
 <button mat-flat-button color="primary" (click)="sendInfo()">Cocinar</button>

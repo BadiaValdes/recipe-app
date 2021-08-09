@@ -1,4 +1,5 @@
 @import '../../../assest/underline.css';
+@import '../../../../assets/css/icofont.min.css';
 
 .background-gray-white{
     background-color: rgba(208, 211, 212, 0.1);
@@ -22,4 +23,9 @@ border: 1px solid #bbbbbb77;
 
 .hover-item:hover{
 background-color: rgba(0, 153, 255, 0.2);
+}
+
+.tooltip-class{
+background: red;
+font-size: 1.5em;
 }

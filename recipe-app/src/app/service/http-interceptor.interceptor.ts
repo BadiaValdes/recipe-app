@@ -9,12 +9,23 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+
+import {UserService} from './user.service'
+
 @Injectable()
 export class HttpInterceptorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _userService : UserService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (this._userService.isAuth()){
+      request = request.clone({
+        setHeaders: {
+          'Authorization': 'JWT ' + this._userService.getLocalSotrage().getItem('token'),
+        }
+      })    
+    }
+
     return next.handle(request).pipe(
       catchError((error)=>{
         let handled = false;

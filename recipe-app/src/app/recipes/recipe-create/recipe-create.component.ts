@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl,  FormGroupDirective,  NgForm, NgControl, FormArray, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 //Interface
 import {Category} from '../../interfaces/category';
 import {Difficulty} from '../../interfaces/difficulty';
@@ -21,6 +23,10 @@ import {existRecipe} from '../../directive/exist-field/recipe/recipe-name.direct
 import {AsyncValServiceService} from '../../directive/exist-field/async-val-service.service'
 import { elementAt } from 'rxjs/operators';
 
+//Event emitter
+import {Output, EventEmitter} from '@angular/core'  
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-recipe-create',
@@ -29,6 +35,8 @@ import { elementAt } from 'rxjs/operators';
 })
 
 export class RecipeCreateComponent implements OnInit {
+
+  @Output() event_TO_Parent = new EventEmitter<String>();
 
   lastIndex : number = 0;
   cant_ingredients: number = 0;
@@ -43,12 +51,20 @@ export class RecipeCreateComponent implements OnInit {
 
   principal : boolean = true;
 
-  constructor(private generalAPI: GeneralApiServicesService,
+  img_to_show = null;
+
+  constructor(
+    private router : Router,
+    private route : ActivatedRoute,
+    private generalAPI: GeneralApiServicesService,
     private formB : FormBuilder, 
     private rs : RecipeService, 
     private asyncValDirective : AsyncValServiceService,
     private cd : ChangeDetectorRef,
-    private us : UserService) { }
+    private us : UserService,
+    public dialogRef: MatDialogRef<RecipeCreateComponent>,
+    //@Inject (MAT_DIALOG_DATA) public data: DialogData
+    ) { }
 
 
   // Form
@@ -63,6 +79,12 @@ export class RecipeCreateComponent implements OnInit {
     steps: new FormControl(null, [Validators.required,]),
     ingredients: this.formB.array([]),
   });
+
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 
  
 
@@ -199,25 +221,28 @@ export class RecipeCreateComponent implements OnInit {
     //form.append('recipe_ingredient', this.recipeForm.get("ingredients").value); 
     form.set('fk_user', p['id']);
 
-    this.rs.postRecipe(form);
+    this.rs.postRecipe(form).then(_ =>{
+      this.sendInfo();
+      
+    }).catch(_ => {this.router.navigate(['recipe'],{queryParams:{done:'bad'}, queryParamsHandling: "merge"})})
+
+
   }
 
    onFileSelect(event) {
     let reader = new FileReader();
     if (event.target.files.length > 0 && event.target.files) {
-      /*const [file] = event.target.files;
-      reader.readAsDataURL(file)
+      const [file2] = event.target.files;
+      reader.readAsDataURL(file2)
 
       reader.onload = () => {
-        this.recipeForm.patchValue({
-          img: reader.result
-        })
+       
+          this.img_to_show = reader.result
+      
 
         this.cd.markForCheck;
-      }     
-      /*this.recipeForm.patchValue({
-        img: event.target.files.item(0)
-      })*/
+      }    
+    
       //const file = event.target.files[0]
       const file = event.target.files[0]
       this.image_data = file;
@@ -226,23 +251,12 @@ export class RecipeCreateComponent implements OnInit {
       })
       this.recipeForm.get('img').updateValueAndValidity()
  
-    }
+    }}
     //this.recipeForm.get('img').setValue(event.target.files[0]);
-  }
+  
   sendInfo(){
-    console.warn("Hola")
-    console.log(this.recipeForm.get("ingredients").value)
-    let p = this.recipeForm.get("ingredients").value;
-    p.forEach(element => {
-      let c = {
-        main_ingredient: element.principal,
-        amount: element.cantidad,
-        fk_measurement_unit_id: element.measurement,
-        fk_product_id: element.product,
-      }
-      console.log(c)
-        
-    });
+    this.router.navigate(['./recipe'],{queryParams:{done:'good'}, queryParamsHandling: "merge"})
+    this.closeDialog();
    
   }
 

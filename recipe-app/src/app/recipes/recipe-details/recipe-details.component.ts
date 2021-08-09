@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'; //Holds the info from de url that points to this component
 import { Location } from '@angular/common'; // Angular service to interact with the browser
 
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 // Service 
 import {RecipeService} from '../../service/recipe.service';
@@ -29,6 +29,7 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 })
 export class RecipeDetailsComponent implements OnInit {
   recipe_details$! : Observable<Recipe>;
+  currentID: string = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,12 +41,15 @@ export class RecipeDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipe_details$ = this.route.paramMap.pipe(
-      switchMap((param: ParamMap)=> this.service.getRecipeDitails(param.get('id')!))
-    )
+      switchMap((param: ParamMap)=> {
+        this.currentID = param.get('id');
+        return this.service.getRecipeDitails(this.currentID!)
+      })
+    )    
   }
 
   openSheet():void{
-    this.buttonSheet.open(RecipeOptionsComponent);
+    this.buttonSheet.open(RecipeOptionsComponent, {data:this.currentID});
   }
 
   isAuth(){

@@ -8,13 +8,14 @@ import {UserService} from '../../../service/user.service'
   styleUrls: ['./recipe-ingredient.component.css']
 })
 export class RecipeIngredientComponent implements OnInit {
-  @Input() recipe_ingredients : string[];
+  @Input() recipe_ingredients : any[];
 
   public token = this.us.token; 
-
+  public mainOne;
   constructor(private us : UserService) { }
 
   ngOnInit(): void {
+    console.log(this.recipe_ingredients)
   }
 
 

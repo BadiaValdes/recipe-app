@@ -36,7 +36,6 @@
 <app-recipe-steps style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
 
 </div>
-<p *ngIf="isAuth()">Lo esta</p>
 <div *ngIf="isAuth() && (userID().id == recipe_details.fk_user)"  style="position: absolute; bottom: 0; right:0; font-size: 2em; color: white; width: 50px; height: 50px;">
     <button mat-mini-fab  color="primary" (click)="openSheet()">
     <i class="bi bi-gear-fill"></i>

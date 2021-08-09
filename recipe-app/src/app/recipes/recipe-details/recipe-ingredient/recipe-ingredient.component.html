@@ -10,7 +10,14 @@
         <mat-list-item  class="hover-item">
             <i mat-list-icon class="bi bi-egg-fried"></i>
             <div mat-line>{{ingredient | titlecase | splitInterface: "-": 0 }}</div>
-            <div mat-line>{{ingredient | titlecase | splitInterface: "-": 1 }}</div>
+            <div mat-line style="margin-left: 5px; font-size: 0.8em; color: lightgray;">{{ingredient | titlecase | splitInterface: "-": 1 }}</div>
+            <i matTooltip="Main Ingredien" matTooltipPosition="above" matTooltipClass="tooltip-class" dir="rtl" *ngIf="(ingredient | titlecase | splitInterface: '-': 2) === 'true'"  class="icofont-crown-queen" style="font-size: 2em; color: gold;"></i>
+                <!-- <object style="filter: invert(20%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);" dir="rtl" *ngIf="(ingredient | titlecase | splitInterface: '-': 2) === 'true'" type="image/svg+xml" width="25px" height="25px" data="assets/icons/crown-solid.svg">
+                    
+                </object> -->
+
+
+                
         </mat-list-item>
  
     </div>

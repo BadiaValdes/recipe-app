@@ -20,7 +20,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
-
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
 
@@ -45,7 +46,8 @@ import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
 import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
 import { SplitInterfacePipe } from './split-interface.pipe';
 import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
-import {MatRadioModule} from '@angular/material/radio'; 
+import {MatRadioModule} from '@angular/material/radio';
+import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack-create/recipe-snack-create.component'; 
 
 
 
@@ -63,6 +65,7 @@ import {MatRadioModule} from '@angular/material/radio';
     RecipeIngredientComponent,
     SplitInterfacePipe,
     RecipeOptionsComponent,
+    RecipeSnackCreateComponent,
 
   
    ],
@@ -88,6 +91,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTooltipModule,
   ]
 })
 export class RecipeModule { }

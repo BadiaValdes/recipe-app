@@ -52,7 +52,7 @@ export class RecipeService {
 
     let httpOptions = this.getHttpOpeion()
 
-    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`, httpOptions).pipe(
+    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`).pipe(
       catchError(this.handleError<Recipe[]>('getRecipe', []))
     );
   }
@@ -103,10 +103,13 @@ export class RecipeService {
     console.log("AUI")
     return this.http.post<any>(`${this.recipeURL}recipe/create`, 
     //JSON.stringify(data), 
-    data,
-    httpOptions).subscribe(
-      data => console.log(data),
-      error => console.log(error));
+    data).toPromise().then(data => {console.log(data)})
+  }
+
+  deleteRecipe(recipeID){
+    return this.http.delete<any>(`${this.recipeURL}recipe/${recipeID}`).toPromise().then(_ => {
+      console.log("Se elimino")
+    })
   }
 
   
