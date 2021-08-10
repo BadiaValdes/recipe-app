@@ -103,7 +103,9 @@ export class RecipeService {
     console.log("AUI")
     return this.http.post<any>(`${this.recipeURL}recipe/create`, 
     //JSON.stringify(data), 
-    data).toPromise().then(data => {console.log(data)})
+    data)
+    .toPromise()
+    //.then(data => {console.log(data)})
   }
 
   deleteRecipe(recipeID){

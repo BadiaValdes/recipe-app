@@ -19,6 +19,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu'; 
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';  
+import {MatDialogModule} from '@angular/material/dialog';
 // MATIRIAL END
 
 // Flex Layout
@@ -38,6 +39,7 @@ import { AuthModule } from './auth/auth.module';
 import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor';
 import { PrincipalCheckDirective } from './directive/arra-form/principal-check.directive';
 import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.directive';
+import { ConfigDialogComponent } from './reusables/config-dialog/config-dialog.component';
 
 
 
@@ -50,7 +52,7 @@ import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.
   declarations: [
     AppComponent,    
     PageNotFoundComponent, 
-    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective,
+    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent,
   ],
   // The order of imports is very important
   imports: [
@@ -78,8 +80,8 @@ import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.
     MatButtonModule,
     MatMenuModule,
     MatListModule,
-    MatDividerModule
-  
+    MatDividerModule,
+    MatDialogModule,
     
     
   ],

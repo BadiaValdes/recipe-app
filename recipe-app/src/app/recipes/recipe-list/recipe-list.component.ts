@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router'
 import {Observable, from} from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 import {Recipe} from '../../interfaces/recipe'
 
@@ -17,12 +17,19 @@ export class RecipeListComponent implements OnInit {
 
   breakpoint : number = 4
 
+  /* Save the HTTP CALL as an observable */
   recipes$ :  Observable<Recipe[]>;
+  recipes_list :  Recipe[];
   constructor(private rs : RecipeService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
-    this.getRecipes()
+    this.rs.getRecipe().subscribe(
+      data => {
+       this.recipes_list = data;
+      }
+    )
+    //this.getRecipes()
   }
 
   breakpointResize(event){

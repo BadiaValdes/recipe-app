@@ -39,17 +39,21 @@ export class RecipeMainComponent implements OnInit {
       width: '900px',
     });
 
-    matDiag.afterClosed().subscribe(_ => {
-      let state = this.route.snapshot.queryParams.done
-    if(state != null) {
-      if(state === "good")
-      {
-        console.log("Pase por aqui")
-        this.openSnack("Ya se puede cocinar la nueva receta");
-      }
+    matDiag.afterClosed().subscribe((data : number) => {
+    if(data == 2)
+    {
+      // get url param
+      //let state = this.route.snapshot.queryParams.done
+     
+          this.openSnack("Ya se puede cocinar la nueva receta");
+      
+   
     }
-    console.log(this.route.snapshot.queryParams.done)
-      console.log("AMARILLO")
+    if(data == 3)
+     {
+      this.openSnack("La receta se quemó en el fuego");
+     }
+   
     })
   }
 

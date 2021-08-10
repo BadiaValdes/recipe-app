@@ -26,6 +26,7 @@ import { elementAt } from 'rxjs/operators';
 //Event emitter
 import {Output, EventEmitter} from '@angular/core'  
 import { Router, ActivatedRoute } from '@angular/router';
+import { Recipe } from 'src/app/interfaces/recipe';
 
 
 @Component({
@@ -40,6 +41,8 @@ export class RecipeCreateComponent implements OnInit {
 
   lastIndex : number = 0;
   cant_ingredients: number = 0;
+
+  recipeNewOne : Recipe;
 
   // Select options
   product_options$ :  Observable<Product[]> ;
@@ -81,8 +84,8 @@ export class RecipeCreateComponent implements OnInit {
   });
 
 
-  closeDialog(): void {
-    this.dialogRef.close();
+  closeDialog(num : number): void {
+    this.dialogRef.close(num);
   }
 
 
@@ -221,11 +224,21 @@ export class RecipeCreateComponent implements OnInit {
     //form.append('recipe_ingredient', this.recipeForm.get("ingredients").value); 
     form.set('fk_user', p['id']);
 
-    this.rs.postRecipe(form).then(_ =>{
+    this.rs.postRecipe(form)       
+    .then(data =>{
+      this.sendInfo(2);      
+    }).catch(_ => {
+      this.sendInfo(3);
+    })
+/*     .subscribe( data => {
       this.sendInfo();
-      
-    }).catch(_ => {this.router.navigate(['recipe'],{queryParams:{done:'bad'}, queryParamsHandling: "merge"})})
+    }) */
 
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
 
   }
 
@@ -254,9 +267,11 @@ export class RecipeCreateComponent implements OnInit {
     }}
     //this.recipeForm.get('img').setValue(event.target.files[0]);
   
-  sendInfo(){
-    this.router.navigate(['./recipe'],{queryParams:{done:'good'}, queryParamsHandling: "merge"})
-    this.closeDialog();
+  sendInfo(numb : number){
+    // Send params by URL
+    //this.router.navigate(['./recipe'],{queryParams:{done:'good'}, queryParamsHandling: "merge"})
+    this.router.navigate(['./recipe'])
+    this.closeDialog(numb);
    
   }
 
