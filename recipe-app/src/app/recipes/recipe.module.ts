@@ -48,7 +48,7 @@ import { SplitInterfacePipe } from './split-interface.pipe';
 import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack-create/recipe-snack-create.component'; 
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 // WYSIWYG
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -95,6 +95,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatSnackBarModule,
     MatTooltipModule,
     AngularEditorModule,
+    MatProgressSpinnerModule
   ]
 })
 export class RecipeModule { }

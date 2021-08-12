@@ -27,7 +27,9 @@
     - Modificar el formulario con los HINTS para el usuario <span style="color:green;">#Done#<span>
     - Integrar el formulario con un wysiwyg <span style="color:green;">#Done#<span>
 	- Hacer un PATCH <span style="color:green;">#Done#<span>
-	- Comentar y arreglar código
+	- Comentar y arreglar código <span style="color:green;">#Precessing#<span>
+	- Cambiar iconos del stepper
+	- Arreglar la forma de mostrar los ingredientes en el formularios
 	- Hacer cambio de imagen <span style="color:red;">#Pending#<span>
 3. CRUD de los nomencladores
 4. Mirar nuevo diseño para el ingrediente y steps

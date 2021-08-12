@@ -1,234 +1,145 @@
-
-<div mat-dialog-content class="form-dialog-height">
-  <h1 mat-dialog-title>Let's cook something</h1>
-  <div  fxShow.gt-sm="" fxShow="false">
-    
-      <mat-stepper linear orientation="horizontal">
-        <mat-step [stepControl]="recipeForm">
-          <form [formGroup]="recipeForm">      
-          <ng-template matStepLabel>General Data</ng-template>
-          <div fxLayout="column">
-        <mat-form-field appearance="fill">
-            <mat-label for="recipe_name">Recipe name</mat-label>
-            <input  matInput maxlength={{this.formSetting.recipeFormCreation.recipeName.maxLength}} #recipeVT  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
-            <!-- Template variable -->
-            <mat-hint >{{recipeVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.recipeName.maxLength}}</mat-hint> 
-            <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
-            <mat-error *ngIf="recipe_name.errors?.asyncValDirective">Ya existe</mat-error>
-          
-       
- 
-           
-        </mat-form-field>
-
-
-        <mat-form-field appearance="fill">
-            <mat-label for="slug">Slug</mat-label>
-          <input  matInput  id="slug" type="text" [value]='recipe_name' formControlName="slug">
-        </mat-form-field>
-
-
-        <mat-form-field *ngIf="this.showImageField == true"  appearance="fill">
-            <mat-label for="img">Image</mat-label>
-            <input   matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
-        </mat-form-field>
- 
-        <mat-label for="description">Description</mat-label>
-        <angular-editor #textAreaDescriptionVT formControlName="description" [config]="this.editConfig"></angular-editor>
-        <mat-hint>{{this.recipeForm.get('description').value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
-        <mat-error *ngIf="this.recipeForm.get('description').value?.length < 1">Este campo debe estar lleno</mat-error>
-         
-<!--         <mat-form-field appearance="fill">
-            <mat-label for="description">Description</mat-label>
-             
-             <textarea #textAreaDescriptionVT  matInput  id="description"  formControlName="description"> </textarea> 
-           <mat-hint>{{textAreaDescriptionVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
-     </mat-form-field> -->
-   
-      </div>
-      <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
-            </form>
-     
-      
-      </mat-step>
-
-    <mat-step [stepControl]="secondForm">
-      <form [formGroup]="secondForm">      
-      <ng-template matStepLabel>How can i do it</ng-template>
-      <div fxLayout="column">
-        <mat-form-field appearance="fill">
-            <mat-label>Difficulty</mat-label>
-            <mat-select formControlName="difficulty">
-                <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
-                    {{difficulty.name}}
-                  </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-
+<div *ngIf="this.isAllLoaded == true">
+  <div mat-dialog-content class="form-dialog-height">
+    <h1 mat-dialog-title>Let's cook something</h1>
+    <div>
+        <mat-stepper linear [orientation]="this.direction">
+          <mat-step [stepControl]="recipeForm">
+            <form [formGroup]="recipeForm">      
+            <ng-template matStepLabel>General Data</ng-template>
+            <div fxLayout="column">
           <mat-form-field appearance="fill">
-            <mat-label>Category</mat-label>
-            <mat-select formControlName="category">
-              <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
-                {{category.name}}
+              <mat-label for="recipe_name">Recipe name</mat-label>
+              <input  matInput maxlength={{this.formSetting.recipeFormCreation.recipeName.maxLength}} #recipeVT  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
+              <!-- Template variable -->
+              <mat-hint >{{recipeVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.recipeName.maxLength}}</mat-hint> 
+              <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
+              <mat-error *ngIf="recipe_name.errors?.asyncValDirective">Ya existe</mat-error>
+            
+         
+   
+             
+          </mat-form-field>
+  
+  
+          <mat-form-field appearance="fill">
+              <mat-label for="slug">Slug</mat-label>
+            <input  matInput  id="slug" type="text" [value]='recipe_name' formControlName="slug">
+          </mat-form-field>
+  
+  
+          <mat-form-field *ngIf="this.showImageField == true"  appearance="fill">
+              <mat-label for="img">Image</mat-label>
+              <input   matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
+          </mat-form-field>
+   
+          <mat-label for="description">Description</mat-label>
+          <angular-editor #textAreaDescriptionVT formControlName="description" [config]="this.editConfig"></angular-editor>
+          <mat-hint>{{this.recipeForm.get('description').value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
+          <mat-error *ngIf="this.recipeForm.get('description').value?.length < 1">Este campo debe estar lleno</mat-error>
+           
+  <!--         <mat-form-field appearance="fill">
+              <mat-label for="description">Description</mat-label>
+               
+               <textarea #textAreaDescriptionVT  matInput  id="description"  formControlName="description"> </textarea> 
+             <mat-hint>{{textAreaDescriptionVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
+       </mat-form-field> -->
+     
+        </div>
+        <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
+              </form>
+       
+        
+        </mat-step>
+  
+      <mat-step [stepControl]="secondForm">
+        <form [formGroup]="secondForm">      
+        <ng-template matStepLabel>How can i do it</ng-template>
+        <div fxLayout="column">
+          <mat-form-field appearance="fill">
+              <mat-label>Difficulty</mat-label>
+              <mat-select formControlName="difficulty">
+                  <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
+                      {{difficulty.name}}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+  
+            <mat-form-field appearance="fill">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
+                  {{category.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+  
+            <mat-form-field appearance="fill">
+              <label for="steps">Steps</label>
+              <textarea #textAreaStepsVT  matInput  id="steps" formControlName="steps" > </textarea>
+              <mat-hint>{{textAreaStepsVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.steps.maxLength}}</mat-hint>
+            </mat-form-field>
+        </div>
+        <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
+        </form>
+        
+        </mat-step>
+  
+  
+      <mat-step [stepControl]="thirdForm">
+        <form [formGroup]="thirdForm">      
+        <ng-template matStepLabel>What is inside</ng-template>
+          <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
+          <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxLayout="row">
+  
+          <mat-form-field appearance="fill" fxFlex="25%">
+            <mat-label>Producto</mat-label>
+            <mat-select formControlName="product">
+              <mat-option *ngFor="let product of product_options$ | async" [value]="product.id">
+                {{product.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-
-
-          <mat-form-field appearance="fill">
-            <label for="steps">Steps</label>
-            <textarea #textAreaStepsVT  matInput  id="steps" formControlName="steps" > </textarea>
-            <mat-hint>{{textAreaStepsVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.steps.maxLength}}</mat-hint>
-          </mat-form-field>
-      </div>
-      <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
-      </form>
-      
-      </mat-step>
-
-
-    <mat-step [stepControl]="thirdForm">
-      <form [formGroup]="thirdForm">      
-      <ng-template matStepLabel>What is inside</ng-template>
-        <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
-        <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxLayout="row">
-
-        <mat-form-field appearance="fill" fxFlex="25%">
-          <mat-label>Producto</mat-label>
-          <mat-select formControlName="product">
-            <mat-option *ngFor="let product of product_options$ | async" [value]="product.id">
-              {{product.name}}
-            </mat-option>
-          </mat-select>
+  
+          <mat-form-field appearance="fill" fxFlex="25%">
+            <mat-label for="cantidad">Cantidad</mat-label>
+            <input  matInput  id="cantidad" type="number" formControlName="cantidad">
         </mat-form-field>
-
-        <mat-form-field appearance="fill" fxFlex="25%">
-          <mat-label for="cantidad">Cantidad</mat-label>
-          <input  matInput  id="cantidad" type="number" formControlName="cantidad">
-      </mat-form-field>
-      
-        <mat-form-field appearance="fill" fxFlex="25%">
-          <mat-label>Medida</mat-label>
-          <mat-select formControlName="measurement">
-            <mat-option *ngFor="let measurement of measurement_options$ | async" [value]="measurement.id">
-              {{measurement.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-slide-toggle
-        class="example-margin" 
-        formControlName="principal"      
-        (click)="mainIngredientSlide(i)"
-        >
-      Principal
-    </mat-slide-toggle>
-
-        <!--<mat-radio-button formControlName="principal" name="principal" [value]="!principal" (click)="mainIngredient(i)">Ingrediente Principal</mat-radio-button>
-        --><button mat-flat-button color="warn" (click)="removeIngredient(i)" fxFlex="25%"><i class="bi bi-trash"></i></button>
-        </div>
-      </div>
-      <!-- Prevent default to avoid the early validation -->
-      <button mat-flat-button color="warn" (click)="$event.preventDefault(); adicionarIngrediente()">Adicionar Ingrediente</button>  
-      <button mat-flat-button color="primary" [disabled]="cant_ingredients == 0" (click)="this.onSubmit()">Cocinar</button>
-</form>
-    </mat-step>
-    </mat-stepper>      
-
-  </div>
-  <!-- vista reducida -->
-  <div  fxShow.sm="" fxShow.xs="" fxShow="false">
-    <form [formGroup]="recipeForm" fxLayout="column">   
-
-      <mat-form-field appearance="fill">
-        <mat-label for="recipe_name">Recipe name</mat-label>
-        <input  matInput  id="recipe_name" type="text" formControlName="recipe_name">
-    </mat-form-field>
-    
-    
-    <mat-form-field appearance="fill">
-      <mat-label for="slug">Slug</mat-label>
-      <input  matInput  id="slug" type="text" formControlName="slug">
-    </mat-form-field>
-    
-    
-    <mat-form-field appearance="fill">
-      <mat-label for="img">Image</mat-label>
-      <input  matInput  id="img" type="file" accept="image/*" formControlName="img">
-    </mat-form-field>
-    
-    
-    <mat-form-field appearance="fill">
-      <mat-label for="description">Description</mat-label>
-      <textarea  matInput  id="description"  formControlName="description"> </textarea>
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      <mat-label>Difficulty</mat-label>
-      <mat-select formControlName="difficulty">
-          <mat-option *ngFor="let difficulty of difficulty_options$ | async" [value]="difficulty.id">
-              {{difficulty.name}}
-            </mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    
-    <mat-form-field appearance="fill">
-      <mat-label>Category</mat-label>
-      <mat-select formControlName="category">
-        <mat-option *ngFor="let category of category_options$ | async" [value]="category.id">
-          {{category.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    
-    
-    <mat-form-field appearance="fill">
-      <label for="steps">Steps</label>
-      <textarea  matInput  id="steps" formControlName="steps" > </textarea>
-    </mat-form-field>
-    
-    <div formArrayName="ingredients" fxLayout="row wrap"  fxFlex="100%">
-      
-      <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxFlex="100%" fxLayout="column" style="border-radius: 15px; position: relative; border: solid gray 1px; padding: 10px ; margin-bottom: 10px;"  >
         
-        <p style="color: gray ;position: absolute; top: -25px; left: 10px; background-color: white; padding: 2px; border-radius: 15px;">Ingredient {{i+1}}</p>
-      
-        <mat-form-field appearance="fill">
-        <mat-label>Producto</mat-label>
-        <mat-select formControlName="product">
-          <mat-option *ngFor="let product of product_options$ | async" [value]="product.id">
-            {{product.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    
-      <mat-form-field appearance="fill" >
-        <mat-label for="cantidad">Cantidad</mat-label>
-        <input  matInput  id="cantidad" type="number" formControlName="cantidad">
-    </mat-form-field>
-    
-      <mat-form-field appearance="fill" >
-        <mat-label>Medida</mat-label>
-        <mat-select formControlName="measurement">
-          <mat-option *ngFor="let measurement of measurement_options$ | async" [value]="measurement.id">
-            {{measurement.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    
-    
-      <mat-radio-button formControlName="principal" value="{{principal}}" >Ingrediente Principal</mat-radio-button>
-    
-      <button mat-flat-button color="warn" (click)="removeIngredient(i)" ><i class="bi bi-trash"></i></button>
-      </div>
+          <mat-form-field appearance="fill" fxFlex="25%">
+            <mat-label>Medida</mat-label>
+            <mat-select formControlName="measurement">
+              <mat-option *ngFor="let measurement of measurement_options$ | async" [value]="measurement.id">
+                {{measurement.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-slide-toggle
+          class="example-margin" 
+          formControlName="principal"      
+          (click)="mainIngredientSlide(i)"
+          >
+        Principal
+      </mat-slide-toggle>
+  
+          <!--<mat-radio-button formControlName="principal" name="principal" [value]="!principal" (click)="mainIngredient(i)">Ingrediente Principal</mat-radio-button>
+          --><button mat-flat-button color="warn" (click)="removeIngredient(i)" fxFlex="25%"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+        <!-- Prevent default to avoid the early validation -->
+        <button mat-flat-button color="warn" (click)="$event.preventDefault(); adicionarIngrediente()">Adicionar Ingrediente</button>  
+        <button mat-flat-button color="primary" [disabled]="cant_ingredients == 0" (click)="this.onSubmit()">Cocinar</button>
+  </form>
+      </mat-step>
+      </mat-stepper>      
+  
     </div>
-    
-    
-    </form>
-  </div>
+  </div> 
+  <button mat-flat-button dir="rtl" color="warn" type="button" (click)="closeDialog(1)">Cerrar</button>
 </div>
-
-
-<img [src]="img_to_show">
-<button mat-flat-button dir="rtl" color="warn" type="button" (click)="closeDialog(1)">Cerrar</button>
+<div *ngIf="!this.isAllLoaded">
+<div fxLayout="row" fxLayoutAlign="center center" fxFlexAlign="center">
+  <mat-spinner diameter="60"></mat-spinner>
+</div>
+</div>
