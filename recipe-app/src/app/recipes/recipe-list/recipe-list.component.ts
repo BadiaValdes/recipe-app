@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router'
-import {Observable, from} from 'rxjs';
+import {Observable, from, Subscriber, Subscription} from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
 import {Recipe} from '../../interfaces/recipe'
 
 import {RecipeService} from '../../service/recipe.service'
+
+import {EventEmitterService} from '../../service/event-emitter.service'
 
 @Component({
   selector: 'app-recipe-list',
@@ -20,7 +22,11 @@ export class RecipeListComponent implements OnInit {
   /* Save the HTTP CALL as an observable */
   recipes$ :  Observable<Recipe[]>;
   recipes_list :  Recipe[];
-  constructor(private rs : RecipeService, private route : ActivatedRoute) { }
+
+  // event
+  eventSubcriber : Subscription;
+  constructor(private rs : RecipeService, private route : ActivatedRoute,
+    private _eventEmitterService : EventEmitterService) { }
 
   ngOnInit(): void {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
@@ -29,7 +35,21 @@ export class RecipeListComponent implements OnInit {
        this.recipes_list = data;
       }
     )
+
+    this.eventSubcriber = this._eventEmitterService.miFistEventEmitter.subscribe(data => {
+      console.log(data)
+      this.recipes_list.push(data)
+    })
     //this.getRecipes()
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    if(this.eventSubcriber){
+      this.eventSubcriber.unsubscribe();
+      this.eventSubcriber = null;
+    }
   }
 
   breakpointResize(event){

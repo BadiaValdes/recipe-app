@@ -30,7 +30,7 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 export class RecipeDetailsComponent implements OnInit {
   recipe_details$! : Observable<Recipe>;
   currentID: string = null;
-
+  idToPass : string = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,10 +46,17 @@ export class RecipeDetailsComponent implements OnInit {
         return this.service.getRecipeDitails(this.currentID!)
       })
     )    
+    this.recipe_details$.subscribe(data => {
+      this.idToPass = data.id;
+    })
   }
 
   openSheet():void{
-    this.buttonSheet.open(RecipeOptionsComponent, {data:this.currentID});
+       
+    this.buttonSheet.open(RecipeOptionsComponent, {data: {
+      currentID: this.currentID,
+      recipe: this.service.getRecipeDitailsJSON(this.idToPass!),
+    }});
   }
 
   isAuth(){

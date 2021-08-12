@@ -40,6 +40,7 @@ import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor
 import { PrincipalCheckDirective } from './directive/arra-form/principal-check.directive';
 import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.directive';
 import { ConfigDialogComponent } from './reusables/config-dialog/config-dialog.component';
+import { NotificationSnackBarComponent } from './reusables/notification-snack-bar/notification-snack-bar.component';
 
 
 
@@ -52,7 +53,7 @@ import { ConfigDialogComponent } from './reusables/config-dialog/config-dialog.c
   declarations: [
     AppComponent,    
     PageNotFoundComponent, 
-    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent,
+    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent, NotificationSnackBarComponent,
   ],
   // The order of imports is very important
   imports: [

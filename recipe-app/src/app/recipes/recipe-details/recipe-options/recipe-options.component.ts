@@ -11,12 +11,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 // General Dialog
 import {ConfigDialogComponent} from '../../../reusables/config-dialog/config-dialog.component'
 
+// Create Component
+import {RecipeCreateComponent} from '../../recipe-create/recipe-create.component'
+
+
+
+
 @Component({
   selector: 'app-recipe-options',
   templateUrl: './recipe-options.component.html',
   styleUrls: ['./recipe-options.component.css']
 })
 export class RecipeOptionsComponent implements OnInit {
+
+  
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
@@ -67,11 +75,17 @@ export class RecipeOptionsComponent implements OnInit {
   // Delete Recipe
   eliminarReceta(){
 
-     this._recipeService.deleteRecipe(this.data).then(_ => {
+     this._recipeService.deleteRecipe(this.data.currentID).then(_ => {
       this._selfMatBSReference.dismiss()
       this._router.navigate(['./recipe'])
     }) 
     
+  }
+
+  //Modify Recipe - PUT
+  modificarReceta(){
+    this._dialog.open(RecipeCreateComponent, {data: this.data.recipe})
+    console.log()
   }
 
 }

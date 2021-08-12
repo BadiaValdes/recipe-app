@@ -5,9 +5,9 @@
 
                     <h2 matSubheader>dd </h2>
                     
-                    <button mat-button color="primary" fxLayoutAlign="start center" (click)="openCreateDialog()">New Recipe</button>
-                    <a mat-button color="primary" >Action</a>
-                    <button mat-button color="primary">Action</button>
+                    <button mat-button color="primary" *ngIf="this.isUserAuth()" fxLayoutAlign="start center" (click)="openCreateDialog()">New Recipe</button>
+                    <button mat-button color="primary" [disabled]="!this.isUserAuth()" (click)="this.openSnackService()" fxFill>SnackBarTest</button>
+                    <button mat-button color="primary">Emit First Event</button>
               
                     <mat-divider></mat-divider>
                       

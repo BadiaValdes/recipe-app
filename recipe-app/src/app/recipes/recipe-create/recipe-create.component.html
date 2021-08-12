@@ -10,7 +10,7 @@
           <div fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label for="recipe_name">Recipe name</mat-label>
-            <input  matInput  id="recipe_name" name="recipe_name" type="text"  formControlName="recipe_name" required>           
+            <input  matInput  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
                   
             <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
             <mat-error *ngIf="recipe_name.errors?.asyncValDirective">Ya existe</mat-error>
@@ -27,9 +27,9 @@
         </mat-form-field>
 
 
-        <mat-form-field appearance="fill">
+        <mat-form-field *ngIf="this.showImageField == true"  appearance="fill">
             <mat-label for="img">Image</mat-label>
-            <input  matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
+            <input   matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
         </mat-form-field>
  
 

@@ -101,7 +101,26 @@ export class RecipeService {
       
     }
     console.log("AUI")
-    return this.http.post<any>(`${this.recipeURL}recipe/create`, 
+    return this.http.post<any>(`${this.recipeURL}recipe/`, 
+    //JSON.stringify(data), 
+    data)
+    .toPromise()
+    //.then(data => {console.log(data)})
+  }
+
+  patchRecipe(data,id){
+    let httpOptions = {
+      // multipart/form-data;  boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+      //application/json
+      //application/x-www-form-urlencoded
+      // application/x-www-form-urlencoded;charset=UTF-8
+      headers: new HttpHeaders({
+      'Authorization': 'JWT ' + this.user_service.getLocalSotrage().getItem('token'),
+      }), 
+      
+    }
+    console.log("AUI")
+    return this.http.patch<any>(`${this.recipeURL}recipe/getID/${id}/`, 
     //JSON.stringify(data), 
     data)
     .toPromise()
@@ -123,7 +142,14 @@ export class RecipeService {
   getRecipeDitails(id:number | string) :  Observable<Recipe>{
     let httpOptions = this.getHttpOpeion()
 
-    return this.http.get<Recipe>(`${this.recipeURL}recipe/${id}`, httpOptions).pipe(
+    return this.http.get<Recipe>(`${this.recipeURL}recipe/${id}`, ).pipe(
+      catchError(this.handleError<Recipe>('getRecipe')))
+  }
+
+  getRecipeDitailsJSON(id:number | string) :  Observable<Recipe>{
+    let httpOptions = this.getHttpOpeion()
+
+    return this.http.get<Recipe>(`${this.recipeURL}recipe/getID/${id}`).pipe(
       catchError(this.handleError<Recipe>('getRecipe')))
   }
 

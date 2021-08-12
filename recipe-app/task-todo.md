@@ -1,23 +1,33 @@
 # Tareas por realizar
 
-1. Crear dialogo universar para preguntas comunes como: Deseas eliminar o Terminar Seccion #DONE#
-__________________________________________________________________________________________
-|		                         Solucion -1					     |
-|	1. Crear componente en la raiz (Dialogo)					     |
-|	2. Llamarlo donde haga falta mediante MatDialog				     |
-|	3. Usar el afterClose para recivir true o false				     |
-|	4. Usar el dato recibido para hacer la validacion				     |
-|											     |
-|					  Solucion -2					     |
-|	1. Lo mismo de arriba pero mediante un servicio				     |
-|											     |
-|											     |
-------------------------------------------------------------------------------------------
-    1. Emitir eventos mediante servicios
+1. Crear dialogo universar para preguntas comunes como: Deseas eliminar o Terminar Seccion <span style="color:green;">#Done#<span>
 
-2. Crear el formulario para el PUT, tratar de reutilizar el que existe
-    1. Modificar el formulario con los HINTS para el usuario
-    2. Integrar el formulario con un WYSIWIS
+		             Solucion -1					     
+	    1. Crear componente en la raiz (Dialogo)					     
+	    2. Llamarlo donde haga falta mediante MatDialog				     
+	    3. Usar el afterClose para recivir true o false				     
+	    4. Usar el dato recibido para hacer la validacion				 
+											                         
+					  Solucion -2					                 
+	    1. Lo mismo de arriba pero mediante un servicio				     
+											                         
+
+    - Emitir eventos mediante servicios <span style="color:green;">#Done#<span>
+						
+						Solucion
+			1. Crear servicio
+			2. Crear variable del timpo EventEmitter<t>
+			2.1. Pertenece a @angular/core
+			3. Crear un metodo que emita el evento
+			4. Ir al componente in el NgInit subscribir el evento
+			5. Guardarlo en una variable de tipo "Subscription"
+			6. Crear el onDestroy y unsubscribe el evento
+
+2. Crear el formulario para el PUT, tratar de reutilizar el que existe <span style="color:green;">#Done#<span>
+    - Modificar el formulario con los HINTS para el usuario
+    - Integrar el formulario con un WYSIWIS
+	- Hacer un PATCH <span style="color:green;">#Done#<span>
+	- Hacer cambio de imagen
 3. CRUD de los nomencladores
 4. Mirar nuevo diseño para el ingrediente y steps
 5. Agregar la fotografia a la lista de ingredientes
@@ -31,4 +41,5 @@ ________________________________________________________________________________
 13. Crear la vista mis recetas
 14. Crear la modificación de perfil del usuario
 15. Lenguaje de la pagina segun seleccion
+16. Terminar de arreglar el login y el logout
 
