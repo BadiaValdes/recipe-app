@@ -20,11 +20,7 @@
                Descripcion:                          
             </mat-list-item>
             <mat-list-item role="listitem">
-                <blockquote>
-                    {{recipe_details.description}}  
-                    
-                    
-                </blockquote>
+               <div style="padding-left: 10px;" [innerHTML]="recipe_details.description"></div>
             </mat-list-item>
             
           </mat-list>     

@@ -2,16 +2,17 @@
 <div mat-dialog-content class="form-dialog-height">
   <h1 mat-dialog-title>Let's cook something</h1>
   <div  fxShow.gt-sm="" fxShow="false">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">      
+    
       <mat-stepper linear orientation="horizontal">
-        <mat-step [stepControl]="recipe_name && slug && description && image">
-          
+        <mat-step [stepControl]="recipeForm">
+          <form [formGroup]="recipeForm">      
           <ng-template matStepLabel>General Data</ng-template>
           <div fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label for="recipe_name">Recipe name</mat-label>
-            <input  matInput  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
-                  
+            <input  matInput maxlength={{this.formSetting.recipeFormCreation.recipeName.maxLength}} #recipeVT  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
+            <!-- Template variable -->
+            <mat-hint >{{recipeVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.recipeName.maxLength}}</mat-hint> 
             <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
             <mat-error *ngIf="recipe_name.errors?.asyncValDirective">Ya existe</mat-error>
           
@@ -32,19 +33,27 @@
             <input   matInput  id="img" type="file" accept="image/*" formControlName="img" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
         </mat-form-field>
  
-
-        <mat-form-field appearance="fill">
+        <mat-label for="description">Description</mat-label>
+        <angular-editor #textAreaDescriptionVT formControlName="description" [config]="this.editConfig"></angular-editor>
+        <mat-hint>{{this.recipeForm.get('description').value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
+        <mat-error *ngIf="this.recipeForm.get('description').value?.length < 1">Este campo debe estar lleno</mat-error>
+         
+<!--         <mat-form-field appearance="fill">
             <mat-label for="description">Description</mat-label>
-            <textarea  matInput  id="description"  formControlName="description"> </textarea>
-        </mat-form-field>
+             
+             <textarea #textAreaDescriptionVT  matInput  id="description"  formControlName="description"> </textarea> 
+           <mat-hint>{{textAreaDescriptionVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
+     </mat-form-field> -->
    
       </div>
-            
       <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
+            </form>
+     
       
       </mat-step>
 
-    <mat-step [stepControl]="difficulty && category && steps">
+    <mat-step [stepControl]="secondForm">
+      <form [formGroup]="secondForm">      
       <ng-template matStepLabel>How can i do it</ng-template>
       <div fxLayout="column">
         <mat-form-field appearance="fill">
@@ -69,12 +78,18 @@
 
           <mat-form-field appearance="fill">
             <label for="steps">Steps</label>
-            <textarea  matInput  id="steps" formControlName="steps" > </textarea>
-        </mat-form-field>
+            <textarea #textAreaStepsVT  matInput  id="steps" formControlName="steps" > </textarea>
+            <mat-hint>{{textAreaStepsVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.steps.maxLength}}</mat-hint>
+          </mat-form-field>
       </div>
       <button mat-button matStepperNext (click)="$event.preventDefault()">Next</button>
+      </form>
+      
       </mat-step>
-    <mat-step>
+
+
+    <mat-step [stepControl]="thirdForm">
+      <form [formGroup]="thirdForm">      
       <ng-template matStepLabel>What is inside</ng-template>
         <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
         <div *ngFor="let ingredient of ingredients().controls; let i = index" [formGroupName]="i" fxLayout="row">
@@ -115,11 +130,11 @@
       </div>
       <!-- Prevent default to avoid the early validation -->
       <button mat-flat-button color="warn" (click)="$event.preventDefault(); adicionarIngrediente()">Adicionar Ingrediente</button>  
-      <button mat-flat-button color="primary" [disabled]="cant_ingredients == 0" type="submit">Cocinar</button>
-
+      <button mat-flat-button color="primary" [disabled]="cant_ingredients == 0" (click)="this.onSubmit()">Cocinar</button>
+</form>
     </mat-step>
     </mat-stepper>      
-</form>
+
   </div>
   <!-- vista reducida -->
   <div  fxShow.sm="" fxShow.xs="" fxShow="false">

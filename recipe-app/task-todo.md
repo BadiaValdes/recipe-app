@@ -24,10 +24,11 @@
 			6. Crear el onDestroy y unsubscribe el evento
 
 2. Crear el formulario para el PUT, tratar de reutilizar el que existe <span style="color:green;">#Done#<span>
-    - Modificar el formulario con los HINTS para el usuario
-    - Integrar el formulario con un WYSIWIS
+    - Modificar el formulario con los HINTS para el usuario <span style="color:green;">#Done#<span>
+    - Integrar el formulario con un wysiwyg <span style="color:green;">#Done#<span>
 	- Hacer un PATCH <span style="color:green;">#Done#<span>
-	- Hacer cambio de imagen
+	- Comentar y arreglar código
+	- Hacer cambio de imagen <span style="color:red;">#Pending#<span>
 3. CRUD de los nomencladores
 4. Mirar nuevo diseño para el ingrediente y steps
 5. Agregar la fotografia a la lista de ingredientes

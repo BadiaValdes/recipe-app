@@ -28,6 +28,11 @@ import {Output, EventEmitter} from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Recipe } from 'src/app/interfaces/recipe';
 
+// Form Settings
+import {formSettings} from '../../interfaces/formSettings'
+
+// Editor Configuration
+import {editorConfig} from '../../interfaces/editorConfig'
 
 @Component({
   selector: 'app-recipe-create',
@@ -58,6 +63,12 @@ export class RecipeCreateComponent implements OnInit {
   principal : boolean = true;
   img_to_show = null;
   showImageField : boolean = this.data ? false : true;
+
+  // Settings
+  formSetting = formSettings;
+
+  // editor Configuration
+  editConfig = editorConfig;
   
   constructor(
     private router : Router,
@@ -72,19 +83,42 @@ export class RecipeCreateComponent implements OnInit {
     @Inject (MAT_DIALOG_DATA) public data: any,
     ) { }
 
+  
+
 
   // Form
   recipeForm = new FormGroup({
     // Validación async -> El asyncValidators:[this.asyncValDirective.customVal2()]
-    recipe_name: new FormControl(null, {validators: [Validators.required], asyncValidators:[this.asyncValDirective.customVal()] ,updateOn: "blur"}, ),
+    recipe_name: new FormControl(null, {updateOn: "blur"}, ),
     slug: new FormControl(null, [Validators.required,]),
     img: new FormControl(null, [Validators.required,]),
-    description: new FormControl(null, [Validators.required,]),
+    description: new FormControl(null, [Validators.required]),
+    
+    
+  });
+
+  secondForm = new FormGroup({
     difficulty: new FormControl(null, [Validators.required,]),
     category: new FormControl(null, [Validators.required,]),
     steps: new FormControl(null, [Validators.required,]),
+  })
+
+  thirdForm = new FormGroup({
     ingredients: this.formB.array([]),
-  });
+  })
+
+
+
+
+
+  // Validations functions
+
+  descriptionLength() :ValidatorFn{
+    return (control : AbstractControl)  => {
+      return this.recipeForm.get('description').value?.length<1 ? {wrongColor: "Debe ser mayor"} : null
+    }
+  }
+
 
 
   closeDialog(num : number, receta?): void {
@@ -96,9 +130,12 @@ export class RecipeCreateComponent implements OnInit {
   ngOnInit(): void {
    this.initNomencladores();
    this.slugGenerator();
+   this.recipeForm.get('description').setValidators([Validators.required, this.descriptionLength])
+   this.recipeForm.get('recipe_name').setAsyncValidators(this.asyncValDirective.customVal())
     if(this.data != null){
       this.setUpdatesValues(this.data)
     }
+   console.log(this.formSetting)
   }
 
   slugGenerator(){
@@ -124,9 +161,9 @@ export class RecipeCreateComponent implements OnInit {
       this.showImageField = false
       //this.recipeForm.get('img').setValue(defaultData.img);
       this.recipeForm.get('description').setValue(defaultData.description);
-      this.recipeForm.get('difficulty').setValue('3dfd91059c');
-      this.recipeForm.get('category').setValue('47f60a1189');
-      this.recipeForm.get('steps').setValue(defaultData.steps);
+      this.secondForm.get('difficulty').setValue('3dfd91059c');
+      this.secondForm.get('category').setValue('47f60a1189');
+      this.secondForm.get('steps').setValue(defaultData.steps);
       defaultData.recipe_ingredient.forEach(element => {     
         this.ingredients().push(this.newIngredientsWithValues(element.fk_product, element.amount, element.fk_measurement_unit, element.main_ingredient));
         this.principal = false;
@@ -137,7 +174,7 @@ export class RecipeCreateComponent implements OnInit {
 
   // Devolver el arreglo actual de ingredietnes
   ingredients() : FormArray {
-    return this.recipeForm.get('ingredients') as FormArray
+    return this.thirdForm.get('ingredients') as FormArray
   }
 
   // Crear parametros internos del array
@@ -191,8 +228,7 @@ export class RecipeCreateComponent implements OnInit {
     })
   }
 
-  mainIngredientSlide(i:number){
-   
+  mainIngredientSlide(i:number){   
      this.ingredients().at(this.lastIndex).get("principal").setValue(false);
    this.lastIndex = i;
   }
@@ -201,6 +237,7 @@ export class RecipeCreateComponent implements OnInit {
 
   get recipe_name(){
     return this.recipeForm.get("recipe_name")}
+  
 
   get slug(){
       return this.recipeForm.get("slug")}
@@ -208,21 +245,20 @@ export class RecipeCreateComponent implements OnInit {
   get description(){
     return this.recipeForm.get("description")}
   
-
   get image(){
     return this.recipeForm.get("img")}
   
   get difficulty(){
-    return this.recipeForm.get("difficulty")}  
+    return this.secondForm.get("difficulty")}  
 
   get category(){
-    return this.recipeForm.get("category")}
+    return this.secondForm.get("category")}
 
   get steps(){
-    return this.recipeForm.get("steps")}
+    return this.secondForm.get("steps")}
 
   get ingredientsArray(){
-    return this.recipeForm.get("ingredients")}
+    return this.thirdForm.get("ingredients")}
   
 
   //Create new recipe
@@ -231,19 +267,27 @@ export class RecipeCreateComponent implements OnInit {
   onSubmit(): void{
     const form = new FormData();
     let p = JSON.parse(this.us.getLocalSotrage().getItem('user'));   
-    console.log(this.recipeForm.get('ingredients').value)
-    form.set('slug', this.recipeForm.get('slug').value);
-    form.set('name', this.recipeForm.get('recipe_name').value);
+
+    form.set('slug', this.slug?.value);
+    form.set('name', this.recipe_name?.value);
     if(this.showImageField == true)
     {
-      form.append('img', this.recipeForm.get('img').value, this.image_data.name);
+      form.append('img', this.recipeForm.get('img')?.value, this.image_data.name);
     }
-    form.set('description', this.recipeForm.get('description').value);
-    form.set('fk_difficult', this.recipeForm.get('difficulty').value);
-    form.set('fk_category', this.recipeForm.get('category').value);
-    form.set('steps', this.recipeForm.get('steps').value);
-    form.append('recipe_ingredient', JSON.stringify(this.recipeForm.get("ingredients").value));
+    form.set('description', this.description?.value);
+    form.set('fk_difficult', this.difficulty.value);
+    form.set('fk_category', this.category.value);
+    form.set('steps', this.steps?.value);
+    form.append('recipe_ingredient', JSON.stringify(this.thirdForm.get("ingredients")?.value));
     form.set('fk_user', p['id']);
+
+    console.log(`SLUG: ${this.recipeForm.get('slug')?.value} \n
+    NAME: ${this.recipe_name?.value} \n
+    Description: ${this.description?.value} \n
+    fk_category: ${this.category?.value} \n
+    fk_difficult:${this.difficulty?.value} \n
+    sptes: ${this.steps?.value} \n
+    recipe_ingredient: ${JSON.stringify(this.ingredientsArray.value)} \n`)
 
     if(this.data == null)
     {
@@ -316,6 +360,9 @@ export class RecipeCreateComponent implements OnInit {
       })
   }
 
+
+
+
 }
   
   
@@ -341,7 +388,7 @@ export class RecipeCreateComponent implements OnInit {
       
 
      
-
+return
            
       
      

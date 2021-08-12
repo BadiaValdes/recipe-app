@@ -49,7 +49,8 @@ import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-o
 import {MatRadioModule} from '@angular/material/radio';
 import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack-create/recipe-snack-create.component'; 
 
-
+// WYSIWYG
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack
     MatSlideToggleModule,
     MatSnackBarModule,
     MatTooltipModule,
+    AngularEditorModule,
   ]
 })
 export class RecipeModule { }
