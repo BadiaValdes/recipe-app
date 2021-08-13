@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
 
   }
 
+  // Check the roles to se if can active admin parts of the route
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -21,6 +22,7 @@ export class AuthGuard implements CanActivate {
     return this.isAdmin(role);
   }
 
+  // Loged in guard -> Is the user not logged, please send it back to login page
   isLogedIn(){
     if(this.userService.isAuth())
       return true;
@@ -30,6 +32,7 @@ export class AuthGuard implements CanActivate {
     }
   }
 
+  // Search for admin role
   isAdmin(role : string []){
     let isAdmin : boolean = false;
     let userParser = JSON.parse(this.userService.getLocalSotrage().getItem('user'));

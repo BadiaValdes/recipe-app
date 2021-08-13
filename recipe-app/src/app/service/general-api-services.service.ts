@@ -23,6 +23,7 @@ export class GeneralApiServicesService {
 
   httpAPI = environment.baseURL;
 
+  // You can use it by this way or use the http interceptor
   getHttpOpeion(){
     if (this.userService.getLocalSotrageToken()){
       return {

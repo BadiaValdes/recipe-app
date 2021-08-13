@@ -27,12 +27,12 @@ export class RecipeOptionsComponent implements OnInit {
   
 
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    private _recipeService : RecipeService,
-    private _router: Router,
-    private _selfMatBSReference: MatBottomSheetRef<RecipeOptionsComponent>,
-    private _dialog: MatDialog,
-    private _confirmDialogService : ConfirmDialogServiceService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any, // Injects parent data
+    private _recipeService : RecipeService, // API of recipes
+    private _router: Router, // Controls the URL
+    private _selfMatBSReference: MatBottomSheetRef<RecipeOptionsComponent>, // Self reference
+    private _dialog: MatDialog, // Dialog reference
+    private _confirmDialogService : ConfirmDialogServiceService, // Dialog service reference
   ) {
     console.log(data)
    }
@@ -40,14 +40,17 @@ export class RecipeOptionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Open the dialog service 
   openTheDialog(){
+    // Services options
     const options = {
       name: "delete",
       title: "Quemar la receta",
       description: "Seguro que desea quemar la receta en el fuego enterno?",
       actionButton: "Delete",
     }
-    this._confirmDialogService.openDialog(options)
+    this._confirmDialogService.openDialog(options) // Open the dialog with the options
+    // On dialog close
     this._confirmDialogService.dialogFinalValue().subscribe(data => {
       if(data)
       {

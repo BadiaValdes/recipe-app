@@ -27,33 +27,39 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class RecipeMainComponent implements OnInit {
 
-  opened: boolean = false;
+  opened: boolean = false; // Controls the side nav arrow
 
-  miFirstEvent : Subscription;
+  miFirstEvent : Subscription; // Old Subscription example
 
+  // change opened value
   changeOpenArrowDirection(){
     this.opened = this.opened ? false : true;
   }
 
-  constructor(public matDialog : MatDialog,
-    private snackBar : MatSnackBar,
-    private router : Router,
-    private route : ActivatedRoute,
-    private _notificationSnackBarService : NotificationSnackBarService,
-    private _eventEmitterTest: EventEmitterService,
-    private _userService : UserService) { }
+  constructor(public matDialog : MatDialog, // Dialog var -> Opens the create dialog
+    private snackBar : MatSnackBar, // Old Snack var option -> Still in use
+    private router : Router, // Routes handler
+    private route : ActivatedRoute, // Routes Params Handler
+    private _notificationSnackBarService : NotificationSnackBarService, // Snack service -> New way to call it
+    private _eventEmitterTest: EventEmitterService, // Event emmiter service -> First one
+    private _userService : UserService // User Service API
+    ) { }
 
+  // Shows the first event data
   showEvent(p: string){
     console.log(p)
   }
 
+  // Opens the creation dialog
   openCreateDialog(){
     const matDiag = this.matDialog.open(RecipeCreateComponent, {
       width: '900px',
     });
 
+    // Get data after close
     matDiag.afterClosed().subscribe((data) => {
 
+      // Manage that data
     if(data.num == 2)
     {
       
@@ -103,6 +109,7 @@ export class RecipeMainComponent implements OnInit {
     } */
   }
 
+  // Open standar snack
   openSnack(message: string) {
     this.snackBar.open(message, "Cerrar",{duration: 3 * 1000})
   }
@@ -131,6 +138,7 @@ export class RecipeMainComponent implements OnInit {
     this._eventEmitterTest.emitTheFirstEvent();
   } */
 
+  // Return True or False
   isUserAuth()
   {
     return this._userService.isAuth();

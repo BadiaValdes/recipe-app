@@ -45,4 +45,7 @@
 14. Crear la modificación de perfil del usuario
 15. Lenguaje de la pagina segun seleccion
 16. Terminar de arreglar el login y el logout
+17. Crear un servicio para buttonSheet no es recomendable al no ser que se utilize para cosas en específico, con pequeñas variaciones -> Intentar buscar una solución general.
+18. Aprender animaciones con angular
+
 

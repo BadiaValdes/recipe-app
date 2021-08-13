@@ -8,6 +8,7 @@ import {UserService} from '../../../service/user.service'
   styleUrls: ['./recipe-ingredient.component.css']
 })
 export class RecipeIngredientComponent implements OnInit {
+  // Takes in via parent data the recipe's ingredient
   @Input() recipe_ingredients : any[];
 
   public token = this.us.token; 

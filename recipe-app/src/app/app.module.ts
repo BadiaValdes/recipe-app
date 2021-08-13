@@ -41,6 +41,7 @@ import { PrincipalCheckDirective } from './directive/arra-form/principal-check.d
 import { RecipeNameDirective } from './directive/exist-field/recipe/recipe-name.directive';
 import { ConfigDialogComponent } from './reusables/config-dialog/config-dialog.component';
 import { NotificationSnackBarComponent } from './reusables/notification-snack-bar/notification-snack-bar.component';
+import { OpenSheetComponent } from './reusables/openSheet/open-sheet/open-sheet.component';
 
 
 
@@ -53,7 +54,7 @@ import { NotificationSnackBarComponent } from './reusables/notification-snack-ba
   declarations: [
     AppComponent,    
     PageNotFoundComponent, 
-    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent, NotificationSnackBarComponent,
+    HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent, NotificationSnackBarComponent, OpenSheetComponent,
   ],
   // The order of imports is very important
   imports: [

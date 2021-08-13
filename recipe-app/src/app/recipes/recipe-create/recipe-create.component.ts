@@ -356,6 +356,13 @@ export class RecipeCreateComponent implements OnInit {
 
   }
 
+  // Clear the file field for now drop object
+  clearFile(event)
+  {
+    event.target.value = null;  
+    this.cd.markForCheck; 
+  }
+
   // LOADS the file that user selects
   onFileSelect(event) {
     let reader = new FileReader(); // Create the file rider var

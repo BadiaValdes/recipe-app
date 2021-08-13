@@ -17,32 +17,44 @@ import {EventEmitterService} from '../../service/event-emitter.service'
 })
 export class RecipeListComponent implements OnInit {
 
-  breakpoint : number = 4
+  // An old var for "Responsive design"
+  breakpoint : number = 4 // Obsolete
 
   /* Save the HTTP CALL as an observable */
-  recipes$ :  Observable<Recipe[]>;
-  recipes_list :  Recipe[];
+  recipes$ :  Observable<Recipe[]>; // Recipe Observable -> Needs to be displayed with the async Pipe
+  recipes_list :  Recipe[]; // Recipe List -> Used in the simple way
 
-  // event
-  eventSubcriber : Subscription;
-  constructor(private rs : RecipeService, private route : ActivatedRoute,
-    private _eventEmitterService : EventEmitterService) { }
+  // event emiter Subscription
+  eventSubcriber : Subscription; 
+  constructor(private rs : RecipeService, // recipe handle
+    private route : ActivatedRoute, // Routes handle
+    private _eventEmitterService : EventEmitterService // We can subscribe to this event to recive the new recipe after creation
+    ) { }
 
-  ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
+  ngOnInit(): void {    
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4; // Depreciated
+    this.dataApiGet();
+    this.eventDataSubcriber();    
+  }
+
+  // Get data from API and store it in recipes_list
+  dataApiGet(){
     this.rs.getRecipe().subscribe(
       data => {
        this.recipes_list = data;
       }
     )
+  }
 
+  // Event Subscription
+  eventDataSubcriber(){
     this.eventSubcriber = this._eventEmitterService.miFistEventEmitter.subscribe(data => {
       console.log(data)
       this.recipes_list.push(data)
     })
-    //this.getRecipes()
   }
 
+  // Whe the component goes "offline" we need to unsubscribe all the events
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
@@ -52,6 +64,7 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
+  // Depreciated
   breakpointResize(event){
     if(event.target.innerWidth  >= 400 && event.target.innerWidth  <= 600 )
       this.breakpoint =  2;
@@ -61,6 +74,7 @@ export class RecipeListComponent implements OnInit {
       this.breakpoint =  4;
   }
 
+  // Get API data via Observable
   getRecipes(){
     this.recipes$ = this.route.paramMap.pipe(
       switchMap(params => {        

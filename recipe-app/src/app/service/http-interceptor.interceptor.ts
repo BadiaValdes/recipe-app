@@ -17,7 +17,9 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
   constructor(private router: Router, private _userService : UserService) {}
 
+  // Intercepts all the HTTP request
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Set the auth token
     if (this._userService.isAuth()){
       request = request.clone({
         setHeaders: {
@@ -26,7 +28,9 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       })    
     }
 
+    // What do after request
     return next.handle(request).pipe(
+      // In case of error
       catchError((error)=>{
         let handled = false;
  
@@ -39,6 +43,7 @@ if (error instanceof HttpErrorResponse) {
         {
           console.log(`Status code error: ${error.status}`);
           switch (error.status){
+            // Here goes all the posible error code
             case 404:
               this.router.navigateByUrl('/404');
               handled = true;
