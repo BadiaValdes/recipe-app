@@ -1,0 +1,55 @@
+.item-hover:hover{
+background-color: rgba(36, 39, 41, 0.1);
+
+border-radius: 10px ;
+}
+
+.item-hover{
+    z-index: 1;
+}
+
+.text-hover:hover{
+    cursor: pointer;
+}
+
+
+
+.nomencladores-action-button:hover{
+    color: rgba(25, 113, 194, 1);
+    cursor: pointer;
+    fill: none;
+}
+
+.element-row:hover{
+    background-color: rgba(36, 39, 41, 0.1);
+}
+
+.table{
+    margin: 0 auto;
+    width: 50%;
+    transition: all ease 0.5s;
+}
+
+@media screen and (max-width: 800px){
+    .table{
+        margin: 0 auto;
+        width: 70%;
+    }
+    
+}
+
+@media screen and (max-width: 700px){
+    .table{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .table{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+}

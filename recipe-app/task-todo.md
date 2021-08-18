@@ -27,11 +27,15 @@
     - Modificar el formulario con los HINTS para el usuario <span style="color:green;">#Done#<span>
     - Integrar el formulario con un wysiwyg <span style="color:green;">#Done#<span>
 	- Hacer un PATCH <span style="color:green;">#Done#<span>
-	- Comentar y arreglar código <span style="color:green;">#Precessing#<span>
-	- Cambiar iconos del stepper
+	- Comentar y arreglar código <span style="color:green;">#Done#<span>
+	- Cambiar iconos del stepper <span style="color:green;">#Done#<span>
+		
+			Necesitas utilizar el CDK de material stepper para modificar los iconos
 	- Arreglar la forma de mostrar los ingredientes en el formularios
 	- Hacer cambio de imagen <span style="color:red;">#Pending#<span>
-3. CRUD de los nomencladores
+	- En la descripcion de la recete poner un overflow Y auto
+3. CRUD de los nomencladores 
+	1. Crear un mecanismo para el menu lateral 
 4. Mirar nuevo diseño para el ingrediente y steps
 5. Agregar la fotografia a la lista de ingredientes
 6. Agregar linea de cargado mediante la libreria
@@ -39,6 +43,7 @@
 8. Mejorar el menu lateral
 9. Crear las pantallas para los errores comunes
 10. Realizar los filtros (sencillos) a la lista de las recetas
+	1. Crear la opcion buscar
 11. Crear un infinity scroll o paginator para la lista de recetas
 12. Crear el filtro que cocino hoy
 13. Crear la vista mis recetas
@@ -47,5 +52,7 @@
 16. Terminar de arreglar el login y el logout
 17. Crear un servicio para buttonSheet no es recomendable al no ser que se utilize para cosas en específico, con pequeñas variaciones -> Intentar buscar una solución general.
 18. Aprender animaciones con angular
+19. Panel para ususarios
+
 
 

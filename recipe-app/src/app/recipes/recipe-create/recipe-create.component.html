@@ -2,7 +2,15 @@
   <div mat-dialog-content class="form-dialog-height">
     <h1 mat-dialog-title>Let's cook something</h1>
     <div>
-        <mat-stepper linear [orientation]="this.direction" >
+        <mat-stepper linear [orientation]="this.direction">
+          <!-- Done has to be before edit -->
+          <ng-template matStepperIcon="done" >
+            <i class="icofont-spoon-and-fork"></i>
+          </ng-template>        
+          <ng-template matStepperIcon="edit">
+            <i class="icofont-chef"></i>
+           
+          </ng-template>
           <mat-step [stepControl]="recipeForm">
             <form [formGroup]="recipeForm">      
             <ng-template matStepLabel>General Data</ng-template>

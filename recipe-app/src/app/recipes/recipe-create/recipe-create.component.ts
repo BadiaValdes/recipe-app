@@ -36,11 +36,18 @@ import {formSettings} from '../../interfaces/formSettings'
 // Editor Configuration
 import {editorConfig} from '../../interfaces/editorConfig'
 
+// Stepper Options
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper' // Import the CDK
+
 //----- END IMPORTS -------
 @Component({
   selector: 'app-recipe-create',
   templateUrl: './recipe-create.component.html',
-  styleUrls: ['./recipe-create.component.css']
+  styleUrls: ['./recipe-create.component.css'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false,
+    }
+  }]
 })
 
 export class RecipeCreateComponent implements OnInit {

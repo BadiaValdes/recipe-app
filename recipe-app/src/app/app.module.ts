@@ -32,8 +32,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 //animation
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
-import { RecipeModule } from './recipes/recipe.module';
-import { AuthModule } from './auth/auth.module';
+
 
 // Interceptor
 import {HttpInterceptorInterceptor} from './service/http-interceptor.interceptor';
@@ -43,7 +42,11 @@ import { ConfigDialogComponent } from './reusables/config-dialog/config-dialog.c
 import { NotificationSnackBarComponent } from './reusables/notification-snack-bar/notification-snack-bar.component';
 import { OpenSheetComponent } from './reusables/openSheet/open-sheet/open-sheet.component';
 
-
+// My Module
+import { RecipeModule } from './recipes/recipe.module';
+import { AuthModule } from './auth/auth.module';
+import {NomencladoresModule} from './nomencladores/nomencladores.module'
+import {AdminPanelModule} from './admin/admin-panel.module'
 
 
 
@@ -72,7 +75,8 @@ import { OpenSheetComponent } from './reusables/openSheet/open-sheet/open-sheet.
     // HTTP CALL ******* END   
     AuthModule,
     RecipeModule,
-   
+    NomencladoresModule,
+    AdminPanelModule,
     AppRoutingModule,
     MatTabsModule,
     MatToolbarModule,
