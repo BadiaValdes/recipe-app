@@ -1,0 +1,45 @@
+<div class="mat-elevation-z8 table">
+    <table mat-table [dataSource]="dataSource" style="width: 100%" matSort>
+      <ng-container matColumnDef="no" style="width: 33%">
+        <th mat-header-cell *matHeaderCellDef>No</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name" style="width: 33%">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="slug" style="width: 33%">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Slug</th>
+        <td mat-cell *matCellDef="let element">{{ element.slug }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action" style="width: 33%">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <i (click)="delete(element.id)"  matTooltip="Eliminar" matTooltipPosition="right" class="bi bi-trash delete-action"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Header data -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="element-row"
+      ></tr>
+      <!-- Body data -->
+    </table>
+    <div style="position: relative;">
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25]"
+        #paginator
+        showFirstLastButtons
+      >
+      </mat-paginator>
+
+      
+    </div>
+    
+  </div>

@@ -1,0 +1,45 @@
+.table{
+    margin: 0 auto;
+    width: 50%;
+    transition: all ease 0.5s;
+}
+
+.element-row:hover{
+    background-color: rgba(36, 39, 41, 0.1);
+}
+
+.delete-action{
+    transition: all ease 0.5s;
+}
+
+.delete-action:hover{
+    color: red;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1000px){
+    .table{
+        margin: 0 auto;
+        width: 60%;
+    }
+    
+}
+
+@media screen and (max-width: 700px){
+    .table{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+    .table{
+        margin: 0 auto;
+        width: 80%;
+    }
+    
+}
+
+

@@ -1,5 +1,5 @@
 <div style="margin: 0 auto" fxLayoutAlign="center">
-  <p style="font-size: 2em; text-align: center">Nomencladores</p>
+  <p style="font-size: 2em; text-align: center">Nomencladores <i matTooltip="Volver" matTooltipPosition="below" class="bi bi-arrow-counterclockwise back-arrow" *ngIf="nomencladores_data != null" (click)="nomencladores_data = null"></i></p>
   <div *ngIf="nomencladores_data == null">
     <mat-list #shoes>
       <div style="width: 50vw; margin: 0 auto">
@@ -25,59 +25,6 @@
       </div>
     </mat-list>
   </div>
-  <div
-    *ngIf="nomencladores_data != null"
-
-    
-    class="mat-elevation-z8 table"
-  >
-    <table
-      mat-table
-      [dataSource]="dataSource"
-      style="width: 100%"
-      matSort
-    >
-      <ng-container matColumnDef="no" style="width: 33%">
-        <th mat-header-cell *matHeaderCellDef>No</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="name" style="width: 33%">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="slug" style="width: 33%">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Slug</th>
-        <td mat-cell *matCellDef="let element">{{ element.slug }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="action" style="width: 33%">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let element">
-          <i (click)="delete(element.id)" class="bi bi-trash"></i>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <!-- Header data -->
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        class="element-row"
-      ></tr>
-      <!-- Body data -->
-    </table>
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 25]"
-        #paginator
-        showFirstLastButtons
-      >      
-      </mat-paginator>
-
-        <button  (click)="nomencladores_data = null">Volver</button>
-   
-    </div>
-
-
+  <!-- The @input needs a value pass via dataBinding -->
+  <app-table style="margin: 0 auto; width: 50vw;" *ngIf="nomencladores_data != null" [data2]="selector"></app-table>
 </div>

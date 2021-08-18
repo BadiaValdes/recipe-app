@@ -17,39 +17,15 @@ border-radius: 10px ;
 .nomencladores-action-button:hover{
     color: rgba(25, 113, 194, 1);
     cursor: pointer;
-    fill: none;
 }
 
-.element-row:hover{
-    background-color: rgba(36, 39, 41, 0.1);
-}
-
-.table{
-    margin: 0 auto;
-    width: 50%;
+.back-arrow{
     transition: all ease 0.5s;
 }
 
-@media screen and (max-width: 800px){
-    .table{
-        margin: 0 auto;
-        width: 70%;
-    }
-    
+.back-arrow:hover{
+    color: rgba(25, 113, 194, 1);
+    cursor: pointer;
 }
 
-@media screen and (max-width: 700px){
-    .table{
-        margin: 0 auto;
-        width: 80%;
-    }
-    
-}
 
-@media screen and (max-width: 500px){
-    .table{
-        margin: 0 auto;
-        width: 80%;
-    }
-    
-}

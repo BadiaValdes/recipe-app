@@ -1,44 +1,36 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 
 // Site configuration
-import { nomencladoresArray } from '../../config/nomencladores';
+import { nomencladoresArray } from '../../../config/nomencladores';
 
 // Service
-import { GeneralApiServicesService } from '../../service/general-api-services.service';
+import { GeneralApiServicesService } from '../../../service/general-api-services.service';
 
 // Table
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
-export interface nomencladores_interface {
-  name: string;
-  slug: string;
-}
-
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
-export class ListComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit , AfterViewInit{
   data = nomencladoresArray;
+  @Input() data2;
 
-  selector? = null;
-
-  nomencladores_data = null;
-
-  // Table vars
-  displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
-  dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator) paginator?: MatPaginator; // Usado para caputrar un componente HTML con etiqueta #
-  @ViewChild(MatSort) sort? : MatSort;
-  // END TABLE VARS
-
-  constructor(private _serviceNomencladores: GeneralApiServicesService) {}
+    // Table vars
+    displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
+    dataSource = new MatTableDataSource<any>([]);
+    @ViewChild(MatPaginator) paginator?: MatPaginator; // Usado para caputrar un componente HTML con etiqueta #
+    @ViewChild(MatSort) sort? : MatSort;
+    // END TABLE VARS
+  constructor(private _serviceNomencladores: GeneralApiServicesService) { }
 
   ngOnInit(): void {
-    
+    this.dataHttpOriginSelector(this.data2)
+    console.log(this.data2)
   }
 
   ngAfterViewInit(): void {
@@ -46,20 +38,6 @@ export class ListComponent implements OnInit, AfterViewInit {
     //Add 'implements AfterViewInit' to the class.
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  addClickEvent(value) {
-    console.log(`El click se dio en ${value}`);
-  }
-
-  selectEvent(value) {
-    this.dataHttpOriginSelector(value);
-    this.selector = value;
-  }
-
-  delete(value) {
-    console.log(`Eliminar ${value}`);
-
   }
 
   dataHttpOriginSelector(value) {
@@ -90,13 +68,20 @@ export class ListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setTableData(data){
-    this.nomencladores_data = data;
-    this.dataSource.data = data;
-    setTimeout(() => {
-      
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+  delete(value) {
+    console.log(`Eliminar ${value}`);
   }
+
+
+  setTableData(data){
+    this.dataSource.data = data;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  /*  Use this when the table is in the parent component
+   setTimeout(() => {
+      
+
+    });
+ */
+}
 }
