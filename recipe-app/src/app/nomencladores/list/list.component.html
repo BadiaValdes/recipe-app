@@ -1,30 +1,38 @@
 <div style="margin: 0 auto" fxLayoutAlign="center">
-  <p style="font-size: 2em; text-align: center">Nomencladores <i matTooltip="Volver" matTooltipPosition="below" class="bi bi-arrow-counterclockwise back-arrow" *ngIf="nomencladores_data != null" (click)="nomencladores_data = null"></i></p>
-  <div *ngIf="nomencladores_data == null">
-    <mat-list #shoes>
-      <div style="width: 50vw; margin: 0 auto">
-        <mat-list-item *ngFor="let item of data" class="item-hover">
-          <i dir="ltr" class="bi bi-box-seam" mat-list-icon></i>
-          <div
-            class="text-hover"
-            dir="auto"
-            mat-line
-            fxFlexFill
-            (click)="this.selectEvent(item.listAction)"
-          >
-            {{ item.name }}
-          </div>
-          <div dir="rtl">
-            <i
-              class="bi bi-plus-square-fill nomencladores-action-button"
-              (click)="this.addClickEvent(item.action)"
-              mat-list-icon
-            ></i>
-          </div>
-        </mat-list-item>
-      </div>
-    </mat-list>
+  <p style="font-size: 2em; text-align: center">
+    Nomencladores
+    <i
+      [@inOutAnimation]
+      matTooltip="Volver"
+      matTooltipPosition="below"
+      class="bi bi-arrow-counterclockwise back-arrow"
+      *ngIf="nomencladores_data != null"
+      (click)="nomencladores_data = null"
+    ></i>
+  </p>
+
+  <div style="position: relative; margin: 0 auto" class="container-width">
+    <!-- The @input needs a value pass via dataBinding -->
+    <app-table
+      [@inOutAnimation]
+      style="margin: 0 auto; position: relative"
+      *ngIf="nomencladores_data != null && !showForm"
+      [data2]="selector"
+    ></app-table>
+    <!-- @output event emitter -->
+    <app-items
+      style="margin: 0 auto; position: absolute; left: 0px; top: 0px"
+      (outputEvent)="selectEvent($event)"
+      (creationEvent)="addClickEvent($event)"
+      [@inOutAnimation]
+      *ngIf="nomencladores_data == null && !showForm"
+    ></app-items>
+
+    <app-form
+      [@inOutAnimation]
+      [formType]="formNomencladorValue"
+      (cancelEvent)="addClickEvent($event)"
+      *ngIf="showForm"
+    ></app-form>
   </div>
-  <!-- The @input needs a value pass via dataBinding -->
-  <app-table style="margin: 0 auto; width: 50vw;" *ngIf="nomencladores_data != null" [data2]="selector"></app-table>
 </div>

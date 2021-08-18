@@ -42,7 +42,7 @@ export const inOutAnimation =
           ':enter', 
           [
             style({ opacity: 0 }),
-            animate('0.5s ease-out', 
+            animate('0.8s ease-in', 
                     style({ opacity: 1 }))
           ]
         ),
@@ -50,7 +50,7 @@ export const inOutAnimation =
           ':leave', 
           [
             style({ opacity: 1 }),
-            animate('0.5s ease-in', 
+            animate('0.5s ease-out', 
                     style({  opacity: 0 }))
           ]
         )

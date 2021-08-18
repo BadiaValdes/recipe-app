@@ -13,11 +13,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { TableComponent } from './list/table/table.component'; 
 
+import {MatFormFieldModule,} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatButtonModule} from '@angular/material/button'; 
+
+//animaiton
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ItemsComponent } from './list/items/items.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ListComponent,
     FormComponent,
-    TableComponent
+    TableComponent,
+    ItemsComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +38,13 @@ import { TableComponent } from './list/table/table.component';
     MatSortModule,
     MatToolbarModule,
     MatTooltipModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
   ]
 })
 export class NomencladoresModule { }

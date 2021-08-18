@@ -1,1 +1,28 @@
-<p>form works!</p>
+<div fxLayout="column">
+  <mat-form-field appearance="fill">
+    <mat-label for="name">Nombre:</mat-label>
+    <input
+      matInput
+      #nameInput
+      id="name"
+      name="name"
+      type="text"
+      [formControl]="name"
+      [maxLength]="nomencladoresConfig.maxLength"
+      required
+    />
+    <mat-error *ngIf="name.invalid && (name.dirty || name.touched)&&name.errors?.required">Este campo es obliga</mat-error>
+    <mat-error *ngIf="name.errors?.asyncVal">Ya existe</mat-error>
+    <mat-hint>{{ nameInput.value?.length || 0 }}/{{this.nomencladoresConfig.maxLength}}</mat-hint>
+  </mat-form-field>
+  <button
+    mat-button
+    color="primary"
+    (click)="create()"
+    [disabled]="name.invalid"
+  >
+    Create
+  </button>
+
+  <button mat-button color="warn" (click)="sendCancelEvent()">Cancel</button>
+</div>

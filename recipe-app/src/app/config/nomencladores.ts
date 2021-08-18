@@ -21,3 +21,7 @@ export const nomencladoresArray =[
     },
 
 ]
+
+export const nomencladoresFormConfig = {
+    maxLength : 20,
+}

@@ -210,8 +210,8 @@ export class RecipeCreateComponent implements OnInit {
       this.showImageField = false
       //this.recipeForm.get('img').setValue(defaultData.img);
       this.recipeForm.get('description').setValue(defaultData.description);
-      this.secondForm.get('difficulty').setValue('3dfd91059c');
-      this.secondForm.get('category').setValue('47f60a1189');
+      this.secondForm.get('difficulty').setValue(defaultData.difficulty);
+      this.secondForm.get('category').setValue(defaultData.category);
       this.secondForm.get('steps').setValue(defaultData.steps);
       defaultData.recipe_ingredient.forEach((element, index) => {   
         this.ingredients().push(this.newIngredientsWithValues(element.fk_product, element.amount, element.fk_measurement_unit, element.main_ingredient));

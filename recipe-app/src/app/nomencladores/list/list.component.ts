@@ -11,6 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
+// animation
+import {inOutAnimation} from '../../animations'
+
 export interface nomencladores_interface {
   name: string;
   slug: string;
@@ -20,6 +23,7 @@ export interface nomencladores_interface {
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
+  animations: [inOutAnimation]
 })
 export class ListComponent implements OnInit, AfterViewInit {
   data = nomencladoresArray;
@@ -27,6 +31,10 @@ export class ListComponent implements OnInit, AfterViewInit {
   selector? = null;
 
   nomencladores_data = null;
+
+  showForm = false;
+
+  formNomencladorValue = 0;
 
   // Table vars
   displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
@@ -48,7 +56,17 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  addClickEvent(value) {
+  addClickEvent(value: number) {
+    if(value == 0)
+    {
+      this.showForm = false;
+      console.log(`El click se dio en ${value}`);
+    }
+    else{
+      this.showForm = true;
+      this.formNomencladorValue = value;
+    }
+    
     console.log(`El click se dio en ${value}`);
   }
 
