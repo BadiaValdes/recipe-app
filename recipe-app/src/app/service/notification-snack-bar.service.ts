@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef, TextOnlySnackBar} from '@angular/material/snack-bar'; 
+import {MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef, TextOnlySnackBar, MatSnackBarVerticalPosition, MatSnackBarHorizontalPosition} from '@angular/material/snack-bar'; 
 
 //SnackBar component
 import {NotificationSnackBarComponent} from '../reusables/notification-snack-bar/notification-snack-bar.component'
@@ -7,6 +7,7 @@ import {NotificationSnackBarComponent} from '../reusables/notification-snack-bar
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class NotificationSnackBarService {
 
@@ -41,3 +42,4 @@ export class NotificationSnackBarService {
   // horizontalPosition: Start || Center || END || Right || Left
 
 }
+

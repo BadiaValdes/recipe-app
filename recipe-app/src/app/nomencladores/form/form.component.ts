@@ -12,6 +12,9 @@ import {nomencladoresFormConfig} from '../../config/nomencladores'
 // AsyncVal
 import {AsyncValServiceService} from '../../directive/exist-field/async-val-service.service'
 
+// Service 
+import {GeneralApiServicesService} from '../../service/general-api-services.service'
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -19,7 +22,9 @@ import {AsyncValServiceService} from '../../directive/exist-field/async-val-serv
 })
 export class FormComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
-    private asyncValDirective : AsyncValServiceService,) {}
+    private asyncValDirective : AsyncValServiceService,
+    private _generalApi : GeneralApiServicesService,
+    ) {}
 
   nomencladoresConfig = nomencladoresFormConfig;
 
@@ -39,14 +44,24 @@ export class FormComponent implements OnInit {
   }
 
   sendCancelEvent() {
-    const formData = new FormData();
-    formData.append('name', this.name_nomenclador.value);
-    formData.append('slug', this.createSlug(this.name_nomenclador.value));
     this.cancelEvent.emit(0);
   }
 
   create() {
-    this.sendCancelEvent();
+    const formData = new FormData();
+    formData.append('name', this.name_nomenclador.value);
+    let slug = this.createSlug(this.name_nomenclador.value);
+    console.log(slug)
+    formData.append('slug', slug);
+    this.post(formData).then(data =>{
+      console.log(data);
+      this.sendCancelEvent();
+    },
+    err =>{
+      console.log("Salio algo mal")
+    })
+    
+    
   }
 
   get name_nomenclador() {
@@ -66,12 +81,16 @@ export class FormComponent implements OnInit {
   post(data) {
     switch (this.formType) {
       case 1:
+        return this._generalApi.postCategory(data)
         break;
       case 2:
+        return this._generalApi.postDifficulty(data)
         break;
       case 3:
+        return this._generalApi.postMeasurement(data)
         break;
       case 4:
+        return this._generalApi.postProduct(data)
         break;
     }
   }

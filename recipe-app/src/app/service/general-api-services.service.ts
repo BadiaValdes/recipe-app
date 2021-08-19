@@ -68,6 +68,45 @@ export class GeneralApiServicesService {
     return this.http.get<Measurement[]>(`${this.httpAPI}measurement/`, httpOptions).pipe(catchError(this.handleError<Measurement[]>('getMeasurement', [])));
   }
 
+  postCategory(data)
+  {
+    return this.http.post<any>(`${this.httpAPI}category/`, data).toPromise();
+  }
+
+  postProduct(data){
+    return this.http.post<any>(`${this.httpAPI}product/`, data).toPromise();
+  }
+
+  postDifficulty(data){
+    return this.http.post<any>(`${this.httpAPI}difficulty/`, data).toPromise();
+  }
+
+  postMeasurement(data){
+    return this.http.post<any>(`${this.httpAPI}measurement/`, data).toPromise();
+  }
+
+  deleteCategory(data)
+  {
+    return this.http.delete(`${this.httpAPI}category/${data}`).toPromise()
+  }
+
+  deleteDifficulty(data)
+  {
+    return this.http.delete(`${this.httpAPI}difficulty/${data}`).toPromise()
+  }
+
+  deleteMeasurement(data)
+  {
+    return this.http.delete(`${this.httpAPI}measurement/${data}`).toPromise()
+  }
+
+  deleteProduct(data)
+  {
+    return this.http.delete(`${this.httpAPI}product/${data}`).toPromise()
+  }
+
+
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable< T> => {

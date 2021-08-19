@@ -1,28 +1,55 @@
-<div fxLayout="column">
-  <mat-form-field appearance="fill">
-    <mat-label for="name">Nombre:</mat-label>
-    <input
-      matInput
-      #nameInput
-      id="name"
-      name="name"
-      type="text"
-      [formControl]="name"
-      [maxLength]="nomencladoresConfig.maxLength"
-      required
-    />
-    <mat-error *ngIf="name.invalid && (name.dirty || name.touched)&&name.errors?.required">Este campo es obliga</mat-error>
-    <mat-error *ngIf="name.errors?.asyncVal">Ya existe</mat-error>
-    <mat-hint>{{ nameInput.value?.length || 0 }}/{{this.nomencladoresConfig.maxLength}}</mat-hint>
-  </mat-form-field>
-  <button
-    mat-button
-    color="primary"
-    (click)="create()"
-    [disabled]="name.invalid"
-  >
-    Create
-  </button>
+<div
+  fxLayout="column"
+  style="width: 50%; margin: 0 auto;"
+>
+  <div fxLayout="row">
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label for="name">Nombre:</mat-label>
+      <input
+        matInput
+        #nameInput
+        id="name"
+        name="name"
+        type="text"
+        [formControl]="name"
+        [maxLength]="nomencladoresConfig.maxLength"
+        required
+      />
+      <mat-error
+        *ngIf="
+          name.invalid && (name.dirty || name.touched) && name.errors?.required
+        "
+        >Este campo es obliga</mat-error
+      >
+      <mat-error *ngIf="name.errors?.asyncVal">Ya existe</mat-error>
+      <mat-hint
+        >{{ nameInput.value?.length || 0 }}/{{
+          this.nomencladoresConfig.maxLength
+        }}</mat-hint
+      >
+    </mat-form-field>
+  </div>
 
-  <button mat-button color="warn" (click)="sendCancelEvent()">Cancel</button>
+  <div fxLayout="row">
+    <button
+      style="display: inline-block; width: 100%; text-align: center"
+      mat-button
+      color="primary"
+      (click)="create()"
+      [disabled]="name.invalid"
+    >
+      Create
+    </button>
+  </div>
+
+  <div fxLayout="row">
+    <button
+      style="display: inline-block; width: 100%; text-align: center"
+      mat-button
+      color="warn"
+      (click)="sendCancelEvent()"
+    >
+      Cancel
+    </button>
+  </div>
 </div>
