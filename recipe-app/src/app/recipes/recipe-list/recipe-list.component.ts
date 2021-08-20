@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import {ActivatedRoute} from '@angular/router'
+import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from '@angular/router'
 import {Observable, from, Subscriber, Subscription} from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
@@ -10,12 +10,13 @@ import {RecipeService} from '../../service/recipe.service'
 
 import {EventEmitterService} from '../../service/event-emitter.service'
 
+
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnInit, OnDestroy {
 
   // An old var for "Responsive design"
   breakpoint : number = 4 // Obsolete
@@ -24,10 +25,13 @@ export class RecipeListComponent implements OnInit {
   recipes$ :  Observable<Recipe[]>; // Recipe Observable -> Needs to be displayed with the async Pipe
   recipes_list :  Recipe[]; // Recipe List -> Used in the simple way
 
+  // isLoading
+  loading = true;
   // event emiter Subscription
   eventSubcriber : Subscription; 
   constructor(private rs : RecipeService, // recipe handle
     private route : ActivatedRoute, // Routes handle
+    private _router : Router,
     private _eventEmitterService : EventEmitterService // We can subscribe to this event to recive the new recipe after creation
     ) { }
 
@@ -42,6 +46,10 @@ export class RecipeListComponent implements OnInit {
     this.rs.getRecipe().subscribe(
       data => {
        this.recipes_list = data;
+        setTimeout(() => {
+        this.loading = false;
+       }, 500); 
+       
       }
     )
   }
@@ -62,6 +70,8 @@ export class RecipeListComponent implements OnInit {
       this.eventSubcriber.unsubscribe();
       this.eventSubcriber = null;
     }
+
+    
   }
 
   // Depreciated
@@ -81,5 +91,12 @@ export class RecipeListComponent implements OnInit {
         return this.rs.getRecipe()
       })
   )}
+
+  consoleThis(value){
+    console.log(value)
+  }
+
+    
+  
 
 }

@@ -34,12 +34,12 @@
 	- Arreglar la forma de mostrar los ingredientes en el formularios
 	- Hacer cambio de imagen <span style="color:red;">#Pending#<span>
 	- En la descripcion de la recete poner un overflow Y auto
-3. CRUD de los nomencladores 
-	1. Crear un mecanismo para el menu lateral 
-4. Mirar nuevo diseño para el ingrediente y steps
-5. Agregar la fotografia a la lista de ingredientes
-6. Agregar linea de cargado mediante la libreria
-7. Tratar de buscar la forma de realizar composicion de ingredientes
+3. CRUD de los nomencladores  <span style="color:green;">#Done#<span>
+	1. Crear un mecanismo para el menu lateral <span style="color:green;">#Done#<span>
+4. Mirar nuevo diseño para el ingrediente y steps <span style="color:red;">#Pending#<span>
+5. Agregar la fotografia a la lista de ingredientes <span style="color:red;">#Pending#<span>
+6. Agregar linea de cargado mediante la libreria <span style="color:green;">#Done#<span>
+7. Tratar de buscar la forma de realizar composicion de ingredientes <span style="color:red;">#Pending#<span>
 8. Mejorar el menu lateral
 9. Crear las pantallas para los errores comunes
 10. Realizar los filtros (sencillos) a la lista de las recetas
@@ -53,6 +53,9 @@
 17. Crear un servicio para buttonSheet no es recomendable al no ser que se utilize para cosas en específico, con pequeñas variaciones -> Intentar buscar una solución general.
 18. Aprender animaciones con angular
 19. Panel para ususarios
+20. Probar las cookies en angular
+21. "Optimizar" los detalles <span style="color:green;">#Done#<span>
+22. Crear skeleton de la lista
 
 
 

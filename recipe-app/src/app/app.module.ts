@@ -20,6 +20,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';  
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
 // MATIRIAL END
 
 // Flex Layout
@@ -47,6 +48,8 @@ import { RecipeModule } from './recipes/recipe.module';
 import { AuthModule } from './auth/auth.module';
 import {NomencladoresModule} from './nomencladores/nomencladores.module'
 import {AdminPanelModule} from './admin/admin-panel.module'
+
+
 
 
 
@@ -88,6 +91,7 @@ import {AdminPanelModule} from './admin/admin-panel.module'
     MatListModule,
     MatDividerModule,
     MatDialogModule,
+    MatSidenavModule,
     
     
   ],

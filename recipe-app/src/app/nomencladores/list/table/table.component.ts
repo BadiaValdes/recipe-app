@@ -8,6 +8,7 @@ import {
 
 // Site configuration
 import { nomencladoresArray } from '../../../config/nomencladores';
+import {defaultDeleteMessage} from '../../../config/dialogDefaultMessages'
 
 // Service
 import { GeneralApiServicesService } from '../../../service/general-api-services.service';
@@ -19,6 +20,8 @@ import { MatSort } from '@angular/material/sort';
 
 // Snack Service
 import { NotificationSnackBarService } from '../../../service/notification-snack-bar.service';
+import { ConfirmDialogServiceService } from '../../../service/confirm-dialog-service.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -37,7 +40,8 @@ export class TableComponent implements OnInit, AfterViewInit {
   // END TABLE VARS
   constructor(
     private _serviceNomencladores: GeneralApiServicesService,
-    private _notificationService: NotificationSnackBarService
+    private _notificationService: NotificationSnackBarService,
+    private _confirmDialog: ConfirmDialogServiceService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +58,19 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  // Delete Actions
   delete(value) {
+
+    this._confirmDialog.openDialog(defaultDeleteMessage); // Open generic dialog confirm
+    // What happen next?
+    this._confirmDialog.dialogFinalValue().subscribe((data) => {
+      if (data) {
+        this.deleteAction(value);
+      }
+    });
+  }
+  
+  deleteAction(value){
     this.deleteHttpOriginSelector(value).then((_) => {
       this.dataSource.data = this.dataSource.data.filter(
         (data) => data.id != value
@@ -70,8 +86,8 @@ export class TableComponent implements OnInit, AfterViewInit {
         options
       );
     });
-    console.log(`Eliminar ${value}`);
   }
+  // END OF DELETE ACTIONS
 
   // OPTION SELECTOR
   dataHttpOriginSelector(value) {

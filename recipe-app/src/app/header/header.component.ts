@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {inOutAnimation, inOutMenuAnimation} from '../animations'
 
 import{UserService} from '../service/user.service';
+
 
 
 @Component({
@@ -13,7 +14,7 @@ import{UserService} from '../service/user.service';
 export class HeaderComponent implements OnInit {
   showUnderMenu : boolean = false;
 
-  
+  @Output() sideNavToogle = new EventEmitter<boolean>();
 
   constructor(private userServ : UserService) { }
 
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
   }
 
   setShowUnderMenu(){
-    this.showUnderMenu = this.showUnderMenu ? false: true;
+    this.sideNavToogle.emit(true);
+    //this.showUnderMenu = this.showUnderMenu ? false: true;
   }
 
   getUserData(){

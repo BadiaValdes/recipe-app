@@ -7,7 +7,7 @@ export const formSettings = {
             maxLength : 40,
         },
         description: {
-            maxLength: 500,
+            maxLength: 255,
         },
         steps: {
             maxLength: 500,

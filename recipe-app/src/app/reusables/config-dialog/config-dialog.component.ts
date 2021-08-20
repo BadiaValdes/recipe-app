@@ -18,7 +18,7 @@ export class ConfigDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   closeMe() {
-    this._selfReference.close();
+    this._selfReference.close(false);
   }
 
   confirmMe() {

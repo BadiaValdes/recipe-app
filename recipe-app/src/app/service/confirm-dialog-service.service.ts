@@ -21,8 +21,7 @@ export class ConfirmDialogServiceService {
   dialogReference : MatDialogRef<ConfigDialogComponent> // Create Component reference
 
 
-  deleteConfirmDialog(dialogData : any){
-  }
+
 
   // Open the dialog with some options -> This case data
   openDialog(options : any)

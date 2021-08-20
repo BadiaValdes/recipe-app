@@ -1,46 +1,106 @@
-<div *ngIf="recipe_details$ | async as recipe_details" fxLayout="column">
-
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding-top: 15px; padding-bottom: 20px; ">
-    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="35%" fxLayoutAlign="center center">
+<div *ngIf="cargando">
+  Cargando
+</div>
+<div *ngIf="!cargando">
+  <div *ngIf="recipe_detail" fxLayout="column">
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="10px"
+      style="padding-top: 15px; padding-bottom: 20px"
+    >
+      <div
+        fxFlex="20%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+        fxFlex.md="35%"
+        fxLayoutAlign="center center"
+      >
+        <img
+          src="{{ recipe_detail.img }}"
+          class="img-thumb"
+          width="300"
+          height="300"
+          alt="recipe image"
+        />
+      </div>
+      <div
+        fxLayoutAlign="start up"
+        fxFlex="79%"
+        fxFlex.xs="100%"
+        fxFlex.sm="100%"
+        fxFlex.md="63%"
+        fxFlexAlign="stretch"
+        class="background-gray-white"
+      >
+        <mat-list role="list" style="width: 97%; padding-left: 10px">
+          <mat-list-item role="listitem"
+            >Nombre: {{ recipe_detail.name }}</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem"
+            >Categoria: {{ recipe_detail.fk_category }}</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem"
+            >Dificultad: {{ recipe_detail.fk_difficult }}</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem" style="height: 150px;">
+            <div  fxFlexAlign="stretch" fxFlex="100%" style="overflow-y: auto; padding-top: 10px;">
+              <div>Descripcion:</div>
   
-            <img src={{recipe_details.img}} class="img-thumb" width="300" height="300" alt="recipe image">
-
-
-         
+              <div style="padding-left: 10px;">
+                  <div [innerHTML]="recipe_detail.description"></div>
+              
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
     </div>
-    <div  fxLayoutAlign="start up" fxFlex="79%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="63%" fxFlexAlign="stretch" class="background-gray-white">
-        <mat-list role="list" style="width: 97%; padding-left: 10px;" >
-            <mat-list-item role="listitem">Nombre: {{recipe_details.name}}</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item role="listitem">Categoria: {{recipe_details.fk_category}}</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item role="listitem">Dificultad: {{recipe_details.fk_difficult}}</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item role="listitem">
-               Descripcion:                          
-            </mat-list-item>
-            <mat-list-item role="listitem">
-               <div style="padding-left: 10px;" [innerHTML]="recipe_details.description"></div>
-            </mat-list-item>
-            
-          </mat-list>     
-
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayout.sm="column"
+      fxFlex="100%"
+      fxLayoutGap="10px"
+      style="padding-bottom: 10px"
+    >
+      <app-recipe-ingredient
+        style="height: 400px !important"
+        fxFlex="50%"
+        fxFlex.sm="100%"
+        fxFlex.xs="100%"
+        [recipe_ingredients]="recipe_detail.recipe_ingredient"
+      ></app-recipe-ingredient>
+      <app-recipe-steps
+        style="height: 400px !important"
+        fxFlex="50%"
+        fxFlex.sm="100%"
+        fxFlex.xs="100%"
+        [setp]="recipe_detail.steps"
+      ></app-recipe-steps>
     </div>
+    <div
+      *ngIf="isAuth() && userID().id == recipe_detail.fk_user"
+      style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 2em;
+        color: white;
+        width: 50px;
+        height: 50px;
+      "
+    >
+      <button mat-mini-fab color="primary" (click)="openSheet()">
+        <i class="bi bi-gear-fill"></i>
+      </button>
+    </div>
+  </div>
 </div>
-<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%" fxLayoutGap="10px" style="padding-bottom: 10px; ">
-    <app-recipe-ingredient style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [recipe_ingredients]="recipe_details.recipe_ingredient"></app-recipe-ingredient>
-<app-recipe-steps style="height: 400px !important;" fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%" [setp]="recipe_details.steps"></app-recipe-steps>
 
+<div *ngIf="!recipe_detail">
+  <H3>No existe</H3>
 </div>
-<div *ngIf="isAuth() && (userID().id == recipe_details.fk_user)"  style="position: absolute; bottom: 0; right:0; font-size: 2em; color: white; width: 50px; height: 50px;">
-    <button mat-mini-fab  color="primary" (click)="openSheet()">
-    <i class="bi bi-gear-fill"></i>
-   
-    </button>
-</div>
-</div>
-<div *ngIf="!recipe_details$">
-    <H3>No existe</H3>
-</div>  
-
-

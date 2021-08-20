@@ -49,8 +49,12 @@ import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-o
 import {MatRadioModule} from '@angular/material/radio';
 import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack-create/recipe-snack-create.component'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+
 // WYSIWYG
 import { AngularEditorModule } from '@kolkov/angular-editor';
+
+// Angular load bar
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client'
 
 
 @NgModule({
@@ -95,7 +99,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatSnackBarModule,
     MatTooltipModule,
     AngularEditorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    LoadingBarHttpClientModule,
   ]
 })
 export class RecipeModule { }

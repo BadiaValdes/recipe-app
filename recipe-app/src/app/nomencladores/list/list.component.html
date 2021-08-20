@@ -11,8 +11,15 @@
     ></i>
   </p>
 
+
   <div style="position: relative; margin: 0 auto" class="container-width">
     <!-- The @input needs a value pass via dataBinding -->
+    <div @inOutAnimation *ngIf="showMotivationText" fxLayoutAlign="center center" fxLayout="row">
+      <div>
+        <p style="font-size: 2em; text-align: center;">Todos tus problemas comienzan aqui.</p>
+      </div>
+      
+    </div>
     <app-table
       [@inOutAnimation]
       style="margin: 0 auto; position: relative"
@@ -25,14 +32,14 @@
       (outputEvent)="selectEvent($event)"
       (creationEvent)="addClickEvent($event)"
       [@inOutAnimation]
-      *ngIf="nomencladores_data == null && !showForm"
+      *ngIf="nomencladores_data == null && !showForm && !showMotivationText"
     ></app-items>
 
     <app-form
       [@inOutAnimation]
       [formType]="formNomencladorValue"
       (cancelEvent)="addClickEvent($event)"
-      *ngIf="showForm"
+      *ngIf="showForm && !showMotivationText"
     ></app-form>
   </div>
 </div>

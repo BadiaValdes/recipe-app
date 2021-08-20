@@ -1,32 +1,5 @@
-<mat-sidenav-container class="example-container" class="min-height-100">
-    <mat-sidenav #sidenav mode="over" class="width-sidenav-40vh"
-                 >
-                 <mat-nav-list fxLayout="column">
 
-                    <h2 matSubheader>dd </h2>
-                    
-                    <button mat-button color="primary" *ngIf="this.isUserAuth()" fxLayoutAlign="start center" (click)="openCreateDialog()">New Recipe</button>
-                    <button mat-button color="primary" [disabled]="!this.isUserAuth()" (click)="this.openSnackService()" fxFill>SnackBarTest</button>
-                    <button mat-button color="primary">Emit First Event</button>
-              
-                    <mat-divider></mat-divider>
-                      
-                    <button mat-button color="primary">Action</button>
-                    <button mat-button color="primary">Action</button>
-                    <button mat-button color="primary">Action</button>
-                 
-              
-                  </mat-nav-list>
-    </mat-sidenav>
-  
-    <mat-sidenav-content class="min-height-100">
-        <div class="sideBTN">
-            <button mat-button (click)="sidenav.toggle()" class="sideBTNicon" color="accent">
-                <i class="bi" (click)="changeOpenArrowDirection()"  [ngClass]="opened ? 'bi-caret-right-fill' : 'bi-caret-left-fill'">
 
-                </i>
-            </button>
-        </div>
         <div class="container">  
                
                 <router-outlet></router-outlet>  
@@ -36,8 +9,8 @@
 
       
 
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+
+ 
 
   
   

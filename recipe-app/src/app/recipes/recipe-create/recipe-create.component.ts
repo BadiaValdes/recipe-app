@@ -210,8 +210,8 @@ export class RecipeCreateComponent implements OnInit {
       this.showImageField = false
       //this.recipeForm.get('img').setValue(defaultData.img);
       this.recipeForm.get('description').setValue(defaultData.description);
-      this.secondForm.get('difficulty').setValue(defaultData.difficulty);
-      this.secondForm.get('category').setValue(defaultData.category);
+      this.secondForm.get('difficulty').setValue(defaultData.fk_difficult);
+      this.secondForm.get('category').setValue(defaultData.fk_category);
       this.secondForm.get('steps').setValue(defaultData.steps);
       defaultData.recipe_ingredient.forEach((element, index) => {   
         this.ingredients().push(this.newIngredientsWithValues(element.fk_product, element.amount, element.fk_measurement_unit, element.main_ingredient));
@@ -220,7 +220,6 @@ export class RecipeCreateComponent implements OnInit {
         }
         this.principal = false;
       }); 
-      console.log(data)
     })
   }
 
@@ -334,8 +333,8 @@ export class RecipeCreateComponent implements OnInit {
       form.append('img', this.recipeForm.get('img')?.value, this.image_data.name);
     }
     form.set('description', this.description?.value); // Save description
-    form.set('fk_difficult', this.difficulty.value); // save difficulty
-    form.set('fk_category', this.category.value); // Save category
+    form.set('fk_difficult', this.difficulty?.value); // save difficulty
+    form.set('fk_category', this.category?.value); // Save category
     // With these two the first time (just a formGroup) I didn't have to do anything in the backEnd, but now I have to do a few things, see the backend for details. 
     form.set('steps', this.steps?.value);// Save the steps
     form.append('recipe_ingredient', JSON.stringify(this.thirdForm.get("ingredients")?.value)); // Append all the ingredient as an arry of strings
@@ -380,9 +379,11 @@ export class RecipeCreateComponent implements OnInit {
 
       // what happened in the load process
       reader.onload = () => {
+
+         
        
           this.img_to_show = reader.result // Save the result value after read in the var that will show the image to user
-      
+         
 
         this.cd.markForCheck; // Detect the reference
       }    
@@ -390,6 +391,7 @@ export class RecipeCreateComponent implements OnInit {
       //const file = event.target.files[0]
       const file = event.target.files[0] // save the file into a variable
       this.image_data = file; // save it again why?
+      
       this.recipeForm.patchValue({
         img: file
       }) // Save it in the recipeForm group

@@ -36,6 +36,8 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   formNomencladorValue = 0;
 
+  showMotivationText = true;
+
   // Table vars
   displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
   dataSource = new MatTableDataSource<any>([]);
@@ -46,7 +48,9 @@ export class ListComponent implements OnInit, AfterViewInit {
   constructor(private _serviceNomencladores: GeneralApiServicesService) {}
 
   ngOnInit(): void {
-    
+    setTimeout(() => {
+      this.showMotivationText = false;
+    }, 3000);
   }
 
   ngAfterViewInit(): void {
