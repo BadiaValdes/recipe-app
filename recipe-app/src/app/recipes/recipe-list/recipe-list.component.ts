@@ -51,6 +51,12 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // Subject for debouncing method
   filterSubject : Subject<string> = new Subject<string>(); // Creates a observable variable
 
+  // Autocomplete options
+  recipe_names : string [];
+
+  // Options Obervable
+  recipe_names_observable :  Subject<string> = new Subject<string>();
+
   constructor(private rs : RecipeService, // recipe handle
     private route : ActivatedRoute, // Routes handle
     private _router : Router,
@@ -107,6 +113,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       this.eventSubcriber = null;
     }
 
+    if(this.recipe_names_observable.observers.length > 0){
+      this.recipe_names_observable.unsubscribe();
+      this.recipe_names_observable = null;
+    }
+
     
   }
 
@@ -133,6 +144,16 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   search(event){
+    if(this.recipe_names_observable.observers.length === 0){
+      this.recipe_names_observable.pipe(
+      ).subscribe(text => {
+        this.optionsFilter(text)
+      });
+    }
+
+    this.recipe_names_observable.next(event)
+
+    
 
 /*     // Avoid consecutive HTTP calls
     // Performance optimization
@@ -208,10 +229,32 @@ export class RecipeListComponent implements OnInit, OnDestroy {
      })   
      
     }
+
+
   
   cloneRecipe(){
     this.recipe_copy = this.recipes_list;
+    this.recipe_names = this.recipeNames
   }
+
+  get recipeNames(){
+    return this.recipes_list.map(data => data.name);
+  }
+
+  optionsFilter(word: string){
+    if(word === "")
+    {
+      this.recipe_names = this.recipeNames
+    }
+    else
+    {
+      this.recipe_names = this.recipe_names.filter(data => data.toLocaleLowerCase().includes(word.toLocaleLowerCase()))
+    }
+  }
+
+ 
+
+
 
     
   }

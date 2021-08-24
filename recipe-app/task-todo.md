@@ -42,9 +42,26 @@
 7. Tratar de buscar la forma de realizar composicion de ingredientes <span style="color:red;">#Pending#<span>
 8. Mejorar el menu lateral <span style="color:green;">#Done#<span>
 9. Crear las pantallas para los errores comunes <span style="color:red;">#Pending#<span>
-10. Realizar los filtros (sencillos) a la lista de las recetas
+10. Realizar los filtros (sencillos) a la lista de las recetas <span style="color:green;">#Done#<span>
 	1. Crear la opcion buscar
-11. Crear un infinity scroll o paginator para la lista de recetas
+
+			- Via PIPE
+				- We need to create a pipe
+				- The transformation method has as params the items array and a search word
+				- Inside the method:
+				- If array is empty, it returns empty
+				- If search word in null or empty, it returns items array
+				- Finally return the items after applaying the filter
+				- In the HTML, use the pipe in the ngFor
+			- Via Method
+				- Create an event (input) in the input html element
+				- Inside the method:
+				- If event is empty, it returns array
+				- else, it returns items after filtering
+			- Use an subjecto with debounceTime or throttleTime
+				- Pipe the subject, and after that, create a subscription and execute the method in way 2
+
+11. Crear un infinity scroll o paginator para la lista de recetas <span style="color:orange;">#We are in the road#<span>
 12. Crear el filtro que cocino hoy
 13. Crear la vista mis recetas
 14. Crear la modificación de perfil del usuario
