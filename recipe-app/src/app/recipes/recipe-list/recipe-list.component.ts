@@ -167,6 +167,25 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         debounce -> execute a function after a cooling period -> Emit the value if the user stops writing
      */
     
+     /* 
+
+     We have three ways of filtering in this component:
+      1- Via PIPE
+        - We need to create a pipe
+        - The transformation method has as params the items array and a search word
+        - Inside the method:
+          - If array is empty, it returns empty
+          - If search word in null or empty, it returns items array
+          - Finally return the items after applaying the filter
+        - In the HTML, use the pipe in the ngFor
+      2- Via Method
+        - Create an event (input) in the input html element
+        - Inside the method:
+          - If event is empty, it returns array
+          - else, it returns items after filtering
+      3- Use an subjecto with debounceTime or throttleTime
+        - Pipe the subject, and after that, create a subscription and execute the method in way 2
+     */
     
 
      
