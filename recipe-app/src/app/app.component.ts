@@ -48,7 +48,7 @@ export class AppComponent {
 
   title = 'routing';
 
-  sideNavToogle(value){
+  sideNavToogle(){
     this.sidenav.toggle();
   }
 

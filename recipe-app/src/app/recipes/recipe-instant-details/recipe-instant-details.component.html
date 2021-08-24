@@ -1,0 +1,32 @@
+
+<div style="position: relative;">
+    <div style="position: absolute; right: -15px; top: -20px;  color: #000;" fxLayout="row" fxLayoutGap="5px">
+        <a style="font-size: 1.17em;" (click)="close(1)"  class="bi  bi-eye"></a>
+        <a style="font-size: 1.1em;" class="bi bi-x-circle" (click)="close()"></a>
+        
+    </div>
+
+
+<div mat-dialog-content>
+  <div fxLayout="row wrap" style="padding-bottom: 5px;">
+    <div fxFlex='100%' fxFlex.gt-sm="37%" fxFlexAlign="center" fxLayoutAlign.gt-sm="start center" fxLayoutAlign="center center">
+        <img [src]="data.image" class="instant-image" fxFlexAlign="center" width="150" height="150">
+    </div>
+    <div fxLayout="column" fxFlex.gt-sm="63%" fxFlex='100%'>
+        <mat-list>
+            <mat-list-item> Nombre: {{data.nombre}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item> Dificultad: {{data.dificultad}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item> Ingrediente Principal: {{ingrediente_principal}}</mat-list-item>
+        </mat-list>           
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div style="padding-top: 15px; max-width: 450px;">
+     <div [innerHTML]="data.descripcion"></div>
+  </div>
+
+</div>
+
+</div>

@@ -1,23 +1,24 @@
 
 <ngx-loading-bar [includeSpinner]="false" color="#17a2b8"></ngx-loading-bar>
-<div *ngIf="loading" fxLayout="column" style="margin: 0 auto; height: 100vh; position: absolute; top: 0; left: 0;" fxFill fxLayoutAlign="center center">
-    
-  
-        <mat-spinner></mat-spinner>
-
- 
+<div *ngIf="filters" fxLayoutAlign="center center"  >
+    <h3>Filtros Activados</h3>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre de receta</mat-label>
+        <input #searchInput [(ngModel)]="searchText" type="text" (input)="search($event.target.value)" matInput  placeholder="Arroz con frijoles">        
+    </mat-form-field>
 </div>
  <div *ngIf="!loading" fxLayout="row wrap" fxLayoutGap="10px"  fxLayout.xs="column" fxLayoutAlign="center" style="padding-top: 15px; padding-bottom: 20px;" >
 
     <!-- If whe use an observable for iteration we need to put the | async PIPE -->
-    <mat-card *ngFor="let recip of recipes_list"  fxFlex="20%" fxFlex.md="30%" fxFlex.sm="40%" fxFlex.lt-sm="100%" fxFlex.xs="100%" class="pd-b">
+    <!--| searchFilter: searchText-->
+    <mat-card *ngFor="let recip of recipes_list | searchFilter: searchText" [@inOutAnimation]   fxFlex="20%" fxFlex.md="30%" fxFlex.sm="40%" fxFlex.lt-sm="100%" fxFlex.xs="100%" class="pd-b">
         <img mat-card-image src={{recip.img}}  width="150" height="250">
         <mat-card-header>
             <mat-card-title>{{recip.name}}</mat-card-title>
         </mat-card-header>
         <mat-card-actions>
             <a mat-stroked-button [routerLink]="['/recipe',recip.slug]" [state]="recip"  color="primary">Detalles</a>
-            <button mat-button>Action</button>
+            <button mat-stroked-button   color="primary" (click)="instantDetails(recip)">Resumen</button>
         </mat-card-actions>
     </mat-card>
 

@@ -40,8 +40,8 @@
 5. Agregar la fotografia a la lista de ingredientes <span style="color:red;">#Pending#<span>
 6. Agregar linea de cargado mediante la libreria <span style="color:green;">#Done#<span>
 7. Tratar de buscar la forma de realizar composicion de ingredientes <span style="color:red;">#Pending#<span>
-8. Mejorar el menu lateral
-9. Crear las pantallas para los errores comunes
+8. Mejorar el menu lateral <span style="color:green;">#Done#<span>
+9. Crear las pantallas para los errores comunes <span style="color:red;">#Pending#<span>
 10. Realizar los filtros (sencillos) a la lista de las recetas
 	1. Crear la opcion buscar
 11. Crear un infinity scroll o paginator para la lista de recetas

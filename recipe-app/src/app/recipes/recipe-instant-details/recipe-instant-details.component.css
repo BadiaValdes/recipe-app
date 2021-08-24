@@ -1,0 +1,25 @@
+.instant-image{
+    box-shadow: inset 0px 0px 33px 7px rgba(0,0,0,0.75) !important;
+}
+
+.bi-eye{
+    transition: all ease 0.5s;
+    color: black;
+}
+
+.bi-eye:hover{
+    color: darkcyan;
+    cursor: pointer;
+}
+
+
+
+.bi-x-circle{
+    transition: all ease 0.5s;
+    color: black;
+}
+
+.bi-x-circle:hover{
+    color: red;
+    cursor: pointer;
+}

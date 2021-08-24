@@ -54,7 +54,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 // Angular load bar
-import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client'
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
+import { RecipeInstantDetailsComponent } from './recipe-instant-details/recipe-instant-details.component';
+import { SearchFilterPipe } from './search-filter.pipe';
+
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client'
     SplitInterfacePipe,
     RecipeOptionsComponent,
     RecipeSnackCreateComponent,
+    RecipeInstantDetailsComponent,
+    SearchFilterPipe,
+    
 
   
    ],
