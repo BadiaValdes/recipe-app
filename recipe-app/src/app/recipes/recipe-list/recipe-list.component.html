@@ -31,7 +31,7 @@
 >
   <!-- If whe use an observable for iteration we need to put the | async PIPE -->
   <!--| searchFilter: searchText-->
-  <mat-card
+<!--   <mat-card
     *ngFor="let recip of recipes_list | searchFilter: searchText"
     [@inOutAnimation]
     fxFlex="20%"
@@ -61,5 +61,6 @@
         Resumen
       </button>
     </mat-card-actions>
-  </mat-card>
+  </mat-card> -->
+  <app-recipe-card-item *ngFor="let recip of recipes_list | searchFilter: searchText" [recip]='recip'></app-recipe-card-item>
 </div>

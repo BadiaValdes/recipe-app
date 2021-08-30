@@ -58,6 +58,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import { RecipeInstantDetailsComponent } from './recipe-instant-details/recipe-instant-details.component';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { RecipeCardItemComponent } from './recipe-card-item/recipe-card-item.component';
 
 
 
@@ -77,6 +78,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     RecipeSnackCreateComponent,
     RecipeInstantDetailsComponent,
     SearchFilterPipe,
+    RecipeCardItemComponent,
     
 
   

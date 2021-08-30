@@ -73,6 +73,7 @@
 20. Probar las cookies en angular
 21. "Optimizar" los detalles <span style="color:green;">#Done#<span>
 22. Crear skeleton de la lista
+23. Refactor recipe list card
 
 
 

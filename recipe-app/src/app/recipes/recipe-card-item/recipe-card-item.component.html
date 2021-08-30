@@ -1,0 +1,31 @@
+<mat-card    
+    [@inOutAnimation]
+    fxFlex="20%"
+    fxFlex.md="30%"
+    fxFlex.sm="40%"
+    fxFlex.lt-sm="100%"
+    fxFlex.xs="100%"
+    class="pd-b"
+  >
+    <img mat-card-image src="{{ recip.img }}" width="150" height="250" />
+    <mat-card-header>
+      <mat-card-title>{{ recip.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <a
+        mat-stroked-button
+        [routerLink]="['/recipe', recip.slug]"
+        [state]="recip"
+        color="primary"
+        >Detalles</a
+      >
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="instantDetails(recip)"
+      >
+        Resumen
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
