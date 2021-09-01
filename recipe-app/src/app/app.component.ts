@@ -24,6 +24,9 @@ import {NotificationSnackBarService} from './service/notification-snack-bar.serv
 
 // Create Component
 import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.component'
+
+// Route var
+import {routes} from './config/routes'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,6 +36,7 @@ import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.compo
 })
 export class AppComponent {
 
+  route = routes;
   @ViewChild('sidenav') sidenav;
 
   constructor(
@@ -41,6 +45,7 @@ export class AppComponent {
     private snackBar : MatSnackBar, // Old Snack var option -> Still in use
     private _notificationSnackBarService : NotificationSnackBarService, // Snack service -> New way to call it
     private _eventEmitterTest: EventEmitterService, // Event emmiter service -> First one
+    
     
   ){
 

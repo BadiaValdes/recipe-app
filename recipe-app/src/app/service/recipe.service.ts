@@ -136,7 +136,16 @@ export class RecipeService {
 
   
 
-
+  getSearchFor(ingredient): Observable<Recipe[]>{
+    console.log(ingredient)
+    return this.http.get<Recipe[]>(`${this.recipeURL}searchFor/`, {params: {ingredients:ingredient}} ).pipe(
+      catchError(this.handleError<Recipe[]>('getRecipe')));
+/*       .subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }) */
+  }
   
 
 

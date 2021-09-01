@@ -1,0 +1,32 @@
+<mat-stepper orientation="vertical">
+  <mat-step [stepControl]="ingredient_form">
+    <ng-template matStepLabel>Ingredientes</ng-template>
+    <ng-template matStepContent>
+      <form [formGroup]="ingredient_form">
+        <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
+          <div
+            *ngFor="let ingredient of ingredients().controls; let i = index"
+            [formGroupName]="i"
+            fxLayout="row"
+          >
+          <mat-form-field appearance="fill" fxFlex="100%">
+            <mat-label>Producto</mat-label>
+            <mat-select formControlName="product" formControlName="product">
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{product.name}}
+              </mat-option>
+              
+            </mat-select>
+            <mat-error *ngIf="this.ingredient_form.get('ingredients').status === 'INVALID'">Este ingrediente existe</mat-error>
+          </mat-form-field>
+          <i (click)="removeIngredient(i)" class="bi bi-trash"></i>
+        </div>
+        </div>
+        <button type="submit" mat-button (click)="this.submit()">Subir</button>
+      </form>
+      <button mat-button (click)='adicionarIngrediente() && $event.preventDefault()'>Adicionar Ingrediente</button>
+      
+      <button mat-button matStepperNext>Next</button>
+    </ng-template>
+  </mat-step>
+</mat-stepper>

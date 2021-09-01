@@ -1,38 +1,50 @@
 <app-header (sideNavToogle)="sideNavToogle()"></app-header>
 <mat-sidenav-container class="example-container" class="min-height-100">
-  <mat-sidenav #sidenav mode="over" class="width-sidenav-40vh"
-               >
-               <mat-nav-list fxLayout="column">
+  <mat-sidenav #sidenav mode="over" class="width-sidenav-40vh">
+    <mat-nav-list fxLayout="column">
+      <h2 matSubheader>Recipe</h2>
+      <button
+        mat-button
+        color="primary"
+        routerLink="/"
+        (click)="sideNavToogle()"
+      >
+        Recipe
+      </button>
+      <button
+        mat-button
+        color="primary"
+        [routerLink]="this.route.whatDoICookToday.url"
+        (click)="sideNavToogle()"
+      >
+        {{ this.route.whatDoICookToday.name }}
+      </button>
+      <button
+        mat-button
+        color="primary"
+        *ngIf="this.isUserAuth()"
+        fxLayoutAlign="start center"
+        (click)="openCreateDialog() && sideNavToogle()"
+      >
+        New Recipe
+      </button>
+      <!--<button mat-button color="primary" [disabled]="!this.isUserAuth()" (click)="this.openSnackService()" fxFill>SnackBarTest</button>
+                 -->
+      <button mat-button color="primary">Emit First Event</button>
 
-                  <h2 matSubheader>Recipe </h2>
-                  <button mat-button color="primary" routerLink="/" (click)="sideNavToogle()" >Recipe</button>
-                  
-                   <button mat-button color="primary" *ngIf="this.isUserAuth()" fxLayoutAlign="start center" (click)="openCreateDialog() && sideNavToogle()">New Recipe</button>
-                  <!--<button mat-button color="primary" [disabled]="!this.isUserAuth()" (click)="this.openSnackService()" fxFill>SnackBarTest</button>
-                 -->  
-                 <button mat-button color="primary">Emit First Event</button>
-            
-                  <mat-divider></mat-divider>
-                    
-                  <button mat-button color="primary">Action</button>
-                  <button mat-button color="primary">Action</button>
-                  <button mat-button color="primary">Action</button>
-               
-            
-                </mat-nav-list>
+      <mat-divider></mat-divider>
+
+      <button mat-button color="primary">Action</button>
+      <button mat-button color="primary">Action</button>
+      <button mat-button color="primary">Action</button>
+    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-<!-- this outlet is not named, so, only one can be present in the template-->
-<div [@routeAnimation]="getAnimationData(routerOutlet)">
-  <router-outlet #routerOutlet="outlet"></router-outlet>
-</div>
+    <!-- this outlet is not named, so, only one can be present in the template-->
+    <div [@routeAnimation]="getAnimationData(routerOutlet)">
+      <router-outlet #routerOutlet="outlet"></router-outlet>
+    </div>
 
-<!-- Use to declare secondary routs -->
-
+    <!-- Use to declare secondary routs -->
   </mat-sidenav-content>
-
 </mat-sidenav-container>
-
-
-
-

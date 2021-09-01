@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+// Routing
 import { RecipeRoutingModule } from './recipe-routing.module';
 
 // Material
@@ -23,10 +24,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatRadioModule} from '@angular/material/radio';
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
-
-// Pipe
 
 //Form
 import { ReactiveFormsModule } from '@angular/forms';
@@ -47,18 +48,24 @@ import { RecipeModifyComponent } from './recipe-modify/recipe-modify.component';
 import { RecipeIngredientComponent } from './recipe-details/recipe-ingredient/recipe-ingredient.component';
 import { SplitInterfacePipe } from './split-interface.pipe';
 import { RecipeOptionsComponent } from './recipe-details/recipe-options/recipe-options.component';
-import {MatRadioModule} from '@angular/material/radio';
+
 import { RecipeSnackCreateComponent } from './recipe-sub-components/recipe-snack-create/recipe-snack-create.component'; 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+
+import { RecipeCardItemComponent } from './recipe-card-item/recipe-card-item.component';
+import { RecipeCookFilterComponent } from './recipe-cook-filter/recipe-cook-filter.component';
+import { CookFormComponent } from './recipe-cook-filter/cook-form/cook-form.component';
+import { RecipeResultComponent } from './recipe-cook-filter/recipe-result/recipe-result.component';
+import { RecipeInstantDetailsComponent } from './recipe-instant-details/recipe-instant-details.component';
 
 // WYSIWYG
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 // Angular load bar
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
-import { RecipeInstantDetailsComponent } from './recipe-instant-details/recipe-instant-details.component';
+
+// Pipe
 import { SearchFilterPipe } from './search-filter.pipe';
-import { RecipeCardItemComponent } from './recipe-card-item/recipe-card-item.component';
+
 
 
 
@@ -79,6 +86,9 @@ import { RecipeCardItemComponent } from './recipe-card-item/recipe-card-item.com
     RecipeInstantDetailsComponent,
     SearchFilterPipe,
     RecipeCardItemComponent,
+    RecipeCookFilterComponent,
+    CookFormComponent,
+    RecipeResultComponent,
     
 
   

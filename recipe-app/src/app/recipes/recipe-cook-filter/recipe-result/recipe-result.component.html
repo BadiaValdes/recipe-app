@@ -1,44 +1,10 @@
-<ngx-loading-bar [includeSpinner]="false" color="#17a2b8"></ngx-loading-bar>
-<div *ngIf="filters" fxLayoutAlign="center center" fxFlexFill style="padding-top: 10px;">
-  <mat-form-field
-    class="example-full-width"
-    appearance="fill"
-    fxFlexAlign="center"
-    style="width: 80%; background-color: white"
-  >
-    <mat-label>Nombre de receta</mat-label>
-    <input
-      #searchInput
-      [(ngModel)]="searchText"
-      type="text"
-      (input)="search($event.target.value)"
-      matInput
-      placeholder="Arroz con frijoles"
-      [matAutocomplete]="auto"
-    />
-    <button
-      *ngIf="searchText"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="searchText = ''"
-    >
-      <i class="bi bi-x-lg"></i>
-    </button>
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let option of recipe_names" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</div>
 <div
-  *ngIf="!loading"
   fxLayout="row wrap"
   fxLayoutGap="10px"
   fxLayout.xs="column"
   fxLayoutAlign="center"
-  style="padding-top: 15px; padding-bottom: 20px"
+  fxFlex="100%"
+  style="padding-top: 15px; padding-bottom: 20px; border: red 1px solid;"
 >
   <!-- If whe use an observable for iteration we need to put the | async PIPE -->
   <!--| searchFilter: searchText-->
@@ -78,9 +44,8 @@
     fxFlex.md="30%"
     fxFlex.sm="40%"
     fxFlex.lt-sm="100%"
-    fxFlex.xs="100%"
     class="pd-b"
-    *ngFor="let recip of recipes_list | searchFilter: searchText"
+    *ngFor="let recip of recipes_list"
     [recip]="recip"
   >
   </app-recipe-card-item>

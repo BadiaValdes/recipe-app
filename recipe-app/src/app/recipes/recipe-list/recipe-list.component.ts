@@ -67,7 +67,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {    
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4; // Depreciated
     this.dataApiGet();
-    this.eventDataSubcriber();     
+    this.eventDataSubcriber();   
+    
   }
 
   // Get data from API and store it in recipes_list
@@ -75,6 +76,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.rs.getRecipe().subscribe(
       data => {
        this.recipes_list = data;
+       console.log(this.recipes_list)  
        this.cloneRecipe()
         setTimeout(() => {
         this.loading = false;

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   baseURL: 'http://localhost:8000/api/',
   authURL: 'http://localhost:8000/',
+  baseImgURL: 'http://localhost:8000',
 };
 
 /*
