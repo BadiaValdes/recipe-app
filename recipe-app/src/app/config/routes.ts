@@ -1,3 +1,4 @@
+// Routes code
 export const routes = {
     whatDoICookToday : {
         url: '/recipe/what-do-i-cook-today',

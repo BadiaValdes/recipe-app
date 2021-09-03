@@ -1,0 +1,53 @@
+# Admin
+- Empty
+
+# Auth
+## GUARD
+### Auth.guard --> Handle page security
+## Login --> Handle user login and logout
+
+
+# Config
+## DialogDefaultMessage --> stores the default message for dialog service 
+## nomencladores --> Store the nomenclature declaration and validation properties of the form. 
+## routes --> Store the path declaration, we are trying to simulate the name of the Django url. 
+
+# Directive
+## Exist-field --> the service in there, handles the form async validation
+
+# Header --> Handle the upper menu
+
+# Interfaces --> Stores all the interfaces used in the project
+
+# nomencladores 
+## form --> handle nomenclature data creation (form)
+## list --> handle the form, nomenclature table and nomenclature items
+### items --> each nomenclature is listed in a column
+### table --> after a nomenclature selection, the table will be displayed
+
+# page not found --> shows page not found
+
+# recipes
+## recipe-card-item --> Create an ingredient card
+## recipe-cook-filter --> Handle the filter form and the result view
+### cook-form --> Takes the user params for the search and execute the search method
+### recipe-result --> gets the results and create the view using recipe-card-item
+## recipe-create --> Creation form
+## recipe-details --> Shows the recipe details, use recipe-ingredient, recipe-steps and recipe-options
+### recipe-description --> Empty
+### recipe-header --> Empty
+### recipe-ingredient --> Shows all the ingredient in the recipe
+### recipe-options --> Shows the under menu, U can modificate or delete the recipe, only accessible if you are recipe owner
+### recipe-steps --> Shows the steps to cook the recipe
+## recipe-instant-details --> Shows a card with some of the recipe properties
+## recipe-list --> Shows all the recipes
+## recipe-main --> Recipe main view
+## recipe-modify --> Empty --> The modification proccess occur in the same create form
+## recipe-sub-component --> The snack bar --> before using the snack service
+
+# reusables
+## Config dialog --> shows the dialog with the help of a service
+## notificaion snack --> shows the snack var with the help of a service
+## opensheet --> Useless right now 
+
+# Service --> Store all the services used in the app

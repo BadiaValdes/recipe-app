@@ -12,9 +12,9 @@ import{UserService} from '../service/user.service';
   animations: [inOutAnimation, inOutMenuAnimation]
 })
 export class HeaderComponent implements OnInit {
-  showUnderMenu : boolean = false;
+  showUnderMenu : boolean = false; // OLD var, see the under menu of the page.
 
-  @Output() sideNavToogle = new EventEmitter<boolean>();
+  @Output() sideNavToogle = new EventEmitter<boolean>(); // Side nive event emitter
 
   constructor(private userServ : UserService) { }
 
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
     
   }
 
+  // SideNav toggle
   setShowUnderMenu(){
     this.sideNavToogle.emit(true);
     //this.showUnderMenu = this.showUnderMenu ? false: true;
@@ -34,7 +35,10 @@ export class HeaderComponent implements OnInit {
 
 
   get isAuth(){
-    return this.userServ.isAuth();
+    // wait 500ms before shows user info - prevents 
+    return setTimeout(() => {
+      this.userServ.isAuth()
+    }, 500);
   }
 
   logOUt(){

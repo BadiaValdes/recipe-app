@@ -9,7 +9,7 @@ import {UserService} from '../../../service/user.service'
 })
 export class RecipeIngredientComponent implements OnInit {
   // Takes in via parent data the recipe's ingredient
-  @Input() recipe_ingredients : any[];
+  @Input() recipe_ingredients : any[]; // Get the recipe from the main component
 
   public token = this.us.token; 
   public mainOne;

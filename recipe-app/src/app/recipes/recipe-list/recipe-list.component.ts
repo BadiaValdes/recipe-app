@@ -55,7 +55,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipe_names : string [];
 
   // Options Obervable
-  recipe_names_observable :  Subject<string> = new Subject<string>();
+  recipe_names_observable :  Subject<string> = new Subject<string>(); 
+  // The subject works like and observable but only shows the last value if U subscribe after the next() call
 
   constructor(private rs : RecipeService, // recipe handle
     private route : ActivatedRoute, // Routes handle
@@ -86,6 +87,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     )
   }
 
+  // Create the data for instant deatils dialog
   instantDetails(recipe : Recipe){
     this._dialogComponent.open(RecipeInstantDetailsComponent, {data: {
       image: recipe.img,
@@ -146,16 +148,18 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   search(event){
+    // Here U can see the way of use a subject
+    // First subscribe
     if(this.recipe_names_observable.observers.length === 0){
       this.recipe_names_observable.pipe(
       ).subscribe(text => {
         this.optionsFilter(text)
       });
     }
-
+    // then next
     this.recipe_names_observable.next(event)
 
-    
+    // In case that here U make a subsribe, the first element will never will be show
 
 /*     // Avoid consecutive HTTP calls
     // Performance optimization
@@ -206,7 +210,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         - Inside the method:
           - If event is empty, it returns array
           - else, it returns items after filtering
-      3- Use an subjecto with debounceTime or throttleTime
+      3- Use an subject with debounceTime or throttleTime
         - Pipe the subject, and after that, create a subscription and execute the method in way 2
      */
     
@@ -233,7 +237,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     }
 
 
-  
+  // Clone the recipe, Why? -> Don't lose the orginal data
   cloneRecipe(){
     this.recipe_copy = this.recipes_list;
     this.recipe_names = this.recipeNames
@@ -243,6 +247,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     return this.recipes_list.map(data => data.name);
   }
 
+  // Filter Option 3
   optionsFilter(word: string){
     if(word === "")
     {

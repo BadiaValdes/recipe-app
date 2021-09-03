@@ -30,21 +30,22 @@ import { from } from 'rxjs';
 })
 export class TableComponent implements OnInit, AfterViewInit {
   data = nomencladoresArray;
-  @Input() data2;
+  @Input() data2; // input data
 
   // Table vars
   displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator?: MatPaginator; // Usado para caputrar un componente HTML con etiqueta #
-  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatSort) sort?: MatSort; // Get sort element
   // END TABLE VARS
   constructor(
-    private _serviceNomencladores: GeneralApiServicesService,
-    private _notificationService: NotificationSnackBarService,
-    private _confirmDialog: ConfirmDialogServiceService
+    private _serviceNomencladores: GeneralApiServicesService, 
+    private _notificationService: NotificationSnackBarService, // Snack msg notification
+    private _confirmDialog: ConfirmDialogServiceService, // Dialog confirmation before delete
   ) {}
 
   ngOnInit(): void {
+    // Get the origin of the event and fill the table rows
     this.dataHttpOriginSelector(this.data2).subscribe((data) => {
       this.setTableData(data);
     });
@@ -71,15 +72,19 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
   
   deleteAction(value){
+    // Send the delete to the http call
     this.deleteHttpOriginSelector(value).then((_) => {
+      // After the delete operation, get the data and delete the deleted appearance 
       this.dataSource.data = this.dataSource.data.filter(
         (data) => data.id != value
       );
+      // Create the snack bar options
       let options = {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center',
       };
+      // Show the snack bar with the corresponding data
       this._notificationService.openSimpleNotificationSnackBar(
         'Datos eliminados',
         'cerrar',
@@ -90,6 +95,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   // END OF DELETE ACTIONS
 
   // OPTION SELECTOR
+  // Get data origin
   dataHttpOriginSelector(value) {
     switch (value) {
       case 1:
@@ -106,6 +112,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // delete value
   deleteHttpOriginSelector(value) {
     switch (this.data2) {
       case 1:
@@ -122,6 +129,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // set the table data
   setTableData(data) {
     this.dataSource.data = data;
     this.dataSource.paginator = this.paginator;

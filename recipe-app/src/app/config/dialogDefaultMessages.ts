@@ -1,4 +1,4 @@
-
+// Configuration page for dialog message
 
 export interface DeleteMessageTemplate {
     name: string,

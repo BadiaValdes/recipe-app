@@ -10,12 +10,12 @@ import {environment} from '../../../environments/environment'
 })
 export class RecipeCookFilterComponent implements OnInit {
 
-  filterOn = false;
-  loadingResult = false;
+  filterOn = false; // Is filter on
+  loadingResult = false; // Is loading result step
 
-  recipe_list : Recipe[];
+  recipe_list : Recipe[]; // The resul list of items
 
-  baseURL = environment.baseImgURL;
+  baseURL = environment.baseImgURL; // The url for the image
 
   constructor(
    
@@ -24,10 +24,11 @@ export class RecipeCookFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Child output data reciver
   recipeOutputDataReciver(data){
-    this.recipe_list = data;
+    this.recipe_list = data; // Asign the search result to the recipe_list array
     this.recipe_list = this.recipe_list.map(data => {
-      data.img = `${this.baseURL}${data.img}`
+      data.img = `${this.baseURL}${data.img}` // Modify the image url
       return data;
     })
     console.log("Is emmited")

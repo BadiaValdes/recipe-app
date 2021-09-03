@@ -28,25 +28,27 @@ export class FormComponent implements OnInit {
 
   nomencladoresConfig = nomencladoresFormConfig;
 
-  @Input() formType: number;
+  @Input() formType: number; // get the form type AKA: selected nomenclature
 
-  @Output() cancelEvent = new EventEmitter();
+  @Output() cancelEvent = new EventEmitter(); // If the creation was canceled
 
   // Validación async -> El asyncValidators:[this.asyncValDirective.customVal2()]
 
-  name = new FormControl(null, {validators: [Validators.required], updateOn:"blur"});
-  slug = new FormControl(null, [Validators.required]);
+  name = new FormControl(null, {validators: [Validators.required], updateOn:"blur"}); // Form input
+  slug = new FormControl(null, [Validators.required]); // Form input
 
   //Form Group
   ngOnInit(): void {
     console.log(this.formType);
-    this.name.setAsyncValidators(this.asyncValDirective.nomencladoresAsynVal())
+    this.name.setAsyncValidators(this.asyncValDirective.nomencladoresAsynVal()) // Async validation
   }
 
+  // Send the cancel event
   sendCancelEvent() {
     this.cancelEvent.emit(0);
   }
 
+  // Handles the data creation
   create() {
     const formData = new FormData();
     formData.append('name', this.name_nomenclador.value);
@@ -64,10 +66,12 @@ export class FormComponent implements OnInit {
     
   }
 
+  // Geth nomenclature name
   get name_nomenclador() {
     return this.name;
   }
 
+  // Create slug from nomenclature
   createSlug(value) {
     let char = [...value];
     let new_text = '';
@@ -78,6 +82,7 @@ export class FormComponent implements OnInit {
     return new_text.toLowerCase();
   }
 
+  // Creates the nomenclature taking into account the value selected in the items components
   post(data) {
     switch (this.formType) {
       case 1:

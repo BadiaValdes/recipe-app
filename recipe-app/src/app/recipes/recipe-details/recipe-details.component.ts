@@ -51,7 +51,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   ) {
     /* console.log("CONSTRUCTOR")
     console.log(this.router.getCurrentNavigation().extras.state) // Only works in the constructur  */
-    // The router state in the constructor is a data or undefined in the second call
+    // The router state in the constructor is a data or undefined in the second call (other place)
     if(this.router.getCurrentNavigation().extras.state)
     {
       this._localStorageService.localStorage(1).setItem('recipe_details', JSON.stringify(this.router.getCurrentNavigation().extras.state))
@@ -80,7 +80,8 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     // console.log(history.state) // Get Router dynamic vars
     // this._location.getState()
    
-     this.recipe_detail = JSON.parse(this._localStorageService.localStorage(1).getItem('recipe_details')); // Like history
+    // Get the recipe from the local storage -> Persist data after user reload the page
+    this.recipe_detail = JSON.parse(this._localStorageService.localStorage(1).getItem('recipe_details')); // Like history
     
     this.currentID = this.recipe_detail.slug;
     this.idToPass = this.recipe_detail.id;
@@ -103,6 +104,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  // Open the bottom sheet for recipe options
   openSheet():void{
        
     this.buttonSheet.open(RecipeOptionsComponent, {data: {
@@ -111,10 +113,12 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     }});
   }
 
+  // Is user authenticated
   isAuth(){
     return this.userService.isAuth();
   }
 
+  // Get user id
   userID(){
     if(this.userService.isAuth())
       return JSON.parse(this.userService.getLocalSotrage().getItem('user'))    

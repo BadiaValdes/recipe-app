@@ -20,6 +20,7 @@ export class RecipeInstantDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Search for main ingredient
     this.data.ingredientes.forEach(element => {
      if(this.splitMe(element, '-', 2) === 'True')
      {
@@ -28,6 +29,7 @@ export class RecipeInstantDetailsComponent implements OnInit {
     });
   }
 
+  // Close the dialog
   close(num? : number){
     if(num && num == 1)
     {
@@ -36,6 +38,7 @@ export class RecipeInstantDetailsComponent implements OnInit {
     this._ownReference.close()
   }
 
+  // Split method in a single position
   splitMe(text: string, splitby: string, index: number): any {
     let p = text.split(splitby);
     console.log(p[index]);

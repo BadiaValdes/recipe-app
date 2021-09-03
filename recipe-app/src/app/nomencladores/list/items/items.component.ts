@@ -13,17 +13,19 @@ export class ItemsComponent implements OnInit {
   data = nomencladoresArray;
   constructor() { }
 
-  @Output() outputEvent = new EventEmitter();
+  @Output() outputEvent = new EventEmitter(); // Emits the value after nomenclature selection
 
-  @Output() creationEvent = new EventEmitter();
+  @Output() creationEvent = new EventEmitter(); // Emits the value after nomenclature creation
  
   ngOnInit(): void {
   }
 
+  // Second event
   addClickEvent(value) {
     this.creationEvent.emit(value);
   }
 
+  // First event
   selectEvent(value) {
     console.log(value)
     this.outputEvent.emit(value);

@@ -1,3 +1,4 @@
+// Form Nomencladores and form options
 export const nomencladoresArray =[
     {
         name: "Categoría",

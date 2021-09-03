@@ -15,14 +15,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
   
-  snackBarDuration = 5;
+  snackBarDuration = 5; // The snack duration configuration
   
+  // a Dictionary
   public user = {
     username : "",
     password : "",
   };
 
-  public toke;
+  public toke; // User Token
 
   constructor(public user_service : UserService, private snackbar : MatSnackBar) { }
 
@@ -32,9 +33,10 @@ export class LoginComponent implements OnInit {
   login() {
     try{
       this.user_service.logIn({'username': this.user.username, 'password': this.user.password}).then( () => {}, ()=> {
+        // If error exist
         if(this.user_service.getError()){    
-          console.log(this.user_service.getError())            
-        this.createSnackMessage(this.user_service.getCodeStatus());
+          console.log(this.user_service.getError())  // Show error          
+        this.createSnackMessage(this.user_service.getCodeStatus());// Get Code
       }
     })
     }

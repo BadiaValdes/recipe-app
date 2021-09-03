@@ -60,7 +60,7 @@ export class UserService {
           },
           msg => { // Error
             this.error = msg['error'];
-            this.code_status = msg['status']
+            this.code_status = msg['status'];
   
             reject(msg);
           }

@@ -18,6 +18,7 @@ export class RecipeCardItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Get the values from the input data
   instantDetails(recipe : Recipe){
     this._dialogComponent.open(RecipeInstantDetailsComponent, {data: {
       image: recipe.img,

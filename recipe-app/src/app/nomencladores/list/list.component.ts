@@ -26,23 +26,23 @@ export interface nomencladores_interface {
   animations: [inOutAnimation]
 })
 export class ListComponent implements OnInit, AfterViewInit {
-  data = nomencladoresArray;
+  data = nomencladoresArray; // Get Nomencladores Data Array from Config File
 
-  selector? = null;
+  selector? = null; 
 
-  nomencladores_data = null;
+  nomencladores_data = null; // Single nomenclador Data
 
-  showForm = false;
+  showForm = false; // Flag for form show
 
-  formNomencladorValue = 0;
+  formNomencladorValue = 0; // Current value to show in form
 
-  showMotivationText = true;
+  showMotivationText = true; // Motivation text
 
   // Table vars
   displayedColumns: string[] = ['no', 'name', 'slug', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator?: MatPaginator; // Usado para caputrar un componente HTML con etiqueta #
-  @ViewChild(MatSort) sort? : MatSort;
+  @ViewChild(MatSort) sort? : MatSort; // Capture the matSort tag
   // END TABLE VARS
 
   constructor(private _serviceNomencladores: GeneralApiServicesService) {}
@@ -60,6 +60,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  // Was selected a nomenclador option?
   addClickEvent(value: number) {
     if(value == 0)
     {
@@ -74,16 +75,19 @@ export class ListComponent implements OnInit, AfterViewInit {
     console.log(`El click se dio en ${value}`);
   }
 
+  // Select event
   selectEvent(value) {
     this.dataHttpOriginSelector(value);
     this.selector = value;
   }
 
+  // Delete event
   delete(value) {
     console.log(`Eliminar ${value}`);
 
   }
 
+  // Get Data from the selected value
   dataHttpOriginSelector(value) {
     switch (value) {
       case 1:
@@ -112,6 +116,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Set the data to the table
   setTableData(data){
     this.nomencladores_data = data;
     this.dataSource.data = data;

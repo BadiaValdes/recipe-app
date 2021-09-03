@@ -17,13 +17,18 @@ export class AsyncValServiceService {
   constructor(private rs: RecipeService,
     private _genarlAPI : GeneralApiServicesService) { }
 
+  // Validator service
   customVal():AsyncValidatorFn{
     return(ctrl: AbstractControl):Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+      // Search for existing recipe
       return this.rs.existRecipe(ctrl.value).pipe(
+        // As and observable, whe can manipulate de data before make a subscription
         map(res => {
+          // In case that a Recipe with the same value exist, we need to send an error Flag
           if(res){
             return {asyncValDirective : { value: ctrl.value }};
           }
+          // Else, all is well
           else
             return null;
         })
@@ -31,7 +36,7 @@ export class AsyncValServiceService {
     }
   }
 
-  // Validación Async
+  // Validación Async - Same as before but with lower code
   customVal2():AsyncValidatorFn{
     return(ctrl: AbstractControl) => {
       return this.rs.getRecipe().pipe(
@@ -44,7 +49,7 @@ export class AsyncValServiceService {
 
   }
 
-  // Async Validator for nomencladores
+  // Async Validator for nomencladores - Same as before but with other model
   nomencladoresAsynVal():AsyncValidatorFn{
     return(ctrl: AbstractControl) => {
       return this._genarlAPI.getCategory().pipe(

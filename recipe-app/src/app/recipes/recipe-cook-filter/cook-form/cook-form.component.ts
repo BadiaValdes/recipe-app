@@ -31,11 +31,12 @@ import { Recipe } from 'src/app/interfaces/recipe';
   styleUrls: ['./cook-form.component.css'],
 })
 export class CookFormComponent implements OnInit, AfterViewInit {
-  products: any[];
-  dificultad: any[];
+  products: any[]; // store the products http call
+  dificultad: any[]; // store the difficult http call
 
-  selected_products?: any[] = [];
+  selected_products?: any[] = []; // OLD -> Create an array of the selected products
 
+  // FORM VAR DECLARATION
   ingredient_form = new FormGroup({
     ingredients: this.formB.array([], { updateOn: 'submit' }),
   });
@@ -48,13 +49,15 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     precision: new FormControl(0, [Validators.required]),
   });
 
-  slideValue = 0;
+  // END FORM VAR DECLARATION
 
-  recipe: Recipe[];
+  slideValue = 0; // The value of the how many ingredients I really need
+
+  recipe: Recipe[]; // Thre result of the filter proccess
 
 
 
-  @Output() data = new EventEmitter<Recipe[]>();
+  @Output() data = new EventEmitter<Recipe[]>(); // Send the collected recipes
 
   constructor(
     private formB: FormBuilder,
@@ -66,6 +69,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this.formVariableInit();
   }
 
+  // Populate the products and dificultad vars.
   formVariableInit() {
     this._generalApi.getProducts().subscribe((data) => {
       this.products = data;
@@ -82,6 +86,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     //Add 'implements AfterViewInit' to the class.
   }
 
+  // Get the for ingredient array
   ingredients(): FormArray {
     return this.ingredient_form.get('ingredients') as FormArray;
   }
@@ -130,16 +135,19 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this.deleteElement(i);
   }
 
+  // OLD -> Get the selected option
   selectionChange(data) {
     this.selected_products.push(data);
   }
 
+  // Delete a product option
   deleteElement(i: number) {
     this.selected_products = this.selected_products?.filter((_, index) => {
       return index != i;
     });
   }
 
+  // Submit all the data
   submit() {
     console.log(this.difficulta.value);
     this._recipeApi
@@ -165,10 +173,12 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     return this.difficulty_form.get('difficult');
   }
 
+  // OLD get the slide value
   algo(event){    
     this.slideValue = event
   }
 
+  // Get the main ingredient
   mainIngredient(){
     return this.products.filter(data => data.id == this.ingredient_form.get('ingredients').value[0]['product'])[0].name;
   }
