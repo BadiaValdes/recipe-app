@@ -1,4 +1,10 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -16,7 +22,7 @@ import {
 
 // API
 import { GeneralApiServicesService } from '../../../service/general-api-services.service';
-import {RecipeService} from '../../../service/recipe.service'
+import { RecipeService } from '../../../service/recipe.service';
 import { Recipe } from 'src/app/interfaces/recipe';
 
 @Component({
@@ -26,6 +32,7 @@ import { Recipe } from 'src/app/interfaces/recipe';
 })
 export class CookFormComponent implements OnInit, AfterViewInit {
   products: any[];
+  dificultad: any[];
 
   selected_products?: any[] = [];
 
@@ -33,19 +40,40 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     ingredients: this.formB.array([], { updateOn: 'submit' }),
   });
 
-  recipe :Recipe[];
+  difficulty_form = new FormGroup({
+    difficult: new FormControl('', [Validators.required]),
+  });
+
+  precision_form = new FormGroup({
+    precision: new FormControl(0, [Validators.required]),
+  });
+
+  slideValue = 0;
+
+  recipe: Recipe[];
+
+
 
   @Output() data = new EventEmitter<Recipe[]>();
 
   constructor(
     private formB: FormBuilder,
     private _generalApi: GeneralApiServicesService,
-    private _recipeApi: RecipeService,
+    private _recipeApi: RecipeService
   ) {}
 
   ngOnInit(): void {
+    this.formVariableInit();
+  }
+
+  formVariableInit() {
     this._generalApi.getProducts().subscribe((data) => {
       this.products = data;
+    });
+
+    this._generalApi.getDifficulty().subscribe((data) => {
+      this.dificultad = data;
+      console.log(this.dificultad);
     });
   }
 
@@ -59,7 +87,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
   }
 
   // Find repeating ingredients
- /*  noRepeatIngredient(): ValidatorFn {
+  /*  noRepeatIngredient(): ValidatorFn {
     return (control: AbstractControl) => {
       let existe: boolean = false;
       if (this.selected_products.length > 0) {
@@ -112,14 +140,37 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-  submit(){
-    this._recipeApi.getSearchFor(JSON.stringify(this.ingredient_form.get("ingredients")?.value)).toPromise().then(data => {this.recipe = data}).then(_ => {
-      this.data.emit(this.recipe);
-    })
-/*     .subscribe((data:Recipe[]) => {
+  submit() {
+    console.log(this.difficulta.value);
+    this._recipeApi
+      .getSearchFor(
+        JSON.stringify(this.ingredient_form.get('ingredients')?.value),
+        this.difficulta.value
+      )
+      .toPromise()
+      .then((data) => {
+        this.recipe = data;
+      })
+      .then((_) => {
+        this.data.emit(this.recipe);
+      });
+    /*     .subscribe((data:Recipe[]) => {
       this.recipe = data;
       console.log(this.recipe)
     }) */
   }
+
+  // Form GET
+  get difficulta() {
+    return this.difficulty_form.get('difficult');
+  }
+
+  algo(event){    
+    this.slideValue = event
+  }
+
+  mainIngredient(){
+    return this.products.filter(data => data.id == this.ingredient_form.get('ingredients').value[0]['product'])[0].name;
+  }
+
 }

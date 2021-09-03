@@ -25,6 +25,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatSliderModule} from '@angular/material/slider'; 
 import {MatRadioModule} from '@angular/material/radio';
 // Timeline Module
 //import { MglTimelineModule } from 'angular-mgl-timeline';
@@ -120,7 +121,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
     AngularEditorModule,
     MatProgressSpinnerModule,
     LoadingBarHttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSliderModule,
   ]
 })
 export class RecipeModule { }

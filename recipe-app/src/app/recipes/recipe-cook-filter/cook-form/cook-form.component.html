@@ -9,23 +9,99 @@
             [formGroupName]="i"
             fxLayout="row"
           >
-          <mat-form-field appearance="fill" fxFlex="100%">
-            <mat-label>Producto</mat-label>
-            <mat-select formControlName="product" formControlName="product">
-              <mat-option *ngFor="let product of products" [value]="product.id">
-                {{product.name}}
-              </mat-option>
-              
-            </mat-select>
-            <mat-error *ngIf="this.ingredient_form.get('ingredients').status === 'INVALID'">Este ingrediente existe</mat-error>
-          </mat-form-field>
-          <i (click)="removeIngredient(i)" class="bi bi-trash"></i>
+            <mat-form-field appearance="fill" fxFlex="100%">
+              <mat-label>Producto</mat-label>
+              <mat-select formControlName="product">
+                <mat-option
+                  *ngFor="let product of products"
+                  [value]="product.id"
+                >
+                  {{ product.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  this.ingredient_form.get('ingredients').status === 'INVALID'
+                "
+                >Este ingrediente existe</mat-error
+              >
+            </mat-form-field>
+            <i (click)="removeIngredient(i)" class="bi bi-trash"></i>
+          </div>
         </div>
-        </div>
-        <button type="submit" mat-button (click)="this.submit()">Subir</button>
       </form>
-      <button mat-button (click)='adicionarIngrediente() && $event.preventDefault()'>Adicionar Ingrediente</button>
-      
+      <button
+        mat-button
+        (click)="adicionarIngrediente() && $event.preventDefault()"
+      >
+        Adicionar Ingrediente
+      </button>
+
+      <button mat-button matStepperNext>Next</button>
+    </ng-template>
+  </mat-step>
+  <mat-step [stepControl]="difficulty_form" (click)="$event.preventDefault()">
+    <ng-template matStepLabel>Dificultad</ng-template>
+    <ng-template matStepContent>
+      <form [formGroup]="difficulty_form">
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row">
+            <mat-form-field appearance="fill" fxFlex="100%">
+              <mat-label>Dificultad</mat-label>
+              <mat-select formControlName="difficult">
+                <mat-option *ngFor="let dific of dificultad" [value]="dific.id">
+                  {{ dific.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <button mat-button matStepperNext>Next</button>
+    </ng-template>
+  </mat-step>
+  <mat-step (click)="$event.preventDefault()">
+    <ng-template matStepLabel>Nivel de precision</ng-template>
+    <ng-template matStepContent>
+      <form>
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <div fxLayout="row" fxFlex="100%" style="padding-top: 0px;">
+
+            <div style="padding-top: 23px;">
+              <mat-slider
+                style="height: 94%;"
+                tickInterval="25"
+                step="25"
+                min="0"
+                max="100"
+                vertical
+                (input)="algo($event.value)"
+                [(ngModel)]="slideValue"
+                invert
+                aria-label="unit(s)"
+              ></mat-slider>
+            </div>
+
+           
+          
+            <mat-list>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 0 ? 'bold' : 'normal'}" >Solo me interesa el {{mainIngredient()}}</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 25 ? 'bold' : 'normal'  }" >Me conformo con el {{mainIngredient()}} y algo mas</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 50 ? 'bold' : 'normal'  }">No me importaria que faltaran la mitad</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 75 ? 'bold' : 'normal'  }">Trato de cocinar algo decete</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 100 ? 'bold' : 'normal'  }">Callate y dame todas las recetas</mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+        <button
+          type="submit"
+          mat-button
+          (click)="this.submit()"
+          [disabled]="!this.difficulty_form.valid"
+        >
+          Subir
+        </button>
+      </form>
       <button mat-button matStepperNext>Next</button>
     </ng-template>
   </mat-step>
