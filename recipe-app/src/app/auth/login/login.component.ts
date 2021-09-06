@@ -6,7 +6,7 @@ import {UserService} from '../../service/user.service'
 
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-
+import{EventEmitterService} from '../../service/event-emitter.service'
 
 @Component({
   selector: 'app-login',
@@ -25,20 +25,14 @@ export class LoginComponent implements OnInit {
 
   public toke; // User Token
 
-  constructor(public user_service : UserService, private snackbar : MatSnackBar) { }
+  constructor(public user_service : UserService, private snackbar : MatSnackBar, private _event_emitter : EventEmitterService) { }
 
   ngOnInit(): void {
   }
 
   login() {
     try{
-      this.user_service.logIn({'username': this.user.username, 'password': this.user.password}).then( () => {}, ()=> {
-        // If error exist
-        if(this.user_service.getError()){    
-          console.log(this.user_service.getError())  // Show error          
-        this.createSnackMessage(this.user_service.getCodeStatus());// Get Code
-      }
-    })
+      this.user_service.logIn({'username': this.user.username, 'password': this.user.password})
     }
     catch (e) {
 
@@ -49,18 +43,6 @@ export class LoginComponent implements OnInit {
 
 
 
-  createSnackMessage(request){
-    console.log(request)
-    if(request == 0){
-      this.showSnackBar("No Existe conexion");
-    }
-    else if(request == 400){
-      this.showSnackBar("Datos Invalidos");
-    }
-    else if(request == 200){
-      this.showSnackBar("Ya esta dentro");
-    }
-  }
  
   refreshToken() {
     this.user_service.refreshToken();

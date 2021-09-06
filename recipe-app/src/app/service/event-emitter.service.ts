@@ -14,6 +14,8 @@ export class EventEmitterService {
 
   public testEmitterEvent : EventEmitter<any> = new EventEmitter<any>();
 
+  public loginInEmitterEvent : EventEmitter<any> = new EventEmitter<any>();
+
   // Can be use with T value
   //public EntryAdded: EventEmitter<StoryEntry> = new EventEmitter<StoryEntry>();
 
@@ -32,6 +34,7 @@ export class EventEmitterService {
   }
 
   loginInEventEmitter(){
-    this
+    console.log('was emitted')
+    this.loginInEmitterEvent.emit("login");
   }
 }

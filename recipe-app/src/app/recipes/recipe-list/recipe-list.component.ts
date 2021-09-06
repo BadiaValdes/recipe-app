@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {RecipeInstantDetailsComponent} from '../recipe-instant-details/recipe-instant-details.component'
 
 // animation 
-import {inOutAnimation} from '../../animations'
+import {inOutAnimation, inOutAnimationFast} from '../../animations'
 
 // debounce
 
@@ -25,7 +25,7 @@ import {inOutAnimation} from '../../animations'
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
-  animations: [inOutAnimation]
+  animations: [inOutAnimation, inOutAnimationFast]
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
 

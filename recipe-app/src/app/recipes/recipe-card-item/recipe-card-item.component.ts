@@ -4,10 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 
 // Componets
 import {RecipeInstantDetailsComponent} from '../recipe-instant-details/recipe-instant-details.component'
+
+//animation
+import {inOutAnimationFast} from '../../animations'
 @Component({
   selector: 'app-recipe-card-item',
   templateUrl: './recipe-card-item.component.html',
-  styleUrls: ['./recipe-card-item.component.css']
+  styleUrls: ['./recipe-card-item.component.css'],
+  animations: [inOutAnimationFast]
 })
 export class RecipeCardItemComponent implements OnInit {
 

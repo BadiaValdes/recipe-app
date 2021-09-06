@@ -9,18 +9,19 @@
 <mat-toolbar-row  fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayoutGap="10px">
     <button mat-icon-button color="accent" (click)="setShowUnderMenu()" ><i class="bi bi-list"  style="font-size:2em;"></i></button>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <i *ngIf="!isAuth" class="bi bi-person-circle" style="font-size:2em;"></i>
-        <img class="avatar" *ngIf="isAuth" src="{{getUserData().avatar}}">
+        <i   *ngIf="!isAuth" class="bi bi-person-circle" style="font-size:2em;"></i>
+        
+        <img   class="avatar" *ngIf="isAuth && getUserDataHeader() != null" src="{{getUserDataHeader().avatar}}">
       </button>
       <mat-menu #menu="matMenu">
-        <div *ngIf="isAuth" >
+        <div *ngIf="isAuth && getUserDataHeader() != null" >
           
           <mat-list >
       
             <mat-list-item>
              
               <div mat-line class="login_welcome">Let's cook as</div>
-              <div mat-line class="login_mail"> {{getUserData().mail}} </div>
+              <div mat-line class="login_mail"> {{getUserDataHeader().mail}} </div>
            
             </mat-list-item>
 

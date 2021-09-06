@@ -23,7 +23,7 @@ export class NotificationSnackBarService {
   openSimpleNotificationSnackBar(message: string = "Mensaje por defecto", closeText: string ="Cerrar", options)
   {
     this.simpleSnackRef = this._notificationSnackBar.open(message, closeText, {
-      duration: options.duration,
+      duration: options.duration * 1000,
       verticalPosition: options.verticalPosition,
       horizontalPosition: options.horizontalPosition,
     } )

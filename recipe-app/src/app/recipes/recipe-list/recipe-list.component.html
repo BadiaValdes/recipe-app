@@ -82,6 +82,7 @@
     class="pd-b"
     *ngFor="let recip of recipes_list | searchFilter: searchText"
     [recip]="recip"
+    [@inOutAnimationFast]
   >
   </app-recipe-card-item>
 </div>
