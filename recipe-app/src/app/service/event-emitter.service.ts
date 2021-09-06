@@ -30,4 +30,8 @@ export class EventEmitterService {
   eventTest(){
     this.testEmitterEvent.emit("hola mundo")
   }
+
+  loginInEventEmitter(){
+    this
+  }
 }

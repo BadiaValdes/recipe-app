@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit {
 
   @Output() sideNavToogle = new EventEmitter<boolean>(); // Side nive event emitter
 
+  showUserComponents: boolean = false;
+
   constructor(private userServ : UserService) { }
 
   ngOnInit(): void {
@@ -29,20 +31,20 @@ export class HeaderComponent implements OnInit {
   }
 
   getUserData(){
-    return this.userServ.getLogedUser();
+        return this.userServ.getLogedUser();    
   }
 
 
 
   get isAuth(){
     // wait 500ms before shows user info - prevents 
-    return setTimeout(() => {
-      this.userServ.isAuth()
-    }, 500);
+    return this.userServ.isAuth()
+
   }
 
   logOUt(){
     this.userServ.logout();
+    this.showUserComponents = false;
   }
 
 }

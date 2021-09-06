@@ -49,6 +49,9 @@
             <mat-form-field appearance="fill" fxFlex="100%">
               <mat-label>Dificultad</mat-label>
               <mat-select formControlName="difficult">
+                <mat-option value="0">
+                  Callate y dame todas
+                </mat-option>
                 <mat-option *ngFor="let dific of dificultad" [value]="dific.id">
                   {{ dific.name }}
                 </mat-option>
