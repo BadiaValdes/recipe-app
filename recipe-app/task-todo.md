@@ -62,18 +62,29 @@
 				- Pipe the subject, and after that, create a subscription and execute the method in way 2
 
 11. Crear un infinity scroll o paginator para la lista de recetas <span style="color:orange;">#We are in the road#<span>
-12. Crear el filtro que cocino hoy
+12. Crear el filtro que cocino hoy <span style="color:orange;">#We are in the road#<span>
 13. Crear la vista mis recetas
 14. Crear la modificación de perfil del usuario
 15. Lenguaje de la pagina segun seleccion
 16. Terminar de arreglar el login y el logout
 17. Crear un servicio para buttonSheet no es recomendable al no ser que se utilize para cosas en específico, con pequeñas variaciones -> Intentar buscar una solución general.
-18. Aprender animaciones con angular
+18. Aprender animaciones con angular <span style="color:orange;">#We are in the road#<span>
 19. Panel para ususarios
 20. Probar las cookies en angular
 21. "Optimizar" los detalles <span style="color:green;">#Done#<span>
 22. Crear skeleton de la lista
-23. Refactor recipe list card
+23. Refactor recipe list card <span style="color:green;">#Done#<span>
+24. Lazy load 
+		
+		{
+    	path: 'admin',
+    	loadChildren: () => import('./admin/admin-panel.module').then(m => m.AdminPanelModule),
+  		},
+		- Eliminar los modules comunes como:
+			- BrowserModule,
+			- BrowserAnimationsModule, 
+			- HttpModule, 
+			- HttpClientModule
 
 
 

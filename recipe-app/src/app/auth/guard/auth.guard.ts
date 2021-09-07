@@ -18,33 +18,45 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot, // Use the route snapshot to take the params
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let role = route.data['roles'] as Array<string>; // Loads the roles array (use params hardcode in the route.py)
-    return this.isAdmin(role);
+      if(!this.isLogedIn())
+    {
+      return this.router.parseUrl('/login'); // Kick off to the main page
+    }
+    else{
+      let role = route.data['rol'] as Array<string>; // Loads the roles array (use params hardcode in the route.py)
+      console.log(role)
+      return this.isAdmin(route.data['rol']);
+    }
+
   }
 
   // Loged in guard -> Is the user not logged, please send it back to login page
   isLogedIn(){
-    if(this.userService.isAuth())
+    if(this.userService.isAuth()){
       return true;
+    }
     else
     {
-      return this.router.parseUrl('/login');
+      return false;
     }
   }
 
   // Search for admin role
   isAdmin(role : string []){
-    let isAdmin : boolean = false;
-    let userParser = JSON.parse(this.userService.getLocalSotrage().getItem('user')); // Parse user data form LocalStorage
-    let userRoles = userParser.groups; // Get Users Groups
-    role.forEach(element => {
-      isAdmin = isAdmin || userRoles.find(x => x== element) // Find inside the role
-    });
-
-    if(isAdmin)
-     return true; // If is admin continue exploring
-    else
-     return this.router.parseUrl('/login'); // Kick off to the main page
+      
+      let isAdmin : boolean = false;
+      let userParser = JSON.parse(this.userService.getLocalSotrage().getItem('user')); // Parse user data form LocalStorage
+      let userRoles = userParser.groups; // Get Users Groups
+      role.forEach(element => {
+        isAdmin = isAdmin || userRoles.find(x => x== element) // Find inside the role
+      });
+  
+      if(isAdmin)
+       return true; // If is admin continue exploring
+      else
+       return this.router.parseUrl('/recipe'); // Kick off to the main page
+    }
+    
+    
   }
   
-}

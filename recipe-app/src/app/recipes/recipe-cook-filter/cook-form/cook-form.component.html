@@ -1,4 +1,4 @@
-<mat-stepper orientation="vertical">
+<mat-stepper orientation="vertical" linear>
   <mat-step [stepControl]="ingredient_form">
     <ng-template matStepLabel>Ingredientes</ng-template>
     <ng-template matStepContent>
@@ -25,19 +25,24 @@
                 "
                 >Este ingrediente existe</mat-error
               >
+              
             </mat-form-field>
+           
             <i (click)="removeIngredient(i)" class="bi bi-trash"></i>
           </div>
+         
         </div>
       </form>
       <button
         mat-button
+        [disabled]="ingredientProductCounter == 7"
         (click)="adicionarIngrediente() && $event.preventDefault()"
       >
         Adicionar Ingrediente
       </button>
 
       <button mat-button matStepperNext>Next</button>
+     
     </ng-template>
   </mat-step>
   <mat-step [stepControl]="difficulty_form" (click)="$event.preventDefault()">

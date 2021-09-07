@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, fromEventPattern, ObservedValueOf } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, elementAt } from 'rxjs/operators';
 
 // Base URL
 import { environment } from '../../environments/environment';
@@ -93,7 +93,7 @@ export class UserService {
 
 
   public isAuth(): boolean {
-    return this.isAut;
+    return this.getLocalSotrage().getItem('user') != null;
   }
 
   public clearLocalStorage() {
@@ -163,6 +163,20 @@ export class UserService {
   getLogedUser(){  
     return JSON.parse(this.local_storage.getItem('user'));   
   }  
+
+  public userGroups(){
+    if(this.getLogedUser())
+      return this.getLogedUser().groups as Array<string>
+    else 
+      return null
+  }
+
+  public isAdmin(){
+    if(this.userGroups())
+      return this.userGroups().find(element => element === "admin")
+    else
+      return false
+  }
 
   public getUserData() {
     let userid = this.getDecodeToken(this.local_storage.getItem('token'))

@@ -62,8 +62,13 @@ export class AppComponent {
   }
 
   isUserAuth(){
-return this._userService.isAuth()
+return this._userService.isAuth();
   }
+
+  isAdmin(){
+    return this._userService.isAdmin();
+  }
+ 
 
   openCreateDialog(){
     const matDiag = this.matDialog.open(RecipeCreateComponent, {

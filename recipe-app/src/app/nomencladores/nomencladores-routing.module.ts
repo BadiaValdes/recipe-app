@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {ListComponent} from './list/list.component'
 
+import {AuthGuard} from '../auth/guard/auth.guard'
+
 const routes: Routes = [
  {
-  path: 'nomencladores',
+  path: '',
   component: ListComponent,
+  canActivate: [AuthGuard],
+  data: {rol:['admin','staff']}
  }
 ];
 

@@ -3,11 +3,13 @@
    
   >
     <img mat-card-image src="{{ recip.img }}" width="150" height="250" />
-    <mat-card-header>
-      <mat-card-title>{{ recip.name }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-actions>
+    <mat-card-content class="text-overflow-hidden-div" (mouseover)="mauseOver=true" (mouseleave)="mauseOver=false">
+      <!-- [ngClass]="{'text-overflow-hidden-action':recip.name.length > 20 }" -->
+      <p class="text-overflow-hidden"  [ngStyle]="(mauseOver==true && recip.name.length > 20) ? textTransform(recip.name.length * -1) : textTransform(0)"  >{{ recip.name }}</p>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center center">
       <a
+
         mat-stroked-button
         [routerLink]="['/recipe', recip.slug]"
         [state]="recip"
@@ -15,6 +17,7 @@
         >Detalles</a
       >
       <button
+
         mat-stroked-button
         color="primary"
         (click)="instantDetails(recip)"

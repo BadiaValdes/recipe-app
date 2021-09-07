@@ -78,8 +78,6 @@ import {AdminPanelModule} from './admin/admin-panel.module'
     // HTTP CALL ******* END   
     AuthModule,
     RecipeModule,
-    NomencladoresModule,
-    AdminPanelModule,
     AppRoutingModule,
     MatTabsModule,
     MatToolbarModule,

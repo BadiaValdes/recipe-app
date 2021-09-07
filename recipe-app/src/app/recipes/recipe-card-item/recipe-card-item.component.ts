@@ -17,6 +17,8 @@ export class RecipeCardItemComponent implements OnInit {
 
   @Input() recip: Recipe;
 
+  mauseOver = false;
+
   constructor(private _dialogComponent : MatDialog,) { }
 
   ngOnInit(): void {
@@ -32,6 +34,10 @@ export class RecipeCardItemComponent implements OnInit {
       descripcion: recipe.description,
       recip: recipe,
     }})
+  }
+
+  textTransform(number){
+    return { 'transform' : 'translateX(' +(number)+'%)'}
   }
 
 }

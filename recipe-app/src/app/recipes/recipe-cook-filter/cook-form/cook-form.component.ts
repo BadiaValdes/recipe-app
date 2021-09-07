@@ -38,7 +38,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   // FORM VAR DECLARATION
   ingredient_form = new FormGroup({
-    ingredients: this.formB.array([], { updateOn: 'submit' }),
+    ingredients: this.formB.array([], { updateOn: 'blur' }),
   });
 
   difficulty_form = new FormGroup({
@@ -55,7 +55,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   recipe: Recipe[]; // Thre result of the filter proccess
 
-
+  ingredientProductCounter : number = 0;
 
   @Output() data = new EventEmitter<Recipe[]>(); // Send the collected recipes
 
@@ -67,6 +67,8 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.formVariableInit();
+    this.adicionarIngrediente();
+    console.log(this.ingredients())
   }
 
   // Populate the products and dificultad vars.
@@ -90,6 +92,21 @@ export class CookFormComponent implements OnInit, AfterViewInit {
   ingredients(): FormArray {
     return this.ingredient_form.get('ingredients') as FormArray;
   }
+
+  // at least one ingredient
+
+  noRepeatIngredient(): ValidatorFn {
+    return (control: AbstractControl) => {
+        let isItRepeated = false;
+        console.log(control.value)
+        console.log("Achy")
+        isItRepeated = isItRepeated || this.ingredient_form.get('ingredients')?.value.find((element) => {
+          return element.product === control.value;
+        })        
+        return isItRepeated ? {repeated : {value:'true'}} : null ;
+      }
+    }
+  
 
   // Find repeating ingredients
   /*  noRepeatIngredient(): ValidatorFn {
@@ -116,10 +133,11 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   // Create the new ingredientes without values
   newIngredients(): FormGroup {
+    this.ingredientProductCounter ++;
     return this.formB.group({
       product: new FormControl(null, {
-        validators: [Validators.required],
-        updateOn: 'change',
+        validators: [Validators.required, this.noRepeatIngredient()],
+        updateOn: 'blur',
       }),
     });
   }
@@ -131,6 +149,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   // Remove ingredient from list
   removeIngredient(i: number) {
+    this.ingredientProductCounter --;
     this.ingredients().removeAt(i);
     this.deleteElement(i);
   }
@@ -153,7 +172,8 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this._recipeApi
       .getSearchFor(
         JSON.stringify(this.ingredient_form.get('ingredients')?.value),
-        this.difficulta.value
+        this.difficulta.value,
+        this.slideValue,
       )
       .toPromise()
       .then((data) => {

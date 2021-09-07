@@ -1,7 +1,7 @@
 <div style="height: 90vh; margin: 0 auto; width: 80%;" fxLayoutAlign="center center" class="">
 
 
-    <div *ngIf="!user_service.getLocalSotrageToken()" fxLayout="row wrap" fxFlex="50" fxFlex.xs="80" class="login_container">
+    <div *ngIf="!user_service.getLogedUser()" fxLayout="row wrap" fxFlex="50" fxFlex.xs="80" class="login_container">
         <div fxFlex="40" fxFlex.sm="100" fxLayoutAlign.xs="center stretch"  fxFlex.xs="100" class="img_container">
             <img src="assets/img/cooking.jpg" class="image_login">
         </div>
@@ -23,7 +23,7 @@
         
     
     </div>
-    <div  *ngIf="user_service.getLocalSotrageToken()" fxLayoutAlign="center center" fxLayout="column">
+    <div  *ngIf="user_service.getLogedUser()" fxLayoutAlign="center center" fxLayout="column">
         <div fxAlign="center" fxLayoutAlign="center center">
             <img class="byebye" src="assets/img/byebye.png">
         </div>

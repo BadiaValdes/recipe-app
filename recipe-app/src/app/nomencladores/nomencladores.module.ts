@@ -38,7 +38,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSortModule,
     MatToolbarModule,
     MatTooltipModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,

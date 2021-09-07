@@ -1,0 +1,13 @@
+.text-overflow-hidden-div{
+    overflow: hidden;
+    width:95%;
+
+
+}
+.text-overflow-hidden{
+    font-size: 1.5em;
+    white-space: nowrap; 
+    transition: all 1s ease-in;
+}
+
+

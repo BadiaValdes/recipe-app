@@ -11,6 +11,14 @@ const routes: Routes = [
   //{path: 'crisis-center', component: CrisisListComponent},
   //{path: 'hero', component: HeroListComponent},
   // Default rout for the app
+  {
+    path: 'nomencladores', 
+    loadChildren: () => import('./nomencladores/nomencladores.module').then(m => m.NomencladoresModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin-panel.module').then(m => m.AdminPanelModule),
+  },
   { path: '',   redirectTo: '/recipe', pathMatch: 'full' },
   {path: '404', component: PageNotFoundComponent },
   {path: '**', redirectTo: '/404' },

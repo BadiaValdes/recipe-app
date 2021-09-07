@@ -4,4 +4,8 @@ export const routes = {
         url: '/recipe/what-do-i-cook-today',
         name: 'What do i cook'
     },
+    nomenclature: {
+        url: '/nomencladores',
+        name: 'Nomencladores'
+    }
 }
