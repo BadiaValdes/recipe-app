@@ -9,3 +9,11 @@
     color: white !important;
     font: normal normal normal 14px/1 !important;
 }
+
+.close-btn{
+    transition: all ease-in 0.5s;
+}
+
+.close-btn:hover{
+    color: red;
+}

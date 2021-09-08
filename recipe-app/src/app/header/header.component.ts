@@ -5,6 +5,7 @@ import{UserService} from '../service/user.service';
 
 import {EventEmitterService} from '../service/event-emitter.service'
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
 
 
-  constructor(private userServ : UserService, private event_emitter : EventEmitterService) { }
+  constructor(private userServ : UserService, private event_emitter : EventEmitterService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -43,6 +44,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOUt(){
+    this.router.navigateByUrl('recipe')
     this.userServ.logout();
   }
 

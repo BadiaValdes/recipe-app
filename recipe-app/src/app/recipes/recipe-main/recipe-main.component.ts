@@ -53,7 +53,9 @@ export class RecipeMainComponent implements OnInit {
   // Opens the creation dialog
   openCreateDialog(){
     const matDiag = this.matDialog.open(RecipeCreateComponent, {
-      width: '900px',
+      width: '900px',      
+      disableClose: false,
+      hasBackdrop: true,
     });
 
     // Get data after close

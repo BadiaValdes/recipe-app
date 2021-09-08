@@ -24,7 +24,8 @@
         color="primary"
         *ngIf="this.isUserAuth()"
         fxLayoutAlign="start center"
-        (click)="openCreateDialog() && sideNavToogle()"
+        (click)='openCreateDialog()'
+        (click)="sideNavToogle()"
       >
         New Recipe
       </button>
@@ -34,7 +35,7 @@
 
       <mat-divider></mat-divider>
 
-      <button mat-button *ngIf="isAdmin()" [routerLink]="this.route.nomenclature.url" color="primary">{{this.route.nomenclature.name}}</button>
+      <button mat-button *ngIf="isAdmin()" [routerLink]="this.route.nomenclature.url" color="primary" (click)="sideNavToogle()">{{this.route.nomenclature.name}}</button>
       <button mat-button color="primary">Action</button>
       <button mat-button color="primary">Action</button>
     </mat-nav-list>

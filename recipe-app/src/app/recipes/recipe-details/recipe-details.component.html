@@ -15,14 +15,20 @@
         fxFlex.sm="100%"
         fxFlex.md="35%"
         fxLayoutAlign="center center"
+        class="box-shadow"
       >
-        <img
+      <div
+      class="img-thumb"
+      [ngStyle]="{'background': 'url('+recipe_detail.img+')','background-size':'cover'}"
+      >
+
+      </div>
+<!--         <img
           src="{{ recipe_detail.img }}"
           class="img-thumb"
           width="300"
           height="300"
-          alt="recipe image"
-        />
+        /> -->
       </div>
       <div
         fxLayoutAlign="start up"

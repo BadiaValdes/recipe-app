@@ -1,6 +1,9 @@
-<div *ngIf="this.isAllLoaded == true">
-  <div mat-dialog-content class="form-dialog-height">
-    <h1 mat-dialog-title>Let's cook something</h1>
+
+<div *ngIf="this.isAllLoaded == true" [@inOutAnimationFast] style="position: relative;">
+  <i fxFlexAlign="center" dir="rtl" class="bi bi-x-circle-fill close-btn" style="position: absolute; right: -10px; top: -10px;  font-size: 1.3em;" (click)="closeDialog(1)"></i>
+  <div mat-dialog-content disableClose='false' class="form-dialog-height" >
+    <h1 mat-dialog-title>Let's cook something</h1>      
+      
     <div>
         <mat-stepper linear [orientation]="this.direction">
           <!-- Done has to be before edit -->
@@ -144,9 +147,12 @@
   
     </div>
   </div> 
-  <button mat-flat-button dir="rtl" color="warn" type="button" (click)="closeDialog(1)">Cerrar</button>
+  <div fxLayoutAlign="end center" fxLayout="row">
+    <button mat-flat-button  color="warn" type="button" (click)="closeDialog(1)">Cerrar</button>
+  </div>
+  
 </div>
-<div *ngIf="!this.isAllLoaded">
+<div *ngIf="!this.isAllLoaded" >
 <div fxLayout="row" fxLayoutAlign="center center" fxFlexAlign="center">
   <mat-spinner diameter="60"></mat-spinner>
 </div>

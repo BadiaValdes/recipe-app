@@ -39,6 +39,9 @@ import {editorConfig} from '../../interfaces/editorConfig'
 // Stepper Options
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper' // Import the CDK
 
+// Animation
+import {inOutAnimationFast} from '../../animations'
+
 //----- END IMPORTS -------
 @Component({
   selector: 'app-recipe-create',
@@ -47,7 +50,8 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper' // Import the CDK
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false,
     }
-  }]
+  }],
+  animations: [inOutAnimationFast],
 })
 
 export class RecipeCreateComponent implements OnInit {
@@ -99,7 +103,9 @@ export class RecipeCreateComponent implements OnInit {
     private us : UserService, // User service 
     public dialogRef: MatDialogRef<RecipeCreateComponent>, // Self reference
     @Inject (MAT_DIALOG_DATA) public data: any, // Data sent by params
-    ) { }
+    ) {
+      dialogRef.disableClose = true;
+     }
 
   
 
@@ -431,6 +437,7 @@ export class RecipeCreateComponent implements OnInit {
    
   }
 
+  @HostListener('document:keydown.escape', ['1'])
   closeDialog(num : number, receta?): void {
     this.dialogRef.close({
       num: num,

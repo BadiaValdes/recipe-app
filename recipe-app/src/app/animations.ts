@@ -41,7 +41,7 @@ export const inOutAnimation =
         transition(
           ':enter', 
           [
-            style({ opacity: 0 }),
+            style({ opacity: 0 }), // Initial State
             animate('0.8s ease-in', 
                     style({ opacity: 1 }))
           ]
@@ -49,7 +49,7 @@ export const inOutAnimation =
         transition(
           ':leave', 
           [
-            style({ opacity: 1 }),
+            style({ opacity: 1 }), // Initial State
             animate('0.5s ease-out', 
                     style({  opacity: 0 }))
           ]
@@ -100,6 +100,22 @@ export const inOutAnimation =
                     style({  opacity: 0 }))
           ]
         )
+      ]
+    )
+
+    export const heightAnimation = trigger(
+      'heightAnimation',
+      [
+        transition(":enter",
+        [style({height: 0}),
+          animate('1.5s ease-out', style({height: '*'}))
+        ]
+        ),
+        transition(":leave",
+        [style({height: '*'}),
+          animate('1.5s ease-out', style({height: 0}))
+        ])
+      
       ]
     )
   
