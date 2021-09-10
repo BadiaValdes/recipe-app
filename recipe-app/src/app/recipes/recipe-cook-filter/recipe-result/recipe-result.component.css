@@ -1,0 +1,8 @@
+@import '../../../../assets/css/food/icofont.min.css';
+.notFound{
+    text-align: center;
+    object-position: center;
+    position: absolute;
+    top: calc(50% - 20%);
+	left: calc(50% - 20%);
+}

@@ -10,4 +10,12 @@
     transition: all 1s ease-in;
 }
 
+.card-shadow::before{
+    content: '';
+    z-index: 5000;
+    position: absolute;
+    border: green 2px solid;
+    height: 500px;
+    width: 500px;
+}
 

@@ -81,11 +81,11 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     // this._location.getState()
    
     // Get the recipe from the local storage -> Persist data after user reload the page
-    this.recipe_detail = JSON.parse(this._localStorageService.localStorage(1).getItem('recipe_details')); // Like history
+/*     this.recipe_detail = JSON.parse(this._localStorageService.localStorage(1).getItem('recipe_details')); // Like history
     
     this.currentID = this.recipe_detail.slug;
-    this.idToPass = this.recipe_detail.id;
-    /* this.recipe_details$ = this.route.paramMap.pipe(
+    this.idToPass = this.recipe_detail.id; */
+     this.recipe_details$ = this.route.paramMap.pipe(
       switchMap((param: ParamMap)=> {
         this.currentID = param.get('id');
         return this.service.getRecipeDitails(this.currentID!)
@@ -93,7 +93,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     )    
     this.recipe_details$.subscribe(data => {
       this.idToPass = data.id;
-    }) */
+    }) 
   }
 
   ngOnDestroy(): void {

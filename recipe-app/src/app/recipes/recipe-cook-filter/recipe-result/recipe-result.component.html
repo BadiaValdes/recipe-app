@@ -4,7 +4,8 @@
   fxLayout.xs="column"
   fxLayoutAlign="center"
   fxFlex="100%"
-  style="padding-top: 15px; padding-bottom: 20px; border: red 1px solid;"
+  style="padding-top: 15px; padding-bottom: 20px"
+  *ngIf="recipes_list.length > 0; else emptyRecipe"
 >
   <!-- If whe use an observable for iteration we need to put the | async PIPE -->
   <!--| searchFilter: searchText-->
@@ -49,4 +50,18 @@
     [recip]="recip"
   >
   </app-recipe-card-item>
+</div>
+
+<div
+  fxLayoutAlign="center stretch"
+  fxLayout="column"
+  #emptyRecipe
+  style="min-height: 90vh;  position: relative;"
+>
+  <div style="text-align: center;" fxLayout="column" fxFlex="100" fxFlexAlign="center" class="notFound">
+    <!-- <i class="icofont-spoon-and-fork" style="font-size: 2em;"></i> -->
+    <span class="icofont-restaurant-menu" style="font-size: 10em;"></span>
+    <h1> No se encontraron recetas en el menu</h1>
+  </div>
+  
 </div>

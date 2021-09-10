@@ -42,6 +42,33 @@
 .nomencladores-action-button:hover {
   color: rgba(25, 113, 194, 1);
   cursor: pointer;
+  animation: glow 0.8s ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;  
+}
+
+@keyframes glow {
+  from{filter: drop-shadow(0 0 0px rgba(25, 113, 194, 1));}
+  to{filter: drop-shadow(0 0 7px rgba(25, 113, 194, 1));}
+}
+
+.box-animation:hover{
+  transition: all ease-in 0.1s;
+  animation: rotation 0.2s ease;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation{
+  from{
+    transform: translateX(-2px);
+    /* transform: rotate(-20deg); */
+  }
+  to{ 
+    transform: translateX(2px);
+   /*  transform: rotate(20deg); */
+  } 
+  
 }
 
 .bi-box-seam {

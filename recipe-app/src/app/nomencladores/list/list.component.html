@@ -1,6 +1,6 @@
 <div style="margin: 0 auto; min-height: 90vh;" fxLayoutAlign="center" >
   <p style="font-size: 2em; text-align: center">
-    Nomencladores
+    Nomencladores<span  [@inOutAnimation] *ngIf="nomencladorSelected != null">/{{this.nomencladorSelected}}</span>
     <i
       [@inOutAnimation]
       matTooltip="Volver"
@@ -8,6 +8,7 @@
       class="bi bi-arrow-counterclockwise back-arrow"
       *ngIf="nomencladores_data != null"
       (click)="nomencladores_data = null"
+      (click)="this.nomencladorSelectorName(0)"
     ></i>
   </p>
 

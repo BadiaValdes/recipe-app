@@ -37,7 +37,7 @@ export class RecipeCardItemComponent implements OnInit {
   }
 
   textTransform(number){
-    return { 'transform' : 'translateX(' +(number)+'%)'}
+    return { 'transform' : 'translateX('+(number/2)+'vw)'}
   }
 
 }

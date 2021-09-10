@@ -1,3 +1,14 @@
 .mat-slider-thumb{    
     background: rgba(40, 55, 70, 0.6);
 }
+
+.delete-btn{
+    margin-left: 5px;
+    font-size: 1.2em;
+    transition: all ease-in 0.5s;
+}
+
+.delete-btn:hover{
+    cursor: pointer;
+    color: red;
+}

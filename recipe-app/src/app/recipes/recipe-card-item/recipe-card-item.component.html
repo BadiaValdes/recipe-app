@@ -2,10 +2,13 @@
     
    
   >
-    <img mat-card-image src="{{ recip.img }}" width="150" height="250" />
+
+ 
+    <img mat-card-image  src="{{ recip.img }}" width="150" height="250" class="card-shadow" />
+
     <mat-card-content class="text-overflow-hidden-div" (mouseover)="mauseOver=true" (mouseleave)="mauseOver=false">
       <!-- [ngClass]="{'text-overflow-hidden-action':recip.name.length > 20 }" -->
-      <p class="text-overflow-hidden"  [ngStyle]="(mauseOver==true && recip.name.length > 20) ? textTransform(recip.name.length * -1) : textTransform(0)"  >{{ recip.name }}</p>
+      <p class="text-overflow-hidden"  [ngStyle]="(mauseOver==true && recip.name.length > 20) ? textTransform((recip.name.length-22) * -1) : textTransform(0)"  >{{ recip.name }}</p>
     </mat-card-content>
     <mat-card-actions fxLayoutAlign="center center">
       <a

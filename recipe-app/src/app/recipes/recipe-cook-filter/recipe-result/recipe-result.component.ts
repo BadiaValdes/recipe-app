@@ -8,7 +8,8 @@ import { Recipe } from 'src/app/interfaces/recipe';
 })
 export class RecipeResultComponent implements OnInit {
 
-  @Input() recipes_list : Recipe[];
+  @Input() recipes_list : Recipe[] ;
+
   constructor() { }
 
   ngOnInit(): void {

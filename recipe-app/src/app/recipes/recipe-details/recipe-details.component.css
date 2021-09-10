@@ -8,6 +8,12 @@
   box-shadow: inset 0px 0px 100px 0px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 960px){
+  .box-shadow{
+    padding-bottom: 10px;
+  }
+}
+
 .background-gray-white {
   background-color: rgba(208, 211, 212, 0.1);
   border-radius: 10px;

@@ -20,12 +20,53 @@ border: 1px solid #bbbbbb77;
     }
 }
 
+.hover-item{
+    width: 98%;
+    transition: all ease-in 0.1s;
+}
 
 .hover-item:hover{
-background-color: rgba(0, 153, 255, 0.2);
+border-radius: 5px;
+background-color: rgba(63, 81, 181,0.5);
+backdrop-filter: blur(10px);
+}
+
+.hover-item:hover{
+    border-radius: 5px;
+    background-color: rgba(63, 81, 181,0.5);
+    backdrop-filter: blur(10px);
+    }
+
+.ingredient-amount{
+    margin-left: 5px; 
+    font-size: 0.8em; 
+    color: rgb(58, 57, 57);
 }
 
 .tooltip-class{
 background: red;
 font-size: 1.5em;
+}
+
+.crown-drop{
+    animation: pulse 1.5s ease;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition: all ease-in 0.1s;
+}
+
+.hover-item:hover .crown-drop{
+    animation-play-state: paused;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes pulse {
+    from{
+        /* filter: drop-shadow(0px 0px 0px rgba(238, 175, 2, 1)); */
+        transform: scale(1);
+    }
+    to{
+        /* filter: drop-shadow(0px 0px 6px rgba(238, 175, 2, 1)); */
+        transform: scale(1.5);
+    }
 }

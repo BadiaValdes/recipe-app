@@ -28,7 +28,7 @@
               
             </mat-form-field>
            
-            <i (click)="removeIngredient(i)" class="bi bi-trash"></i>
+            <i fxFlexAlign="center" (click)="removeIngredient(i)" class="bi bi-trash-fill delete-btn"></i>
           </div>
          
         </div>
@@ -36,12 +36,13 @@
       <button
         mat-button
         [disabled]="ingredientProductCounter == 7"
+        [disabled]="this.ingredient_form.get('ingredients').status === 'INVALID'"
         (click)="adicionarIngrediente() && $event.preventDefault()"
       >
         Adicionar Ingrediente
       </button>
 
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperNext [disabled]="ingredientProductCounter < 1" [disabled]="this.ingredient_form.get('ingredients').status === 'INVALID'">Next</button>
      
     </ng-template>
   </mat-step>

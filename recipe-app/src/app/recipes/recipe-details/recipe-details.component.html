@@ -2,7 +2,7 @@
   Cargando
 </div>
 <div *ngIf="!cargando">
-  <div *ngIf="recipe_detail" fxLayout="column">
+  <div *ngIf="recipe_details$ | async as recipe_detail" fxLayout="column">
     <div
       fxLayout="row wrap"
       fxLayoutAlign="start center"
@@ -107,6 +107,6 @@
   </div>
 </div>
 
-<div *ngIf="!recipe_detail">
+<div *ngIf="!recipe_details$ | async">
   <H3>No existe</H3>
 </div>
