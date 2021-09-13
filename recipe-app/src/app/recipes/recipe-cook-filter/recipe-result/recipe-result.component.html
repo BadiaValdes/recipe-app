@@ -5,7 +5,7 @@
   fxLayoutAlign="center"
   fxFlex="100%"
   style="padding-top: 15px; padding-bottom: 20px"
-  *ngIf="recipes_list.length > 0; else emptyRecipe"
+  *ngIf="recipes_list.length > 0"
 >
   <!-- If whe use an observable for iteration we need to put the | async PIPE -->
   <!--| searchFilter: searchText-->
@@ -55,7 +55,7 @@
 <div
   fxLayoutAlign="center stretch"
   fxLayout="column"
-  #emptyRecipe
+  *ngIf="recipes_list.length < 1"
   style="min-height: 90vh;  position: relative;"
 >
   <div style="text-align: center;" fxLayout="column" fxFlex="100" fxFlexAlign="center" class="notFound">

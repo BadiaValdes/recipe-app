@@ -11,23 +11,33 @@
           >
             <mat-form-field appearance="fill" fxFlex="100%">
               <mat-label>Producto</mat-label>
-              <mat-select formControlName="product">
+              <input type="text" #searchText placeholder="Selecciona un ingrediente" [matAutocomplete]="auto" matInput formControlName="product">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayOnlyName">
                 <mat-option
-                  *ngFor="let product of products"
-                  [value]="product.id"
+                  #options                   
+                  *ngFor="let product of products | searchFilter : searchText.value"                  
+                  [value]="product"
                 >
+               
                   {{ product.name }}
                 </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="
+              </mat-autocomplete>
+              
+           
+               <!--  *ngIf="
                   this.ingredient_form.get('ingredients').status === 'INVALID'
-                "
+                " -->
+                
+<!--                 <mat-error
+                *ngIf="ingredients().controls[i].get('product').touched && ingredients().controls[i].get('product').errors?.repeated"
+                >Este ingrediente existe</mat-error
+              >  -->
+              <mat-error
+                *ngIf="(ingredient.get('product').dirty || ingredient.get('product').untouched) && ingredient.get('product').errors?.repeated && ingredient.get('product').invalid"
                 >Este ingrediente existe</mat-error
               >
               
-            </mat-form-field>
-           
+            </mat-form-field>      
             <i fxFlexAlign="center" (click)="removeIngredient(i)" class="bi bi-trash-fill delete-btn"></i>
           </div>
          
@@ -46,13 +56,36 @@
      
     </ng-template>
   </mat-step>
-  <mat-step [stepControl]="difficulty_form" (click)="$event.preventDefault()">
+  <!-- [stepControl]="difficulty_form" -->
+  <mat-step  (click)="$event.preventDefault()">
     <ng-template matStepLabel>Dificultad</ng-template>
     <ng-template matStepContent>
-      <form [formGroup]="difficulty_form">
+      <!-- [formGroup]="difficulty_form" -->
+      <form >
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <div fxLayout="row">
-            <mat-form-field appearance="fill" fxFlex="100%">
+            <div style="padding-top: 23px;">
+              <mat-slider
+                style="height: 94%;"
+                tickInterval="1"
+                step="1"
+                min="0"
+                max="4"
+                vertical
+                (input)="dificultyValue($event.value)"
+                [(ngModel)]="slideDificultyValue"
+                invert
+                aria-label="unit(s)"
+              ></mat-slider>
+            </div>
+
+           
+          
+            <mat-list>
+              <mat-list-item [ngStyle]="{'font-weight' : slideDificultyValue == 0 ? 'bold' : 'normal'}" >Callate y dame todas</mat-list-item>
+              <mat-list-item *ngFor="let dific of dificultad, index as i"  [ngStyle]="{'font-weight' : slideDificultyValue == i+1 ? 'bold' : 'normal'}" >{{ dific.name }}</mat-list-item>
+            </mat-list>
+            <!-- <mat-form-field appearance="fill" fxFlex="100%">
               <mat-label>Dificultad</mat-label>
               <mat-select formControlName="difficult">
                 <mat-option value="0">
@@ -62,7 +95,7 @@
                   {{ dific.name }}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
           </div>
         </div>
       </form>
@@ -106,12 +139,10 @@
           type="submit"
           mat-button
           (click)="this.submit()"
-          [disabled]="!this.difficulty_form.valid"
         >
           Subir
         </button>
       </form>
-      <button mat-button matStepperNext>Next</button>
     </ng-template>
   </mat-step>
 </mat-stepper>

@@ -24,6 +24,7 @@ import {
 import { GeneralApiServicesService } from '../../../service/general-api-services.service';
 import { RecipeService } from '../../../service/recipe.service';
 import { Recipe } from 'src/app/interfaces/recipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cook-form',
@@ -38,7 +39,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   // FORM VAR DECLARATION
   ingredient_form = new FormGroup({
-    ingredients: this.formB.array([], { updateOn: 'blur' }),
+    ingredients: this.formB.array([]),
   });
 
   difficulty_form = new FormGroup({
@@ -52,10 +53,14 @@ export class CookFormComponent implements OnInit, AfterViewInit {
   // END FORM VAR DECLARATION
 
   slideValue = 0; // The value of the how many ingredients I really need
+  slideDificultyValue = 0; // The value of the how many ingredients I really need
 
   recipe: Recipe[]; // Thre result of the filter proccess
 
   ingredientProductCounter : number = 0;
+
+  // Observable
+  productFilterOption : Observable<any[]>;
 
   @Output() data = new EventEmitter<Recipe[]>(); // Send the collected recipes
 
@@ -68,7 +73,6 @@ export class CookFormComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.formVariableInit();
     this.adicionarIngrediente();
-    console.log(this.ingredients())
   }
 
   // Populate the products and dificultad vars.
@@ -98,12 +102,10 @@ export class CookFormComponent implements OnInit, AfterViewInit {
   noRepeatIngredient(): ValidatorFn {
     return (control: AbstractControl) => {
         let isItRepeated = false;
-        console.log(control.value)
-        console.log("Achy")
-        isItRepeated = isItRepeated || this.ingredient_form.get('ingredients')?.value.find((element) => {
+        isItRepeated =this.ingredient_form.get('ingredients')?.value.find((element) => {
           return element.product === control.value;
         })        
-        return isItRepeated ? {repeated : {value:'true'}} : null ;
+        return isItRepeated && control ? {repeated : {value:'true'}} : null ;
       }
     }
   
@@ -136,8 +138,8 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this.ingredientProductCounter ++;
     return this.formB.group({
       product: new FormControl(null, {
-        validators: [Validators.required, this.noRepeatIngredient()],
-        updateOn: 'blur',
+        validators: [ this.noRepeatIngredient()],
+
       }),
     });
   }
@@ -168,11 +170,12 @@ export class CookFormComponent implements OnInit, AfterViewInit {
 
   // Submit all the data
   submit() {
-    console.log(this.difficulta.value);
+    let dificultAfterSildeValue = this.dificultyIDAfterSlideValue(this.slideDificultyValue)
+    console.log(this.ingredient_form.get('ingredients')?.value[0]['product'].id)
     this._recipeApi
       .getSearchFor(
         JSON.stringify(this.ingredient_form.get('ingredients')?.value),
-        this.difficulta.value,
+        dificultAfterSildeValue,
         this.slideValue,
       )
       .toPromise()
@@ -198,9 +201,32 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this.slideValue = event
   }
 
+  dificultyValue(event){
+    this.slideDificultyValue = event;
+  }
+
+  dificultyIDAfterSlideValue(value){
+    console.log(`SlideDificultValue ${value}`)
+    switch (value) {
+      case 0:
+        return 0;
+      default:        
+        return this.dificultad.find((_,index) => index == value-1).id;
+    }
+  }
+
   // Get the main ingredient
   mainIngredient(){
-    return this.products.filter(data => data.id == this.ingredient_form.get('ingredients').value[0]['product'])[0].name;
+    return this.products.filter(data => data.id == this.ingredient_form.get('ingredients').value[0]['product'].id)[0].name;
+  }
+
+
+
+  displayOnlyName(value){ 
+    if(value)
+    {
+      return value.name
+    }
   }
 
 }

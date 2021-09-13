@@ -36,10 +36,10 @@
 	- En la descripcion de la recete poner un overflow Y auto
 3. CRUD de los nomencladores  <span style="color:green;">#Done#<span>
 	1. Crear un mecanismo para el menu lateral <span style="color:green;">#Done#<span>
-4. Mirar nuevo diseño para el ingrediente y steps <span style="color:red;">#Pending#<span>
+
 5. Agregar la fotografia a la lista de ingredientes <span style="color:red;">#Pending#<span>
 6. Agregar linea de cargado mediante la libreria <span style="color:green;">#Done#<span>
-7. Tratar de buscar la forma de realizar composicion de ingredientes <span style="color:red;">#Pending#<span>
+
 8. Mejorar el menu lateral <span style="color:green;">#Done#<span>
 9. Crear las pantallas para los errores comunes <span style="color:red;">#Pending#<span>
 10. Realizar los filtros (sencillos) a la lista de las recetas <span style="color:green;">#Done#<span>
@@ -62,11 +62,11 @@
 				- Pipe the subject, and after that, create a subscription and execute the method in way 2
 
 11. Crear un infinity scroll o paginator para la lista de recetas <span style="color:orange;">#We are in the road#<span>
-12. Crear el filtro que cocino hoy <span style="color:orange;">#We are in the road#<span>
+12. Crear el filtro que cocino hoy <span style="color:green;">#Done#<span>
 13. Crear la vista mis recetas
 14. Crear la modificación de perfil del usuario
 15. Lenguaje de la pagina segun seleccion
-16. Terminar de arreglar el login y el logout
+16. Terminar de arreglar el login y el logout <span style="color:green;">#Done#<span>
 17. Crear un servicio para buttonSheet no es recomendable al no ser que se utilize para cosas en específico, con pequeñas variaciones -> Intentar buscar una solución general.
 18. Aprender animaciones con angular <span style="color:orange;">#We are in the road#<span>
 19. Panel para ususarios
@@ -74,7 +74,7 @@
 21. "Optimizar" los detalles <span style="color:green;">#Done#<span>
 22. Crear skeleton de la lista
 23. Refactor recipe list card <span style="color:green;">#Done#<span>
-24. Lazy load 
+24. Lazy load <span style="color:green;">#Done#<span>
 		
 		{
     	path: 'admin',
@@ -87,4 +87,6 @@
 			- HttpClientModule
 
 
-
+VERSION 2.0
+1. Tratar de buscar la forma de realizar composicion de ingredientes <span style="color:red;">#Pending#<span>
+2. Mirar nuevo diseño para el ingrediente y steps <span style="color:red;">#Pending#<span>
