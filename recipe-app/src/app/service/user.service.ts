@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, HostListener } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, fromEventPattern, ObservedValueOf } from 'rxjs';
+import { BehaviorSubject, Observable, of, fromEventPattern, ObservedValueOf, Subject } from 'rxjs';
 import { catchError, map, tap, elementAt } from 'rxjs/operators';
 
 // Base URL
@@ -16,6 +16,8 @@ import { NotificationSnackBarService } from './notification-snack-bar.service';
 
 // config
 import {simpleConfiguration} from '../config/snackBarConfig';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -33,18 +35,26 @@ export class UserService {
   private isAut = false;
   private is_save = false;
 
+  private isAuthSubject : Subject<boolean> = new Subject<boolean>();
+
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
+
+
 
   constructor(
     private http: HttpClient,
     private localStorage: LocalStorageService,
     private _event_emitter: EventEmitterService,
     private _snack_notification: NotificationSnackBarService,
+    private _router: Router,
   ) {
-    this.local_storage = localStorage.localStorage(1);
+    
+    this.local_storage = localStorage.localStorage(0);
+    this.isAuthSubject.next(false);
+    
   }
 
   //  public  logIn(user){
@@ -73,7 +83,7 @@ export class UserService {
           (res) => {
             // Success
             this.updateData(res['token']);
-
+            this.isAuthObservable(true);
             resolve;
           },
           (msg) => {
@@ -88,6 +98,14 @@ export class UserService {
     });
     return promise;
     
+  }
+
+  public isAuthObservable(state: boolean){    
+    return this.isAuthSubject.next(state);
+  }
+
+  public isAuthSubcriber():Observable<boolean>{
+    return this.isAuthSubject.asObservable();
   }
 
 
@@ -119,6 +137,8 @@ export class UserService {
     this.token_expires = null;
     this.username = null;
     this.isAut = false;
+    this.isAuthObservable(false);
+    this._router.navigateByUrl('recipe');
   }
 
   public getLocalSotrage() {

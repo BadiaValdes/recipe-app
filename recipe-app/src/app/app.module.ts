@@ -49,6 +49,10 @@ import { AuthModule } from './auth/auth.module';
 import {NomencladoresModule} from './nomencladores/nomencladores.module'
 import {AdminPanelModule} from './admin/admin-panel.module'
 
+// IDLE
+import {NgIdleKeepaliveModule} from '@ng-idle/keepalive'
+import {NgIdleModule} from '@ng-idle/core';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -61,13 +65,16 @@ import {AdminPanelModule} from './admin/admin-panel.module'
     AppComponent,    
     PageNotFoundComponent, 
     HeaderComponent, PrincipalCheckDirective, RecipeNameDirective, ConfigDialogComponent, NotificationSnackBarComponent, OpenSheetComponent,
+  
   ],
   // The order of imports is very important
   imports: [
+    
     BrowserModule,
     BrowserAnimationsModule,
-
+    NgIdleModule.forRoot(),
     FormsModule,  
+   
 
     //CrisisModule, -> For lazy load, the module cant be imported here
     //AdminModule, -> For lazy load, the module cant be imported here
@@ -92,7 +99,10 @@ import {AdminPanelModule} from './admin/admin-panel.module'
     MatSidenavModule,
     
     
+    
   ],
+
+
   providers: [
     // HTTP INTERCEPTOR for ERROR handle
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true}

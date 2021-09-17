@@ -26,10 +26,17 @@ import { RecipeService } from '../../../service/recipe.service';
 import { Recipe } from 'src/app/interfaces/recipe';
 import { Observable } from 'rxjs';
 
+// Stepper Options
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper' // Import the CDK
+
 @Component({
   selector: 'app-cook-form',
   templateUrl: './cook-form.component.html',
   styleUrls: ['./cook-form.component.css'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false,
+    }
+  }],
 })
 export class CookFormComponent implements OnInit, AfterViewInit {
   products: any[]; // store the products http call

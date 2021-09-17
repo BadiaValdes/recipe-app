@@ -1,8 +1,58 @@
-.min-height-100{
-    min-height: 93.4vh;
- 
+@import "../assets/css/food/icofont.min.css";
+
+.min-height-100 {
+  min-height: 93.4vh;
 }
 
-.width-sidenav-40vh{
-    width: 30vh;
+.width-sidenav-40vh {
+  width: 30vh;
 }
+
+
+
+.icon {
+  font-size: 1.4em !important; 
+  color: white;
+}
+
+.icon-rotate-animation{
+    position: absolute; 
+    transition: all ease 1s;
+    transform: rotateZ(0);
+    transform-origin: bottom center;
+}
+
+.button-container:hover .icon-rotate-animation {
+    animation: eggRotation 1s ease infinite alternate-reverse;
+
+    
+  }
+
+@keyframes eggRotation {
+    0% {
+        transform: rotateZ(0);       
+    }
+
+    50%{transform: rotateZ(10deg);  }
+
+
+    100% {
+        transform: rotateZ(-10deg); 
+      
+    }
+    
+  }
+
+.button-text {
+  padding-left: 35px;
+}
+
+.button-text-not-relative{
+    padding-left: 15px;
+}
+
+.button-container {
+  position: relative;
+  text-align: left
+}
+

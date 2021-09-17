@@ -1,7 +1,15 @@
 <mat-stepper orientation="vertical" linear>
+  <ng-template matStepperIcon="done" >
+    <i class="icofont-restaurant-menu"></i>
+  </ng-template>        
+  <ng-template matStepperIcon="edit">
+    <i class="icofont-spoon-and-fork"></i>
+   
+  </ng-template>
   <mat-step [stepControl]="ingredient_form">
     <ng-template matStepLabel>Ingredientes</ng-template>
     <ng-template matStepContent>
+
       <form [formGroup]="ingredient_form">
         <div formArrayName="ingredients" fxLayout="row wrap" fxLayoutGap="10px">
           <div
@@ -59,8 +67,9 @@
   <!-- [stepControl]="difficulty_form" -->
   <mat-step  (click)="$event.preventDefault()">
     <ng-template matStepLabel>Dificultad</ng-template>
-    <ng-template matStepContent>
+    <ng-template matStepContent >
       <!-- [formGroup]="difficulty_form" -->
+      <div [ngStyle.xs]="{'margin-top':'1em'}">
       <form >
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <div fxLayout="row">
@@ -85,6 +94,7 @@
               <mat-list-item [ngStyle]="{'font-weight' : slideDificultyValue == 0 ? 'bold' : 'normal'}" >Callate y dame todas</mat-list-item>
               <mat-list-item *ngFor="let dific of dificultad, index as i"  [ngStyle]="{'font-weight' : slideDificultyValue == i+1 ? 'bold' : 'normal'}" >{{ dific.name }}</mat-list-item>
             </mat-list>
+            
             <!-- <mat-form-field appearance="fill" fxFlex="100%">
               <mat-label>Dificultad</mat-label>
               <mat-select formControlName="difficult">
@@ -99,6 +109,7 @@
           </div>
         </div>
       </form>
+      </div>
       <button mat-button matStepperNext>Next</button>
     </ng-template>
   </mat-step>
@@ -126,12 +137,12 @@
 
            
           
-            <mat-list>
-              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 0 ? 'bold' : 'normal'}" >Solo me interesa el ingrediente: {{mainIngredient()}}</mat-list-item>
-              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 25 ? 'bold' : 'normal'  }" >Me conformo con el ingrediente: {{mainIngredient()}} y algo más</mat-list-item>
-              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 50 ? 'bold' : 'normal'  }">No me importaria que falten la mitad</mat-list-item>
-              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 75 ? 'bold' : 'normal'  }">Trato de cocinar algo decete</mat-list-item>
-              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 100 ? 'bold' : 'normal'  }">Callate y dame todas las recetas</mat-list-item>
+            <mat-list [ngStyle.xs]="{'margin-top':'3em'}">
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 0 ? 'bold' : 'normal'}" [ngStyle.xs]="{'display': slideValue ==0 ? 'inline' : 'none'}" >Solo me interesa el ingrediente: {{mainIngredient()}}</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 25 ? 'bold' : 'normal'  }" [ngStyle.xs]="{'display': slideValue ==25 ? 'inline' : 'none'}" >Me conformo con el ingrediente: {{mainIngredient()}} y algo más</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 50 ? 'bold' : 'normal'  }" [ngStyle.xs]="{'display': slideValue ==50 ? 'inline' : 'none'}">No me importaria que falten la mitad</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 75 ? 'bold' : 'normal'  }" [ngStyle.xs]="{'display': slideValue ==75 ? 'inline' : 'none'}">Trato de cocinar algo decete</mat-list-item>
+              <mat-list-item [ngStyle]="{'font-weight' : slideValue == 100 ? 'bold' : 'normal'  }" [ngStyle.xs]="{'display': slideValue ==100 ? 'inline' : 'none'}">Callate y dame todas las recetas</mat-list-item>
             </mat-list>
           </div>
         </div>

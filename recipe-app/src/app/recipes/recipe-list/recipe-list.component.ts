@@ -16,6 +16,7 @@ import {RecipeInstantDetailsComponent} from '../recipe-instant-details/recipe-in
 
 // animation 
 import {inOutAnimation, inOutAnimationFast} from '../../animations'
+import { HostListenerInUseService } from 'src/app/service/host-listener-in-use.service';
 
 // debounce
 
@@ -63,6 +64,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     private _router : Router,
     private _eventEmitterService : EventEmitterService, // We can subscribe to this event to recive the new recipe after creation
     private _dialogComponent : MatDialog,
+    private _hostListenerInUse : HostListenerInUseService,
     ) { }
 
   ngOnInit(): void {    
@@ -147,9 +149,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     console.log(value)
   }
 
+  endSearch(){
+    this._hostListenerInUse.hostListenerInUseNextState(false)
+  }
+
   search(event){
     // Here U can see the way of use a subject
     // First subscribe
+    this._hostListenerInUse.hostListenerInUseNextState(true)
     if(this.recipe_names_observable.observers.length === 0){
       this.recipe_names_observable.pipe(
       ).subscribe(text => {

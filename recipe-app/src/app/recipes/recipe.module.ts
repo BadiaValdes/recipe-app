@@ -58,6 +58,7 @@ import { CookFormComponent } from './recipe-cook-filter/cook-form/cook-form.comp
 import { RecipeResultComponent } from './recipe-cook-filter/recipe-result/recipe-result.component';
 import { RecipeInstantDetailsComponent } from './recipe-instant-details/recipe-instant-details.component';
 
+
 // WYSIWYG
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -68,7 +69,11 @@ import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import { SearchFilterPipe } from './search-filter.pipe';
 
 
+// Idle
+import {NgIdleKeepaliveModule} from '@ng-idle/keepalive'
 
+// Shared module
+import {SharedModuleModule} from '../reusables/shared-module/shared-module.module'
 
 @NgModule({
   declarations: [
@@ -91,6 +96,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     CookFormComponent,
     RecipeResultComponent,
     
+   
 
   
    ],
@@ -123,6 +129,9 @@ import { SearchFilterPipe } from './search-filter.pipe';
     LoadingBarHttpClientModule,
     MatAutocompleteModule,
     MatSliderModule,
+    SharedModuleModule,
+    
+   
   ]
 })
 export class RecipeModule { }

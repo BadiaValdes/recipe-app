@@ -12,6 +12,7 @@
       [(ngModel)]="searchText"
       type="text"
       (input)="search($event.target.value)"
+      (blur)="endSearch()"
       matInput
       placeholder="Arroz con frijoles"
       [matAutocomplete]="auto"

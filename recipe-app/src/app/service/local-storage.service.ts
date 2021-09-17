@@ -17,7 +17,7 @@ export class LocalStorageService {
     if(num == 0){
       return getLocalStorage();
     }
- 
+    else if(num == 1) 
       return getSessionStorage();
   
       

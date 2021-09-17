@@ -1,41 +1,121 @@
 <app-header (sideNavToogle)="sideNavToogle()"></app-header>
-<mat-sidenav-container class="example-container" class="min-height-100">
-  <mat-sidenav #sidenav mode="over" class="width-sidenav-40vh">
-    <mat-nav-list fxLayout="column">
-      <h2 matSubheader>Recipe</h2>
+<mat-sidenav-container
+  class="example-container"
+  class="min-height-100"
+  style="background-color: rgba(213, 213, 213, 0.2)"
+>
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="width-sidenav-40vh"
+    style="background-color: rgba(26, 28, 28, 1)"
+  >
+    <mat-nav-list
+      fxLayout="column"
+      class="mat-nav-l"
+      style="width: 90%; margin: 0 auto; margin-bottom: 20px"
+    >
+      <div
+        fxLayout="column"
+        style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
+      >
+        <span>Recipe </span>
+        <span style="color: gray; font-size: 0.8em"> Opciones generales</span>
+      </div>
+
       <button
+        style="text-align: left"
         mat-button
+        fxLayout="row"
         color="primary"
         routerLink="/"
         (click)="sideNavToogle()"
       >
-        Recipe
+        <span
+          class="bi bi-receipt"
+          style="font-size: 1.4em !important; color: white; padding-right: 15px"
+          fxFlexAlign="center"
+        ></span>
+        <span fxFlexAlign="center">Recipe</span>
       </button>
-      <button
+
+      <a
         mat-button
+       
         color="primary"
         [routerLink]="this.route.whatDoICookToday.url"
         (click)="sideNavToogle()"
+        class="button-container"
       >
-        {{ this.route.whatDoICookToday.name }}
-      </button>
+        <i
+          class="bi bi-egg-fill icon icon-rotate-animation"
+          fxFlexAlign="center"
+        ></i>
+        <span fxFlexAlign="center" class="button-text">{{
+          this.route.whatDoICookToday.name
+        }}</span>
+      </a>
+
       <button
         mat-button
+        class="button-container"
         color="primary"
         *ngIf="this.isUserAuth()"
         fxLayoutAlign="start center"
-        (click)='openCreateDialog()'
+        (click)="openCreateDialog()"
         (click)="sideNavToogle()"
       >
-        New Recipe
+        <i class="bi bi-plus-square-fill icon" fxFlexAlign="center"></i>
+        <span fxFlexAlign="center" class="button-text-not-relative"
+          >Cocinar Receta</span
+        >
       </button>
+
       <!--<button mat-button color="primary" [disabled]="!this.isUserAuth()" (click)="this.openSnackService()" fxFill>SnackBarTest</button>
                  -->
-      <button mat-button color="primary">Emit First Event</button>
+    </mat-nav-list>
 
-      <mat-divider></mat-divider>
+    <mat-nav-list
+      fxLayout="column"
+      style="width: 90%; margin: 0 auto; margin-bottom: 20px"
+    >
+      <div
+        fxLayout="column"
+        style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
+      >
+        <span>Usuario</span>
+        <span style="color: gray; font-size: 0.8em">
+          It's dangeroes to go alone, take this</span
+        >
+      </div>
 
-      <button mat-button *ngIf="isAdmin()" [routerLink]="this.route.nomenclature.url" color="primary" (click)="sideNavToogle()">{{this.route.nomenclature.name}}</button>
+      <button mat-button color="primary">Action</button>
+      <button mat-button color="primary">Action</button>
+    </mat-nav-list>
+
+    <mat-nav-list
+      fxLayout="column"
+      style="width: 90%; margin: 0 auto; margin-bottom: 20px"
+    >
+      <div
+        fxLayout="column"
+        style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
+      >
+        <span>Admin</span>
+        <span style="color: gray; font-size: 0.8em"> What can we do?</span>
+      </div>
+
+      <button
+        mat-button
+        *ngIf="isAdmin()"
+        [routerLink]="this.route.nomenclature.url"
+        color="primary"
+        (click)="sideNavToogle()"
+        class="button-container"
+      >
+      <i class="icon bi bi-puzzle" fxFlexAlign="center"></i>
+        <span class="button-text-not-relative" fxFlexAlign="center">{{ this.route.nomenclature.name }}</span>
+      </button>
       <button mat-button color="primary">Action</button>
       <button mat-button color="primary">Action</button>
     </mat-nav-list>

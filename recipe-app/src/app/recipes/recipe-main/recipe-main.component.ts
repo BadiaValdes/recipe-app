@@ -20,6 +20,9 @@ import {EventEmitterService} from '../../service/event-emitter.service'
 import { Subscriber, Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 
+// idle
+import {Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core'
+
 @Component({
   selector: 'app-recipe-main',
   templateUrl: './recipe-main.component.html',
@@ -42,8 +45,11 @@ export class RecipeMainComponent implements OnInit {
     private route : ActivatedRoute, // Routes Params Handler
     private _notificationSnackBarService : NotificationSnackBarService, // Snack service -> New way to call it
     private _eventEmitterTest: EventEmitterService, // Event emmiter service -> First one
-    private _userService : UserService // User Service API
-    ) { }
+    private _userService : UserService, // User Service API
+    private _idle : Idle,
+    ) { 
+     
+    }
 
   // Shows the first event data
   showEvent(p: string){
