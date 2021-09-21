@@ -19,7 +19,7 @@
       >
       <div
       class="img-thumb"
-      [ngStyle]="{'background': 'url('+recipe_detail.img+')','background-size':'cover'}"
+      [ngStyle]="{'background': 'url('+recipe_detail.img+')','background-size':'cover', 'background-position': 'center'}"
       >
 
       </div>
@@ -89,7 +89,7 @@
       ></app-recipe-steps>
     </div>
     <div
-      *ngIf="isAuth() && userID().id == recipe_detail.fk_user"
+      *ngIf="isAuth() && (userID().id == recipe_detail.fk_user || currentUserData().isAdmin())"
       style="
         position: absolute;
         bottom: 0px;

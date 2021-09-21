@@ -1,18 +1,19 @@
 <ngx-loading-bar [includeSpinner]="false" color="#17a2b8"></ngx-loading-bar>
 <div *ngIf="filters" fxLayoutAlign="center center" fxFlexFill style="padding-top: 10px;">
   <mat-form-field
+  appearance="standard"
     class="example-full-width"
     appearance="fill"
     fxFlexAlign="center"
-    style="width: 80%; background-color: white"
+    style="width: 80%; "
   >
     <mat-label>Nombre de receta</mat-label>
     <input
       #searchInput
       [(ngModel)]="searchText"
       type="text"
+      appInputHostListener
       (input)="search($event.target.value)"
-      (blur)="endSearch()"
       matInput
       placeholder="Arroz con frijoles"
       [matAutocomplete]="auto"
@@ -87,3 +88,7 @@
   >
   </app-recipe-card-item>
 </div>
+<app-card-mini-info [viewMode]='1' [recipeToShow]='recipes_list'></app-card-mini-info>
+
+
+<app-card-mini-info [viewMode]='2' [recipeToShow]='recipes_list'></app-card-mini-info>

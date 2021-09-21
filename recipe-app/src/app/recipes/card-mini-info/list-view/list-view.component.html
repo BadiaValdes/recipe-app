@@ -1,0 +1,99 @@
+<mat-form-field appearance="standard" style="width: 100%;">
+  <mat-label>Filter</mat-label>
+  <input matInput appInputHostListener (keyup)="applyFilter($event.target.value)" placeholder="Name or Category or Difficult" #input>
+</mat-form-field>
+<div class="mat-elevation-z8 table">
+    <table mat-table [dataSource]="dataSource" style="width: 100%" matSort multiTemplateDataRows>
+     
+
+      <ng-container matColumnDef="name" style="width: 10%">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category" style="width: 20%">
+        <th mat-header-cell *matHeaderCellDef >Categoria</th>
+        <td mat-cell *matCellDef="let element">{{ element.fk_category }}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="difficulty" style="width: 20%">
+        <th mat-header-cell *matHeaderCellDef >Dificultad</th>
+        <td mat-cell *matCellDef="let element">{{ element.fk_difficult }}</td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="action" style="width: 20%">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;">Action</th>
+        <td mat-cell *matCellDef="let element" style="text-align: center;">
+          <i matTooltip="Más info" (click)="navigateTo(element.slug)" style="z-index: 5;" matTooltipPosition="right" class="bi bi-eye-fill" fxFlexAlign="center"></i>
+
+        </td>
+      </ng-container>
+<!-- Head -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+    <!-- End Head -->
+    <!-- Body -->
+<!--       <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="element-row"
+      ></tr> -->
+
+      <tr *matRowDef="let row; columns: displayedColumns;"    
+      mat-row     
+      class="element-row example-element-row"      
+      (click)="expandedElement = expandedElement === row ? null : row"  
+      >
+</tr>
+      <!-- end body -->
+
+      <!-- Expand -->
+      
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+     
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail"  
+          *ngIf="element === expandedElement"        
+          [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div style="padding-bottom: 10px; padding-top: 10px;" fxLayout="row" fxLayout.lt-md="column">
+     
+            <img src={{element.img}} class="table-detail-image" fxFlexAlign="center" ngStyle.lt-md="width: 50%">
+            <div fxLayout="column" >
+              <mat-list>
+                <mat-list-item>Nombre: {{element.name}}</mat-list-item>
+                <mat-list-item>Categoria: {{element.fk_category}}</mat-list-item>
+                <mat-list-item>Dificultad: {{element.fk_difficult}}</mat-list-item>
+                <mat-list-item>Ingrediente Principal: {{mainIngredient(element.recipe_ingredient) | splitInterface:"-":0}}</mat-list-item>
+                <mat-list-item style="width: 90%; margin: 0 auto;" innerHTML={{element.description}}></mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+          
+  </div>
+        </td>
+      </ng-container>
+     <!-- END Expand -->
+
+     <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [@inOutAnimationFast] [attr.colspan]="displayedColumns.length">No data matching the filter "{{input.value}}"</td>
+    </tr>
+
+ 
+    </table>
+    
+      <mat-paginator
+        
+        [pageSizeOptions]="[5, 10, 25]"
+        #paginator
+        showFirstLastButtons
+      >
+      </mat-paginator>
+
+      
+
+    
+  </div>
+
+

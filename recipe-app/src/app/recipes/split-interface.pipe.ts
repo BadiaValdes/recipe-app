@@ -6,7 +6,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SplitInterfacePipe implements PipeTransform {
 
   transform(text: string, splitby: string, index: number): any {
-    let p = text.split(splitby)
+    console.log(text)
+    let p
+    if(Array.isArray(text))
+    {
+      p = text[0].split(splitby)
+    }
+    else
+    {
+      p = text.split(splitby)
+    }
+      
     return p[index]
   }
 

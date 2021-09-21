@@ -19,7 +19,7 @@
           >
             <mat-form-field appearance="fill" fxFlex="100%">
               <mat-label>Producto</mat-label>
-              <input type="text" #searchText placeholder="Selecciona un ingrediente" [matAutocomplete]="auto" matInput formControlName="product">
+              <input appInputHostListener type="text" #searchText placeholder="Selecciona un ingrediente" [matAutocomplete]="auto" matInput formControlName="product">
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayOnlyName">
                 <mat-option
                   #options                   

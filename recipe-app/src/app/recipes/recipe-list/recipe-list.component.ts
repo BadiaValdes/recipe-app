@@ -156,7 +156,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   search(event){
     // Here U can see the way of use a subject
     // First subscribe
-    this._hostListenerInUse.hostListenerInUseNextState(true)
+    //this._hostListenerInUse.hostListenerInUseNextState(true)
     if(this.recipe_names_observable.observers.length === 0){
       this.recipe_names_observable.pipe(
       ).subscribe(text => {

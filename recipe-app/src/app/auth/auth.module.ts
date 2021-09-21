@@ -15,11 +15,15 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 // FLEX
 import {FlexLayoutModule} from '@angular/flex-layout';
 
+// DirectiveModule
+import {DirectiveModule} from '../directive/directive.module'
+
 @NgModule({
   declarations: [
     LoginComponent,
     LogoutComponent,
-    SingupComponent
+    SingupComponent,
+   
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatInputModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    DirectiveModule,
     
   ]
 })

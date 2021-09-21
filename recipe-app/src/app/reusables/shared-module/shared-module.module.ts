@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import {LoadingEggComponent} from './loading-egg/loading-egg.component'
 
 
+
 @NgModule({
-  declarations: [LoadingEggComponent],
+  declarations: [LoadingEggComponent, ],
   imports: [
     CommonModule
   ],
-  exports: [LoadingEggComponent],
+  exports: [LoadingEggComponent, ],
 })
 export class SharedModuleModule { }

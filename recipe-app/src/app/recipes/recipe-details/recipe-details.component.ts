@@ -124,4 +124,9 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       return JSON.parse(this.userService.getLocalSotrage().getItem('user'))    
   }
 
+  // Get user service
+  currentUserData(){
+    return this.userService
+  }
+
 }

@@ -240,4 +240,11 @@ export class UserService {
     this.token_expires = new Date(token_decoded.exp * 1000);
     this.username = token_decoded.username;
   }
+
+  // is in group methods
+  isUserAdmin(){
+    if(this.isAuth()){
+      return this.userGroups().find((group:String) => group.toLocaleLowerCase() === 'admin')
+    }
+  }
 }

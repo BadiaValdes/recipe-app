@@ -20,7 +20,7 @@
             <div fxLayout="column">
           <mat-form-field appearance="fill">
               <mat-label for="recipe_name">Recipe name</mat-label>
-              <input  matInput maxlength={{this.formSetting.recipeFormCreation.recipeName.maxLength}} #recipeVT  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
+              <input  appInputHostListener matInput maxlength={{this.formSetting.recipeFormCreation.recipeName.maxLength}} #recipeVT  id="recipe_name" name="recipe_name" type="text" formControlName="recipe_name" required>           
               <!-- Template variable -->
               <mat-hint >{{recipeVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.recipeName.maxLength}}</mat-hint> 
               <mat-error *ngIf="recipe_name.invalid && (recipe_name.dirty || recipe_name.touched)&&recipe_name.errors?.required">Campo obligatorio</mat-error>
@@ -34,17 +34,17 @@
   
           <mat-form-field appearance="fill">
               <mat-label for="slug">Slug</mat-label>
-            <input  matInput  id="slug" type="text" [value]='recipe_name' formControlName="slug">
+            <input appInputHostListener  matInput  id="slug" type="text" [value]='recipe_name' formControlName="slug">
           </mat-form-field>
   
   
           <mat-form-field *ngIf="this.showImageField == true"  appearance="fill">
               <mat-label for="img">Image</mat-label>
-              <input   matInput  id="img" type="file" accept="image/*" formControlName="img" (dragover)="clearFile($event)" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
+              <input  appInputHostListener  matInput  id="img" type="file" accept="image/*" formControlName="img" (dragover)="clearFile($event)" (drop)="onFileSelect($event)" (change)="onFileSelect($event)">
           </mat-form-field>
    
           <mat-label for="description">Description</mat-label>
-          <angular-editor #textAreaDescriptionVT formControlName="description" [config]="this.editConfig"></angular-editor>
+          <angular-editor appInputHostListener #textAreaDescriptionVT formControlName="description" [config]="this.editConfig"></angular-editor>
           <mat-hint>{{this.recipeForm.get('description').value?.length || 0}}/{{this.formSetting.recipeFormCreation.description.maxLength}}</mat-hint>
           <mat-error *ngIf="this.recipeForm.get('description').value?.length < 1">Este campo debe estar lleno</mat-error>
            
@@ -88,7 +88,7 @@
   
             <mat-form-field appearance="fill">
               <label for="steps">Steps</label>
-              <textarea #textAreaStepsVT  matInput  id="steps" formControlName="steps" > </textarea>
+              <textarea #textAreaStepsVT appInputHostListener  matInput  id="steps" formControlName="steps" > </textarea>
               <mat-hint>{{textAreaStepsVT.value?.length || 0}}/{{this.formSetting.recipeFormCreation.steps.maxLength}}</mat-hint>
             </mat-form-field>
         </div>
@@ -115,7 +115,7 @@
   
           <mat-form-field appearance="fill" fxFlex="25%">
             <mat-label for="cantidad">Cantidad</mat-label>
-            <input  matInput  id="cantidad" type="number" formControlName="cantidad">
+            <input appInputHostListener matInput  id="cantidad" type="number" formControlName="cantidad">
         </mat-form-field>
         
           <mat-form-field appearance="fill" fxFlex="25%">

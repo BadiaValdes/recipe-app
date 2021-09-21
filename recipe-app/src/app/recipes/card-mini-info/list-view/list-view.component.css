@@ -1,0 +1,38 @@
+
+  .example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+
+  
+  .example-element-detail {
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: flex;
+  }
+  
+ .table-detail-image{
+   width: 20%;
+  position: relative;
+ }
+
+ .table-detail-image::after{
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 5;
+   height: 100%;
+   width: 100%;
+   background: red;
+ }
+

@@ -22,6 +22,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ItemsComponent } from './list/items/items.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+// Directive module
+import {DirectiveModule} from '../directive/directive.module'
 @NgModule({
   declarations: [
     ListComponent,
@@ -44,6 +47,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    DirectiveModule,
   ]
 })
 export class NomencladoresModule { }

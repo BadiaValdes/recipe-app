@@ -30,16 +30,21 @@
 
 @keyframes eggRotation {
     0% {
-        transform: rotateZ(0);       
+        transform: rotateZ(0);   
+   
     }
 
-    50%{transform: rotateZ(10deg);  }
+    35%{transform: rotateZ(10deg);  }
 
 
-    100% {
+    70% {
         transform: rotateZ(-10deg); 
       
     }
+
+    100% {
+      transform: rotateZ(0);       
+  }
     
   }
 

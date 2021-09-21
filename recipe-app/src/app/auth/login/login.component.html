@@ -10,11 +10,15 @@
                 <p fxFlexAlign="center" class="login_text">Log In</p>
                 <mat-form-field  appearance="fill">
                     <mat-label>UserName</mat-label>
-                    <input matInput [(ngModel)]="user.username">          
+                    <input matInput 
+                    appInputHostListener
+                    [(ngModel)]="user.username">          
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password"[(ngModel)]="user.password">
+                    <input matInput type="password"
+                    appInputHostListener
+                    [(ngModel)]="user.password">
                 </mat-form-field>
                 <button mat-button color="primary" (click)="login()">Login</button>
             </div>

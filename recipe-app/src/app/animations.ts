@@ -106,6 +106,7 @@ export const inOutAnimation =
     export const heightAnimation = trigger(
       'heightAnimation',
       [
+        
         transition(":enter",
         [style({height: 0}),
           animate('1.5s ease-out', style({height: '*'}))
@@ -114,6 +115,22 @@ export const inOutAnimation =
         transition(":leave",
         [style({height: '*'}),
           animate('1.5s ease-out', style({height: 0}))
+        ])
+      
+      ]
+    )
+
+    export const scaleCenter = trigger(
+      'scaleCenter',
+      [
+        transition(":enter",
+        [style({transform: 'scale(0)' }),
+          animate('1s ease-out', style({transform: 'scale(*)'}))
+        ]
+        ),
+        transition(":leave",
+        [style({transform: 'scale(*)'}),
+          animate('1s ease-out', style({transform: 'scale(0)'}))
         ])
       
       ]

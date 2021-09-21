@@ -72,8 +72,15 @@ import { SearchFilterPipe } from './search-filter.pipe';
 // Idle
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive'
 
-// Shared module
-import {SharedModuleModule} from '../reusables/shared-module/shared-module.module'
+// DirectiveModule
+import {DirectiveModule} from '../directive/directive.module';
+import { CardMiniInfoComponent } from './card-mini-info/card-mini-info.component';
+import { ListViewComponent } from './card-mini-info/list-view/list-view.component';
+import { MiniCardViewComponent } from './card-mini-info/mini-card-view/mini-card-view.component'
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [
@@ -95,6 +102,9 @@ import {SharedModuleModule} from '../reusables/shared-module/shared-module.modul
     RecipeCookFilterComponent,
     CookFormComponent,
     RecipeResultComponent,
+    CardMiniInfoComponent,
+    ListViewComponent,
+    MiniCardViewComponent,
     
    
 
@@ -129,7 +139,10 @@ import {SharedModuleModule} from '../reusables/shared-module/shared-module.modul
     LoadingBarHttpClientModule,
     MatAutocompleteModule,
     MatSliderModule,
-    SharedModuleModule,
+    DirectiveModule,  
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     
    
   ]
