@@ -1,6 +1,6 @@
 
     <app-list-view *ngIf='viewMode == 1 && recipeToShow' [recipes]='recipeToShow'></app-list-view>
-    <app-mini-card-view *ngIf='viewMode == 2 && recipeToShow' [recipes]='recipeToShow'></app-mini-card-view>
+    <app-mini-card-view *ngIf='viewMode == 2 && recipeToShow' [recipes]='recipeToShow' [filters]='showFilterInMiniCardView'></app-mini-card-view>
     <div *ngIf='viewMode != 1 && viewMode != 2 '>
         Wrong Input
     </div>

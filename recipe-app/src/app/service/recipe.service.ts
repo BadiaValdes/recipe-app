@@ -57,6 +57,16 @@ export class RecipeService {
     );
   }
 
+  getUserRecipe(userid : string) : Observable<Recipe[]>{
+
+    let httpOptions = this.getHttpOpeion()
+
+    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/getAll/${userid}`).pipe(
+      catchError(this.handleError<Recipe[]>('getRecipe', []))
+    );
+  }
+
+
   existRecipe(name: string){
     let httpOptions = this.getHttpOpeion()
     let find : boolean = false;
@@ -152,7 +162,7 @@ export class RecipeService {
   getRecipeDitails(id:number | string) :  Observable<Recipe>{
     let httpOptions = this.getHttpOpeion()
 
-    return this.http.get<Recipe>(`${this.recipeURL}recipe/${id}`, ).pipe(
+    return this.http.get<Recipe>(`${this.recipeURL}recipe/detail/${id}`, ).pipe(
       catchError(this.handleError<Recipe>('getRecipe')))
   }
 

@@ -10,6 +10,7 @@ export class CardMiniInfoComponent implements OnInit {
 
   @Input() viewMode : number;
   @Input() recipeToShow : Recipe;
+  @Input() showFilterInMiniCardView? : boolean = false;
 
   constructor() { }
 

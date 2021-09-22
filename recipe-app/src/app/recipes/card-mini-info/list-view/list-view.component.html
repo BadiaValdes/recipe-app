@@ -1,6 +1,16 @@
 <mat-form-field appearance="standard" style="width: 100%;">
   <mat-label>Filter</mat-label>
   <input matInput appInputHostListener (keyup)="applyFilter($event.target.value)" placeholder="Name or Category or Difficult" #input>
+  <button
+  *ngIf="input.value != ''"
+  matSuffix
+  mat-icon-button
+  aria-label="Clear"
+  (click)="this.dataSource.filter = '';"
+  (click)="input.value = ''"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
 </mat-form-field>
 <div class="mat-elevation-z8 table">
     <table mat-table [dataSource]="dataSource" style="width: 100%" matSort multiTemplateDataRows>

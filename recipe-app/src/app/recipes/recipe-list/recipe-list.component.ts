@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {RecipeInstantDetailsComponent} from '../recipe-instant-details/recipe-instant-details.component'
 
 // animation 
-import {inOutAnimation, inOutAnimationFast} from '../../animations'
+import {inOutAnimation, inOutAnimationFast, inOutAnimationFast2} from '../../animations'
 import { HostListenerInUseService } from 'src/app/service/host-listener-in-use.service';
 
 // debounce
@@ -26,7 +26,7 @@ import { HostListenerInUseService } from 'src/app/service/host-listener-in-use.s
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
-  animations: [inOutAnimation, inOutAnimationFast]
+  animations: [inOutAnimation, inOutAnimationFast, inOutAnimationFast2]
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
 
@@ -59,6 +59,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipe_names_observable :  Subject<string> = new Subject<string>(); 
   // The subject works like and observable but only shows the last value if U subscribe after the next() call
 
+  // View type
+  viewType : number = 0;
+  //
   constructor(private rs : RecipeService, // recipe handle
     private route : ActivatedRoute, // Routes handle
     private _router : Router,

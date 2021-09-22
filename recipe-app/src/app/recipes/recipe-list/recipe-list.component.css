@@ -14,3 +14,7 @@
    /*change color of underline when focused*/
    background-color: rga(63, 81, 181) !important;;
   }
+
+.icon-view:hover{
+    filter: drop-shadow(0 0 5px rgb(129, 161, 193));
+}

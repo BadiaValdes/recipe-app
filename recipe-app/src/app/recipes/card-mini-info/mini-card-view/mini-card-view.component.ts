@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from 'src/app/interfaces/recipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mini-card-view',
@@ -9,10 +10,19 @@ import { Recipe } from 'src/app/interfaces/recipe';
 export class MiniCardViewComponent implements OnInit {
 
   @Input() recipes: Recipe[];
+  @Input() filters: boolean = false;
 
-  constructor() { }
+  searchFilterText : string = "";
+
+  constructor(
+    private _router : Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openDetailRoute(slug){
+    this._router.navigateByUrl('recipe/'+slug);
   }
 
 }

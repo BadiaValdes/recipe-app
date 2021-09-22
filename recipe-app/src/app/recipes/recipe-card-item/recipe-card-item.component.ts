@@ -18,6 +18,7 @@ export class RecipeCardItemComponent implements OnInit {
   @Input() recip: Recipe;
 
   mauseOver = false;
+  searchText : string = "";
 
   constructor(private _dialogComponent : MatDialog,) { }
 
