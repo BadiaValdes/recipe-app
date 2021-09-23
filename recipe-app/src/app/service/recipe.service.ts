@@ -166,6 +166,11 @@ export class RecipeService {
       catchError(this.handleError<Recipe>('getRecipe')))
   }
 
+  getUserRecipes(id:string):  Observable<Recipe[]>{
+    return this.http.get<Recipe[]>(`${this.recipeURL}recipe/`, {params: {search: id}}).pipe(
+      catchError(this.handleError<Recipe[]>('getRecipe')))
+  }
+
   getRecipeDitailsJSON(id:number | string) :  Observable<Recipe>{
     let httpOptions = this.getHttpOpeion()
 

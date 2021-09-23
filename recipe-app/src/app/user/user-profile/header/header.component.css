@@ -1,0 +1,12 @@
+.img-thumb{
+    
+    
+    -webkit-box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
+    -moz-box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
+    box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
+}
+
+.border{
+    border-bottom-style: solid;
+
+}

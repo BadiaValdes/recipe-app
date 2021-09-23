@@ -1,0 +1,108 @@
+<div class="dropShadow">
+  <div class="backgroundClipath"></div>
+
+  <div>
+    <!-- First Part -->
+    <h2 class="underline title-decorator">Personal Data:</h2>
+    <div fxLayout="column" class="user-data">
+      <p >
+        <span class="text-decorator">Username:</span> 
+        {{ userData.user_name }}
+      </p>           
+      <p >
+        <span class="text-decorator">Full Name:</span> 
+        {{ userData.first_name }} {{userData.last_name}}
+      </p>     
+      <p >
+        <span class="text-decorator">Email:</span> 
+        {{ userData.mail }}
+      </p>
+      
+    </div>
+<!-- Second part -->
+    <h2 class="underline title-decorator">Site Data:</h2>
+    <div fxLayout="column" class="user-data">
+      <p >
+        <span class="text-decorator">Nivel:</span> 
+        <ng-container *ngIf="userData.is_staff">
+          Administrador
+        </ng-container>
+        <ng-container *ngIf="!userData.is_staff">
+          Usuario
+        </ng-container>
+      </p>           
+      <p >
+        <span class="text-decorator">Account Status:</span> 
+        <ng-container *ngIf="userData.is_active">
+          Activada
+        </ng-container>
+        <ng-container *ngIf="!userData.is_active">
+          No Activada
+        </ng-container>
+      </p>     
+      <p >
+        <span class="text-decorator">Cantidad de recetas creadas:</span> 
+         {{userRecipe}}
+      </p>
+      
+    </div>
+    <!-- Third part -->
+    <h2 class="underline title-decorator">Site Data:</h2>
+    <div fxLayout="column" class="user-data">
+      <p >
+        <span class="text-decorator">Nivel:</span> 
+        <ng-container *ngIf="userData.is_staff">
+          Administrador
+        </ng-container>
+        <ng-container *ngIf="!userData.is_staff">
+          Usuario
+        </ng-container>
+      </p>           
+      <p >
+        <span class="text-decorator">Account Status:</span> 
+        <ng-container *ngIf="userData.is_active">
+          Activada
+        </ng-container>
+        <ng-container *ngIf="!userData.is_active">
+          No Activada
+        </ng-container>
+      </p>     
+      <p >
+        <span class="text-decorator">Cantidad de recetas creadas:</span> 
+         {{userRecipe}}
+      </p>
+      
+    </div>
+    <!-- 
+    <h1 class="underline">Site Data:</h1>
+    <mat-list>
+        <mat-list-item>
+            <ng-container *ngIf="userData.is_staff"
+              >Nivel: administrator</ng-container
+            >
+            <ng-container *ngIf="!userData.is_staff">Nivel: user</ng-container>
+          </mat-list-item>
+          <mat-list-item>
+            <ng-container *ngIf="userData.is_staff"
+              >Account Status: Activada</ng-container
+            >
+            <ng-container *ngIf="!userData.is_staff"
+              >Account Status: : No activada</ng-container
+            >
+          </mat-list-item>
+          <mat-list-item>
+              Cantidad de recetas creadas: {{userRecipe}}
+          </mat-list-item>
+        </mat-list>
+
+    <h1 class="underline">Configuración:</h1>
+    
+
+  </div>
+ -->
+    <mat-divider></mat-divider>
+    <div dir="rtl">
+      <p fxFlex="50%">Last Login: {{ userData.last_login }}</p>
+    </div>
+  </div>
+</div>

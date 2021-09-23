@@ -1,1 +1,28 @@
-<p>user-profile works!</p>
+<div style="min-height: 93vh;">
+  <ng-container *ngIf="userData">
+    <app-header
+      class="border-header"
+      [border]="true"
+      [borderStroke]="10"
+      color="#0099ff"
+      [backgroundImage]="userData.background_image"
+    ></app-header>
+    <div style="position: relative; width: 50%; margin: 0 auto">
+      <app-avatar-image
+        class="absolute"
+        [border]="true"
+        [borderStroke]="10"
+        color="#0099ff"
+        [dropShadow]="true"
+        [avatar]="userData.avatar"
+        [height]="150"
+        [width]="150"
+      ></app-avatar-image>
+    </div>
+  </ng-container>
+  <ng-container>
+      <app-user-data [userData]="userData">
+
+      </app-user-data>
+  </ng-container>
+</div>

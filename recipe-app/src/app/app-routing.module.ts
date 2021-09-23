@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin-panel.module').then(m => m.AdminPanelModule),
   },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+  },
   { path: '',   redirectTo: '/recipe', pathMatch: 'full' },
   {path: '404', component: PageNotFoundComponent },
   {path: '**', redirectTo: '/404' },

@@ -6,57 +6,88 @@
   fxLayoutGap="10px"
   fxLayout.xs="column"
   fxLayoutAlign="center"
-  style="padding-top: 15px; padding-bottom: 20px; position: relative;"
+  style="padding-top: 15px; padding-bottom: 20px; position: relative"
 >
-  <div fxLayout="row" fxLayoutAlign="center center" >
-    <a mat-icon-button [disabled]='viewType==0' style="font-size: 1.5em;" (click)="viewType = 0" class="bi bi-grid-3x3-gap icon-view"></a>
-    <a mat-icon-button [disabled]='viewType==1' style="font-size: 1.5em;" (click)="viewType = 1" class="bi bi-table icon-view"></a>
-    <a mat-icon-button [disabled]='viewType==2' style="font-size: 1.5em;" (click)="viewType = 2" class="bi bi-view-stacked icon-view"></a>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <a
+      mat-icon-button
+      [disabled]="viewType == 0"
+      #tooltip="matTooltip"
+      matTooltip="Grid View"
+      matTooltipPosition="below"
+      matTooltipHideDelay="100"
+      style="font-size: 1.5em"
+      (click)="viewType = 0"
+      class="bi bi-grid-3x3-gap icon-view"
+    ></a>
+    <a
+      mat-icon-button
+      #tooltip="matTooltip"
+      matTooltip="Table View"
+      matTooltipPosition="below"
+      matTooltipHideDelay="100"
+      matTooltipClass="tooltip"
+      [disabled]="viewType == 1"
+      style="font-size: 1.5em"
+      (click)="viewType = 1"
+      class="bi bi-table icon-view"
+    ></a>
+    <a
+      mat-icon-button
+      #tooltip="matTooltip"
+      matTooltip="Resume View"
+      matTooltipPosition="below"
+      matTooltipHideDelay="100"
+      [disabled]="viewType == 2"
+      style="font-size: 1.5em"
+      (click)="viewType = 2"
+      class="bi bi-view-stacked icon-view"
+    ></a>
   </div>
-  <ng-container *ngIf="viewType == 0" style="position: absolute; z-index: 1;">
-  <div
-    *ngIf="filters && viewType == 0"
-    fxLayoutAlign="center center"
-    fxFlexFill
-    style="padding-top: 10px"
-  >
-    <mat-form-field
-      appearance="standard"
-      class="example-full-width"
-      appearance="fill"
-      fxFlexAlign="center"
-      style="width: 80%"
+  <ng-container *ngIf="viewType == 0" style="position: absolute; z-index: 1">
+    <div
+      *ngIf="filters && viewType == 0"
+      fxLayoutAlign="center center"
+      fxFlexFill
+      style="padding-top: 10px"
     >
-      <mat-label>Nombre de receta</mat-label>
-      <input
-        #searchInput
-        [(ngModel)]="searchText"
-        type="text"
-        appInputHostListener
-        (input)="search($event.target.value)"
-        matInput
-        placeholder="Arroz con frijoles"
-        [matAutocomplete]="auto"
-      />
-      <button
-        *ngIf="searchText"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="searchText = ''"
+      <mat-form-field
+        appearance="standard"
+        class="example-full-width"
+        appearance="fill"
+        fxFlexAlign="center"
+        style="width: 80%"
       >
-        <i class="bi bi-x-lg"></i>
-      </button>
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of recipe_names" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-  <!-- If whe use an observable for iteration we need to put the | async PIPE -->
-  <!--| searchFilter: searchText-->
-  <!--   <mat-card
+        <mat-label>Nombre de receta</mat-label>
+        <input
+          #searchInput
+          [(ngModel)]="searchText"
+          type="text"
+          appInputHostListener
+          (input)="search($event.target.value)"
+          matInput
+          placeholder="Arroz con frijoles"
+          [matAutocomplete]="auto"
+        />
+        <button
+          *ngIf="searchText"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="searchText = ''"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of recipe_names" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <!-- If whe use an observable for iteration we need to put the | async PIPE -->
+    <!--| searchFilter: searchText-->
+    <!--   <mat-card
     *ngFor="let recip of recipes_list | searchFilter: searchText"
     [@inOutAnimation]
     fxFlex="20%"
@@ -91,37 +122,34 @@
     <app-recipe-card-item
       class="pd-b"
       *ngFor="let recip of recipes_list | searchFilter: searchText"
-      
-    fxFlex="20%"
-    fxFlex.md="30%"
-    fxFlex.sm="40%"
-    fxFlex.lt-sm="100%"
-    fxFlex.xs="100%"
+      fxFlex="20%"
+      fxFlex.md="30%"
+      fxFlex.sm="40%"
+      fxFlex.lt-sm="100%"
+      fxFlex.xs="100%"
       [recip]="recip"
       [@inOutAnimationFast2]
     >
     </app-recipe-card-item>
   </ng-container>
 
-  <ng-container   >
+  <ng-container>
     <app-card-mini-info
-    style="z-index: 2;"
+      style="z-index: 2"
       *ngIf="viewType == 2"
       [viewMode]="2"
       [recipeToShow]="recipes_list"
       [@inOutAnimationFast2]
     ></app-card-mini-info>
   </ng-container>
-  
-<ng-container style="position: absolute; z-index: 2;" >
-  <app-card-mini-info
-    *ngIf="viewType == 1"
-    [viewMode]="1"
-    [recipeToShow]="recipes_list"
-    fxFlex="100"
-    [@inOutAnimationFast2]
-  ></app-card-mini-info>
-</ng-container>
 
-
+  <ng-container style="position: absolute; z-index: 2">
+    <app-card-mini-info
+      *ngIf="viewType == 1"
+      [viewMode]="1"
+      [recipeToShow]="recipes_list"
+      fxFlex="100"
+      [@inOutAnimationFast2]
+    ></app-card-mini-info>
+  </ng-container>
 </div>

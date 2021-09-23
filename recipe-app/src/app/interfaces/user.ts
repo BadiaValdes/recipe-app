@@ -7,5 +7,8 @@ export interface User {
     mail: string,
     date_joined : string,
     avatar: string,
+    background_image: string,
     groups: string [],
+    is_staff: boolean,
+    is_active: boolean,
 }

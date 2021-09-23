@@ -210,9 +210,12 @@ export class UserService {
           JSON.stringify({
             id: data['id'],
             last_login: data['last_login'],
+            background_image: data['background_image'],
             user_name: data['username'],
             first_name: data['first_name'],
             last_name: data['last_name'],
+            is_staff: data['is_staff'],
+            is_active: data['is_active'],
             mail: data['email'],
             date_joined: data['date_joined'],
             avatar: data['avatar'],

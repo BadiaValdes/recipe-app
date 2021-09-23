@@ -1,0 +1,63 @@
+.dropShadow {
+    position: relative;
+  width: 50%;
+  margin: 0 auto;
+  padding: 15px;
+  padding-top: 30px; 
+  margin-top: 50px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  z-index: -2;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+  transition: all ease 0.5s;
+}
+
+@media screen and (max-width: 640px){
+    .dropShadow {
+        width: 80%;
+    }
+}
+
+/* .backgroundClipath
+{
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    width: 150px;
+    height: 70px;
+    border-radius: 0 0 200px 200px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+     
+} */
+
+.underline{
+    position: relative;
+}
+
+.underline::after{
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.title-decorator{
+    color: rgb(50, 102, 165);
+}
+
+.text-decorator{
+    color: rgb(71, 114, 167);
+    font-weight: bold;
+}
+
+.user-data{
+    padding-left: 15px;
+}

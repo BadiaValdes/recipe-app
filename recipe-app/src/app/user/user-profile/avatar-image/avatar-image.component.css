@@ -1,0 +1,13 @@
+.avatar{
+    border-radius: 60%;
+    
+}
+
+.border{
+    border-style: solid;
+}
+
+.dropShadow{
+    filter: drop-shadow(0 0 5px black);
+}
+

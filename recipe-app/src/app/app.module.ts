@@ -53,6 +53,7 @@ import {AdminPanelModule} from './admin/admin-panel.module'
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive'
 import {NgIdleModule} from '@ng-idle/core';
 import { CommonModule } from '@angular/common';
+import { UserModule } from './user/user.module';
 
 
 
@@ -99,6 +100,7 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
     MatDialogModule,
     MatSidenavModule,
+    UserModule,
     
     
     

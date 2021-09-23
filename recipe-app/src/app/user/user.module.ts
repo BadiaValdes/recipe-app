@@ -7,6 +7,10 @@ import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 import { UserProfileUpdateComponent } from './user-profile-update/user-profile-update.component';
 import { UserRecipesComponent } from './user-recipes/user-recipes.component';
 import { UserPasswordChangeComponent } from './user-password-change/user-password-change.component';
+import { UserDataComponent } from './user-profile/user-data/user-data.component';
+import { AvatarImageComponent } from './user-profile/avatar-image/avatar-image.component';
+import { HeaderComponent } from './user-profile/header/header.component';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -15,11 +19,16 @@ import { UserPasswordChangeComponent } from './user-password-change/user-passwor
     UserAvatarComponent,
     UserProfileUpdateComponent,
     UserRecipesComponent,
-    UserPasswordChangeComponent
+    UserPasswordChangeComponent,
+    UserDataComponent,
+    AvatarImageComponent,
+    HeaderComponent
   ],
+  exports:[AvatarImageComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MatListModule,
   ]
 })
 export class UserModule { }
