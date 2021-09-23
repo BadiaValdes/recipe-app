@@ -41,8 +41,12 @@
                 >Este ingrediente existe</mat-error
               >  -->
               <mat-error
-                *ngIf="(ingredient.get('product').dirty || ingredient.get('product').untouched) && ingredient.get('product').errors?.repeated && ingredient.get('product').invalid"
+                *ngIf="(ingredient.get('product').dirty || ingredient.get('product').untouched ||  ingredient.get('product').valueChanges) && ingredient.get('product').errors?.repeated && ingredient.get('product').invalid"
                 >Este ingrediente existe</mat-error
+              >
+              <mat-error
+                *ngIf="(ingredient.get('product').dirty || ingredient.get('product').untouched ||  ingredient.get('product').valueChanges) && ingredient.get('product').errors?.notAnElement"
+                >Debe "Seleccionar" una opción valida</mat-error
               >
               
             </mat-form-field>      
@@ -53,15 +57,14 @@
       </form>
       <button
         mat-button
-        [disabled]="ingredientProductCounter == 7"
-        [disabled]="this.ingredient_form.get('ingredients').status === 'INVALID'"
+        [disabled]="ingredientProductCounter == 7 || this.ingredient_form.get('ingredients').status === 'INVALID'"
         (click)="adicionarIngrediente() && $event.preventDefault()"
       >
         Adicionar Ingrediente
       </button>
 
-      <button mat-button matStepperNext [disabled]="ingredientProductCounter < 1" [disabled]="this.ingredient_form.get('ingredients').status === 'INVALID'">Next</button>
-     
+      <button mat-button matStepperNext [disabled]="this.ingredient_form.get('ingredients').status === 'INVALID' || ingredientProductCounter == 0">Next</button>
+     {{ingredientProductCounter}}
     </ng-template>
   </mat-step>
   <!-- [stepControl]="difficulty_form" -->

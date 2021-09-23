@@ -28,6 +28,7 @@ import { Observable } from 'rxjs';
 
 // Stepper Options
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper' // Import the CDK
+import { Product } from 'src/app/interfaces/product';
 
 @Component({
   selector: 'app-cook-form',
@@ -115,6 +116,21 @@ export class CookFormComponent implements OnInit, AfterViewInit {
         return isItRepeated && control ? {repeated : {value:'true'}} : null ;
       }
     }
+
+    avaliableIngredient(): ValidatorFn {
+      return (control: AbstractControl) => {
+          let inList;
+           
+          if(this.products != undefined)
+            inList = this.products.find(data => {
+              return   data === control.value
+            }
+              
+            )    
+          
+          return inList == null ? {notAnElement : {value:'true'}} : null ;
+        }
+      }
   
 
   // Find repeating ingredients
@@ -145,7 +161,7 @@ export class CookFormComponent implements OnInit, AfterViewInit {
     this.ingredientProductCounter ++;
     return this.formB.group({
       product: new FormControl(null, {
-        validators: [ this.noRepeatIngredient()],
+        validators: [ this.noRepeatIngredient(), this.avaliableIngredient()],
 
       }),
     });
