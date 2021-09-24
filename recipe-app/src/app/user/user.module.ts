@@ -11,6 +11,9 @@ import { UserDataComponent } from './user-profile/user-data/user-data.component'
 import { AvatarImageComponent } from './user-profile/avatar-image/avatar-image.component';
 import { HeaderComponent } from './user-profile/header/header.component';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PipeModule } from '../pipe/pipe.module';
 
 
 @NgModule({
@@ -22,13 +25,17 @@ import { MatListModule } from '@angular/material/list';
     UserPasswordChangeComponent,
     UserDataComponent,
     AvatarImageComponent,
-    HeaderComponent
+    HeaderComponent,
+
   ],
   exports:[AvatarImageComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     MatListModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    PipeModule,
   ]
 })
 export class UserModule { }

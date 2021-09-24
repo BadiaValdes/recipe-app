@@ -1,6 +1,6 @@
 .avatar{
     border-radius: 60%;
-    
+    z-index: 5;
 }
 
 .border{
