@@ -1,1 +1,19 @@
-<p>user-avatar works!</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <img
+    src="{{ imageToShow }}"
+    *ngIf="imageToShow"
+    width="200px"
+    height="200px"
+    style="border-radius: 50px;"
+  />
+  <input    
+    matInput
+    id="img"
+    type="file"
+    accept="image/*"
+    (dragover)="clearFile($event)"
+    (drop)="onFileSelect($event)"
+    (change)="onFileSelect($event)"
+  />
+  <button mat-button color="primary" [disabled]="!this.imageData" (click)="updateImage()">Primary</button>
+</div>

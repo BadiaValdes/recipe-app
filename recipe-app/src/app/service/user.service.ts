@@ -42,6 +42,8 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
+  
+
 
 
   constructor(
@@ -94,7 +96,7 @@ export class UserService {
             reject(msg);
            
           }
-        ).then(_ => this.isAut=true)
+        ).catch(e => {console.log(e)}).then(_ => this.isAut=true)
     });
     return promise;
     

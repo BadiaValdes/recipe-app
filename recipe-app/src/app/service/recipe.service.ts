@@ -110,8 +110,6 @@ export class RecipeService {
       }), 
       
     }
-    console.log("AUI")
-    console.log(data.get('fk_category'))
     return this.http.post<any>(`${this.recipeURL}recipe/`, 
     //JSON.stringify(data), 
     data)
