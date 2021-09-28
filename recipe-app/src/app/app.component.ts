@@ -129,6 +129,9 @@ export class AppComponent implements OnDestroy {
                 this.openCreateDialog();
                 this._hostListenerInUse.hostListenerInUseNextState(true);
               }
+             else if (event.key === 'p') {
+              this._router.navigateByUrl(this.route.user.url);
+            }
               this.closeOpenSideNav();
             }
           }

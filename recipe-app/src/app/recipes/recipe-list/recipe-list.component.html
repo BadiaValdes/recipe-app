@@ -78,6 +78,15 @@
         >
           <i class="bi bi-x-lg"></i>
         </button>
+        <button
+        *ngIf="searchByUser"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear User Search"
+        (click)="reloadData()"
+      >
+        <i class="bi bi-person-x-fill" style="font-size: 1.2em ;"></i>
+      </button>
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option *ngFor="let option of recipe_names" [value]="option">
             {{ option }}

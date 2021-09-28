@@ -1,12 +1,14 @@
-.img-thumb{
-    
-    
-    -webkit-box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
-    -moz-box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
-    box-shadow: inset 11px -41px 135px 4px rgba(0,0,0,0.86);
+.img-thumb {
+  -webkit-box-shadow: inset 11px -41px 135px 4px rgba(34, 34, 34, 0.86);
+  -moz-box-shadow: inset 11px -41px 135px 4px rgba(34, 34, 34, 0.86);
+  box-shadow: inset 11px -41px 135px 4px rgba(34, 34, 34, 0.86);
 }
 
-.border{
-    border-bottom-style: solid;
+.border {
+  border-bottom-style: solid;
+}
 
+.parallax {
+  background-size: "cover";
+  background-position: "center";
 }

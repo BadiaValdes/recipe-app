@@ -7,5 +7,9 @@ export const routes = {
     nomenclature: {
         url: '/nomencladores',
         name: 'Nomencladores'
+    },
+    user: {
+        url: '/user',
+        name: 'Profile'
     }
 }

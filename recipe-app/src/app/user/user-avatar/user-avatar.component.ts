@@ -53,11 +53,19 @@ export class UserAvatarComponent implements OnInit {
       }}
       //this.recipeForm.get('img').setValue(event.target.files[0]);
     
-    updateImage(){     
+    updateImage(){   
+        console.log(this.data.type)  
         const form = new FormData();
-        form.set('avatar',this.imageData)
-        console.log(form.get('avatar'))
-        this._user.updateUserAvatar(this.data,form);      
+        if(this.data.type == 1){
+          form.set('avatar',this.imageData)      
+          this._user.updateUserAvatar(this.data.user,form);   
+        }
+        else if (this.data.type == 2)
+        {
+          form.set('background_image',this.imageData)     
+          this._user.updateUserBackground(this.data.user,form);   
+        }
+        
     }
 
 }

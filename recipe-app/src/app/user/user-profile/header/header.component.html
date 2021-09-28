@@ -1,6 +1,14 @@
 <div
-
-      [ngClass]="{'border' : border, 'img-thumb' : true}" 
-      [ngStyle]="{'background': 'url('+backgroundImage+')','background-size':'cover', 'background-attachment': 'fixed', 'background-position': 'center', 'width':'100%', 'height':'300px', 'border-color': color, ' border-width': borderStroke+'px'}"
-      >
-</div>
+      *ngIf="backgroundImage"
+  [ngStyle]="{
+    'background': 'url(' + backgroundImage + ')',
+    'background-size':'cover',
+    'background-position': 'center',
+    'background-attachment': 'fixed',     
+    'width': '100%',
+    'height': '300px',
+    'border-color': color,
+    'border-width': borderStroke + 'px'
+  }"
+  [ngClass]="{ border: border, 'img-thumb': true}"
+></div>

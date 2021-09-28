@@ -19,8 +19,8 @@
         fxLayout="column"
         style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
       >
-        <span>Recipe </span>
-        <span style="color: gray; font-size: 0.8em"> Opciones generales</span>
+        <span class="main_Name">Recipe </span>
+        <span class="second_Name"> Opciones generales</span>
       </div>
 
       <button
@@ -33,10 +33,10 @@
       >
         <span
           class="bi bi-receipt"
-          style="font-size: 1.4em !important; color: white; padding-right: 15px"
+          style="font-size: 1.4em !important; color: white;"
           fxFlexAlign="center"
         ></span>
-        <span fxFlexAlign="center">Recipe</span>
+        <span fxFlexAlign="center" class="button-text-not-relative">Recipe</span>
       </button>
 
       <a
@@ -83,13 +83,29 @@
         fxLayout="column"
         style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
       >
-        <span>Usuario</span>
-        <span style="color: gray; font-size: 0.8em">
+        <span class="main_Name">Usuario</span>
+        <span class="second_Name">
           It's dangeroes to go alone, take this</span
         >
       </div>
 
-      <button mat-button color="primary">Action</button>
+      <button
+      style="text-align: left"
+      mat-button
+      fxLayout="row"
+      color="primary"
+      [routerLink]="this.route.user.url"
+      (click)="sideNavToogle()"
+    >
+      <span
+        class="bi bi-person-circle"
+        style="font-size: 1.4em !important; color: white;"
+        fxFlexAlign="center"
+      ></span>
+      <span fxFlexAlign="center" class="button-text-not-relative">{{
+        this.route.user.name
+      }}</span>
+    </button>
       <button mat-button color="primary">Action</button>
     </mat-nav-list>
 
@@ -101,8 +117,8 @@
         fxLayout="column"
         style="font-size: 0.9em; margin-bottom: 10px; margin-top: 10px"
       >
-        <span>Admin</span>
-        <span style="color: gray; font-size: 0.8em"> What can we do?</span>
+        <span class="main_Name">Admin</span>
+        <span class="second_Name"> What can we do?</span>
       </div>
 
       <button

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+// RXjs
 import {
   BehaviorSubject,
   Observable,
@@ -8,6 +10,7 @@ import {
   ObservedValueOf,
   Subject,
 } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 
 // Base URL
 import { environment } from '../../environments/environment';
@@ -20,8 +23,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 // Dialog - Component
 import { UserAvatarComponent } from '../user/user-avatar/user-avatar.component'; // User AVATAR
-import { take, map } from 'rxjs/operators';
+import { UserPasswordChangeComponent } from '../user/user-password-change/user-password-change.component'; // User Password
+
+// User service
 import { UserService } from './user.service';
+import { Recipe } from '../interfaces/recipe';
 
 @Injectable({
   providedIn: 'root',
@@ -44,12 +50,12 @@ export class UserPageService {
   }
 
   searchForUser(data) {
-    return this.http.get(`${environment.baseImgURL}/users/`, {
+    return this.http.get<Recipe[]>(`${environment.baseImgURL}/api/recipe/`, {
       params: { search: data },
     });
   }
 
-  // POST
+  // PATCH
   updateUserAvatar(userID: string, data) {
     return this.http.patch<any>(
       `${environment.baseImgURL}/user/change_avatar/${userID}`,
@@ -67,7 +73,12 @@ export class UserPageService {
     return this.http.patch<any>(
       `${environment.baseImgURL}/user/change_background/${userID}`,
       data
-    );
+    ).toPromise().then(data => {
+      let user = this._userService.getLogedUser() 
+      user.background_image = data['background_image'];
+      this._userService.getLocalSotrage().setItem('user', JSON.stringify(user));
+      this.updateValueSubjectNext(true);
+    });
   }
   // PUT
 
@@ -76,10 +87,11 @@ export class UserPageService {
   }
 
   updateUserPassword(userID: string, data) {
-    return this.http.put(
+    console.log(userID)
+    return this.http.patch<any>(
       `${environment.baseImgURL}/user/change_password/${userID}`,
       data
-    );
+    ).subscribe();
   }
 
   updateUserAdminInfo(userID: string, data) {
@@ -103,9 +115,21 @@ export class UserPageService {
 
   /////////////////////////// AVATAR
 
-  UpadteAvatarDialog(userID) {
-    this._dialog.open(UserAvatarComponent, { data: userID });
+  UpadteAvatarDialog(userID, type: number) {
+    this._dialog.open(UserAvatarComponent, { data: {'user': userID, 'type': type} });
   }
 
   /////////////////////////// END AVATAR
+
+  /////////////////////////// Background IMG
+  UpadteBackgroundDialog(userID) {
+    this._dialog.open(UserAvatarComponent, { data: userID });
+  }
+  /////////////////////////// END Background IMG
+
+  /////////////////////////// Change Password
+  updateUserPasswordDialog(userID) {
+    this._dialog.open(UserPasswordChangeComponent, { data: userID });
+  }
+  /////////////////////////// END Change Password
 }

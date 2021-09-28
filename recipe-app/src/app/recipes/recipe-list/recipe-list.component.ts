@@ -17,6 +17,7 @@ import {RecipeInstantDetailsComponent} from '../recipe-instant-details/recipe-in
 // animation 
 import {inOutAnimation, inOutAnimationFast, inOutAnimationFast2} from '../../animations'
 import { HostListenerInUseService } from 'src/app/service/host-listener-in-use.service';
+import { UserPageService } from 'src/app/service/user-page.service';
 
 // debounce
 
@@ -62,13 +63,29 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // View type
   viewType : number = 0;
   //
+
+  // If a recipe user search
+  searchByUser = false
+  searchedUser;
   constructor(private rs : RecipeService, // recipe handle
     private route : ActivatedRoute, // Routes handle
     private _router : Router,
     private _eventEmitterService : EventEmitterService, // We can subscribe to this event to recive the new recipe after creation
     private _dialogComponent : MatDialog,
     private _hostListenerInUse : HostListenerInUseService,
-    ) { }
+    private _userPage : UserPageService
+    
+    ) { 
+      if(this._router.getCurrentNavigation().extras.state)
+      {
+        if(this._router.getCurrentNavigation().extras.state.recipeSearch)
+        {
+          this.searchByUser = true
+          this.searchedUser = this._router.getCurrentNavigation().extras.state.user
+        }
+
+      }
+    }
 
   ngOnInit(): void {    
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 4; // Depreciated
@@ -77,19 +94,35 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     
   }
 
+  reloadData(){
+    this.searchByUser = false;
+    this.dataApiGet();
+  }
+
   // Get data from API and store it in recipes_list
   dataApiGet(){
-    this.rs.getRecipe().subscribe(
-      data => {
-       this.recipes_list = data;
-       console.log(this.recipes_list)  
-       this.cloneRecipe()
-        setTimeout(() => {
-        this.loading = false;
-       }, 500); 
-       
-      }
-    )
+    if(!this.searchByUser)
+      this.rs.getRecipe().subscribe(
+        data => {
+        this.recipes_list = data;
+        console.log(this.recipes_list)  
+        this.cloneRecipe()
+          setTimeout(() => {
+          this.loading = false;
+        }, 500); 
+        
+        }
+      )
+    else
+      this._userPage.searchForUser(this.searchedUser).subscribe( data => {
+        this.recipes_list = data;
+        console.log(this.recipes_list)  
+        this.cloneRecipe()
+          setTimeout(() => {
+          this.loading = false;
+        }, 500); 
+        
+        })
   }
 
   // Create the data for instant deatils dialog

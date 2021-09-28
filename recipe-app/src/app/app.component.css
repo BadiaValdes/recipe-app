@@ -50,10 +50,12 @@
 
 .button-text {
   padding-left: 35px;
+  color: white;
 }
 
 .button-text-not-relative{
     padding-left: 15px;
+    color: white;
 }
 
 .button-container {
@@ -61,3 +63,11 @@
   text-align: left
 }
 
+.main_Name{
+  color: white;
+}
+
+.second_Name{
+  color: gray; 
+  font-size: 0.8em;
+}

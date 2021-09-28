@@ -18,7 +18,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserBackgroundImageUpdateComponent } from './user-background-image-update/user-background-image-update.component';
 
+// Shared Module
+import {DirectiveModule} from '../directive/directive.module'
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserDataComponent,
     AvatarImageComponent,
     HeaderComponent,
+    UserBackgroundImageUpdateComponent,
 
   ],
   exports:[AvatarImageComponent],
@@ -44,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    DirectiveModule,
   ]
 })
 export class UserModule { }

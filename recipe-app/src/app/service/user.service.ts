@@ -18,6 +18,7 @@ import { NotificationSnackBarService } from './notification-snack-bar.service';
 import {simpleConfiguration} from '../config/snackBarConfig';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogServiceService } from './confirm-dialog-service.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -52,6 +53,8 @@ export class UserService {
     private _event_emitter: EventEmitterService,
     private _snack_notification: NotificationSnackBarService,
     private _router: Router,
+    private _confirmDialog : ConfirmDialogServiceService,
+  
   ) {
     
     this.local_storage = localStorage.localStorage(0);
@@ -132,7 +135,8 @@ export class UserService {
       });
   }
 
-  public logout() {
+  public forceLogout(){
+    this._router.navigateByUrl('recipe');
     this.local_storage.removeItem('token');
     this.local_storage.removeItem('user');
     this.token = null;
@@ -140,7 +144,23 @@ export class UserService {
     this.username = null;
     this.isAut = false;
     this.isAuthObservable(false);
-    this._router.navigateByUrl('recipe');
+  }
+
+  public logout() {
+    this._confirmDialog.openDialog({
+      title: "LogOut",
+      description: "Dejar de ser cocinero por hoy?",
+      actionButton: "LogOut",
+      name: "LogOut"})
+    this._confirmDialog.dialogFinalValue().subscribe(
+      data => {
+        if(data == 1)
+        {
+          this.forceLogout();
+        }
+      }
+    )  
+    
   }
 
   public getLocalSotrage() {
@@ -207,24 +227,34 @@ export class UserService {
       .get<User>(`${this.recipeURL}users/${userid}`, this.getHttpOpeion())
       .toPromise()
       .then((data) => {
-        this.local_storage.setItem(
-          'user',
-          JSON.stringify({
-            id: data['id'],
-            last_login: data['last_login'],
-            background_image: data['background_image'],
-            user_name: data['username'],
-            first_name: data['first_name'],
-            last_name: data['last_name'],
-            is_staff: data['is_staff'],
-            is_active: data['is_active'],
-            mail: data['email'],
-            date_joined: data['date_joined'],
-            avatar: data['avatar'],
-            groups: data['groups'],
-          })
-        );
-        this.is_save = true;
+        if(data['is_active'])
+        {
+          this.local_storage.setItem(
+         
+            'user',
+            JSON.stringify({
+              id: data['id'],
+              last_login: data['last_login'],
+              background_image: data['background_image'],
+              user_name: data['username'],
+              first_name: data['first_name'],
+              last_name: data['last_name'],
+              is_staff: data['is_staff'],
+              is_active: data['is_active'],
+              mail: data['email'],
+              date_joined: data['date_joined'],
+              avatar: data['avatar'],
+              groups: data['groups'],
+            })
+          );
+          this.is_save = true;
+        }
+        else
+        {
+          this.forceLogout();
+        }
+        
+       
         // The oposite process
       });
   }

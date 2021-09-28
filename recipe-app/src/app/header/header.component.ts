@@ -51,20 +51,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOUt() {
-    this._confirmDialog.openDialog({
-      title: "LogOut",
-      description: "Dejar de ser cocinero por hoy?",
-      actionButton: "LogOut",
-      name: "LogOut"})
-    this._confirmDialog.dialogFinalValue().subscribe(
-      data => {
-        if(data == 1)
-        {
-          this.router.navigateByUrl('recipe');
-          this.userServ.logout();
-        }
-      }
-    )
-
+    this.userServ.logout();   
   }
 }
