@@ -9,8 +9,9 @@
     },
     "files": [
         "package.json",
-        "app/**/*",
-        "node_modules"
+        "dist/**/*",
+        "node_modules",
+        "main.js"
     ],
     "dmg": {
         "background": null,
