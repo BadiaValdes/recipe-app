@@ -1,0 +1,12 @@
+.absolute {
+  position: absolute;
+  top: -100px;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.user_data{
+    position: relative;
+    top: 15%;
+}

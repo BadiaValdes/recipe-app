@@ -1,0 +1,51 @@
+<div style="min-height: 93vh">
+  <ng-container *ngIf="userData">
+    <app-header
+      class="border-header"
+      [border]="true"
+      [borderStroke]="2"
+      color="#0099ff"
+      [backgroundImage]="userData.background_image"
+    ></app-header>
+    <div style="position: relative; width: 80%; margin: 0 auto">
+      <app-avatar-image
+        [ngStyle.lt-md]="{ 'text-align': 'center' }"
+        class="absolute"
+        [border]="true"
+        [borderStroke]="2"
+        color="#0099ff"
+        [rounded]="false"
+        [dropShadow]="true"
+        [avatar]="userData.avatar"
+        [height]="200"
+        [width]="200"
+      ></app-avatar-image>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.lt-md="column"
+      fxLayout.lt-md="center stretch"
+      fxLayoutAlign="center start"
+    >
+      <app-user-data    
+        style="margin-top: 80px"
+        fxFlex="25"
+        fxFlex.lt-md="70"
+
+        [userData]="userData"
+        [showSettings]="false"
+        [showSiteInfo]="false"
+      >
+      </app-user-data>
+
+      <app-recipe-list
+        fxFlex="70"
+        fxFlex.lt-md="100"
+        [searchByUser]="true"
+        [searchedUser]="userData.id"
+        [showSerchUserIcon]="false"
+      >
+      </app-recipe-list>
+    </div>
+  </ng-container>
+</div>

@@ -54,6 +54,7 @@ import {NgIdleKeepaliveModule} from '@ng-idle/keepalive'
 import {NgIdleModule} from '@ng-idle/core';
 import { CommonModule } from '@angular/common';
 import { UserModule } from './user/user.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -101,6 +102,8 @@ import { UserModule } from './user/user.module';
     MatDialogModule,
     MatSidenavModule,
     UserModule,
+    
+    
     
     
     

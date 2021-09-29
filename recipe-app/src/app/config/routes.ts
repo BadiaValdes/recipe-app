@@ -2,14 +2,18 @@
 export const routes = {
     whatDoICookToday : {
         url: '/recipe/what-do-i-cook-today',
-        name: 'What do i cook'
+        name: 'What do i cook',
     },
     nomenclature: {
         url: '/nomencladores',
-        name: 'Nomencladores'
+        name: 'Nomencladores',
     },
     user: {
         url: '/user',
-        name: 'Profile'
+        name: 'Profile',
+    },
+    logIn: {
+        url : '/login',
+        name: 'login',
     }
 }

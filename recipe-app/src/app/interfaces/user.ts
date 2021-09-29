@@ -1,10 +1,10 @@
 export interface User {
     id: string,
     last_login: string,
-    user_name : string,
+    username : string,
     first_name: string,
     last_name:string,
-    mail: string,
+    email: string,
     date_joined : string,
     avatar: string,
     background_image: string,

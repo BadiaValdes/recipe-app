@@ -6,9 +6,9 @@
   fxLayoutGap="10px"
   fxLayout.xs="column"
   fxLayoutAlign="center"
-  style="padding-top: 15px; padding-bottom: 20px; position: relative"
+  style="padding-top: 15px; padding-bottom: 20px; position: relative;"
 >
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center">
     <a
       mat-icon-button
       [disabled]="viewType == 0"
@@ -48,6 +48,7 @@
     <div
       *ngIf="filters && viewType == 0"
       fxLayoutAlign="center center"
+   
       fxFlexFill
       style="padding-top: 10px"
     >
@@ -79,7 +80,7 @@
           <i class="bi bi-x-lg"></i>
         </button>
         <button
-        *ngIf="searchByUser"
+        *ngIf="searchByUser && showSerchUserIcon"
         matSuffix
         mat-icon-button
         aria-label="Clear User Search"
@@ -129,6 +130,7 @@
   </mat-card> -->
 
     <app-recipe-card-item
+
       class="pd-b"
       *ngFor="let recip of recipes_list | searchFilter: searchText"
       fxFlex="20%"
@@ -144,6 +146,7 @@
 
   <ng-container>
     <app-card-mini-info
+ 
       style="z-index: 2"
       *ngIf="viewType == 2"
       [viewMode]="2"
@@ -154,10 +157,11 @@
 
   <ng-container style="position: absolute; z-index: 2">
     <app-card-mini-info
+
       *ngIf="viewType == 1"
       [viewMode]="1"
       [recipeToShow]="recipes_list"
-      fxFlex="100"
+      fxFlex="90"
       [@inOutAnimationFast2]
     ></app-card-mini-info>
   </ng-container>

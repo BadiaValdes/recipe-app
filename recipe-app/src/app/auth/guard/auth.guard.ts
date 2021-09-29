@@ -30,6 +30,7 @@ export class AuthGuard implements CanActivate {
 
   }
 
+  
   // Loged in guard -> Is the user not logged, please send it back to login page
   isLogedIn(){
     if(this.userService.isAuth()){

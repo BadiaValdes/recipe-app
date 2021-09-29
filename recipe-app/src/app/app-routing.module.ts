@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin-panel.module').then(m => m.AdminPanelModule),
   },
   {
-    path: 'user',
+    path: '',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
   },
   { path: '',   redirectTo: '/recipe', pathMatch: 'full' },
@@ -34,6 +34,7 @@ const routes: Routes = [
     // For preloading
     {
       enableTracing: true, // <-- debugging purposes only
+      onSameUrlNavigation: "reload"
       // The PrealoadAllModules is the one that can be load url with canLoad
     }
   )],

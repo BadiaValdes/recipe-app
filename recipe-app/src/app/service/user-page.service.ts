@@ -49,6 +49,10 @@ export class UserPageService {
     return this.http.get(`${environment.baseImgURL}/users/${userID}`);
   }
 
+  getUserDetailsByUsername(username: string) {
+    return this.http.get(`${environment.baseImgURL}/user/${username}`);
+  }
+
   searchForUser(data) {
     return this.http.get<Recipe[]>(`${environment.baseImgURL}/api/recipe/`, {
       params: { search: data },

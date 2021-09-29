@@ -110,6 +110,8 @@ import { MatSortModule } from '@angular/material/sort';
 
   
    ],
+   exports: [RecipeListComponent],
+
   imports: [
     CommonModule,
     FormsModule,

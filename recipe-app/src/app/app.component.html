@@ -28,7 +28,7 @@
         mat-button
         fxLayout="row"
         color="primary"
-        routerLink="/"
+        routerLink="/recipe"
         (click)="sideNavToogle()"
       >
         <span
@@ -94,6 +94,7 @@
       mat-button
       fxLayout="row"
       color="primary"
+      *ngIf="this.isUserAuth()"
       [routerLink]="this.route.user.url"
       (click)="sideNavToogle()"
     >
@@ -106,10 +107,63 @@
         this.route.user.name
       }}</span>
     </button>
-      <button mat-button color="primary">Action</button>
+
+    <button
+    style="text-align: left"
+    mat-button
+    fxLayout="row"
+    color="primary"
+    *ngIf="this.isUserAuth()"
+
+    (click)="sideNavToogle()"
+  >
+    <span
+      class="bi bi-person-circle"
+      style="font-size: 1.4em !important; color: white;"
+      fxFlexAlign="center"
+    ></span>
+    <span fxFlexAlign="center" class="button-text-not-relative">Mis Recetas</span>
+  </button>
+
+  <button
+  style="text-align: left"
+  mat-button
+  fxLayout="row"
+  color="primary"
+  *ngIf="this.isUserAuth()"
+
+  (click)="sideNavToogle()"
+>
+  <span
+    class="bi bi-person-circle"
+    style="font-size: 1.4em !important; color: white;"
+    fxFlexAlign="center"
+  ></span>
+  <span fxFlexAlign="center" class="button-text-not-relative">LogOut</span>
+</button>
+
+      <button
+      style="text-align: left"
+      mat-button
+      fxLayout="row"
+      color="primary"
+      *ngIf="!this.isUserAuth()"
+      [routerLink]="this.route.logIn.url"
+      (click)="sideNavToogle()"
+    >
+      <span
+        class="bi bi-key-fill"
+        style="font-size: 1.4em !important; color: white;"
+        fxFlexAlign="center"
+      ></span>
+      <span fxFlexAlign="center" class="button-text-not-relative">{{
+        this.route.logIn.name
+      }}</span>
+    </button>
     </mat-nav-list>
 
     <mat-nav-list
+    *ngIf="isAdmin()"
       fxLayout="column"
       style="width: 90%; margin: 0 auto; margin-bottom: 20px"
     >

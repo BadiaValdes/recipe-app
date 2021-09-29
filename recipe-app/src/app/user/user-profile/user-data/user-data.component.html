@@ -7,7 +7,7 @@
     <div fxLayout="column" class="user-data">
       <p >
         <span class="text-decorator">Username:</span> 
-        {{ userData.user_name }}
+        {{ userData.username }}
       </p>           
       <p >
         <span class="text-decorator">Full Name:</span> 
@@ -15,15 +15,19 @@
       </p>     
       <p >
         <span class="text-decorator">Email:</span> 
-        {{ userData.mail }}
+        {{ userData.email }}
       </p>
       <mat-divider></mat-divider>
-      <div dir="rtl">
-        <p > <span class="text-decorator">Last Login:</span> {{ userData.last_login|subString: 0:10 | date }}</p>
-      </div>
+      <ng-container *ngIf="userData.id === this.getLogedUser().id">
+        <div dir="rtl">
+          <p > <span class="text-decorator">Last Login:</span> {{ userData.last_login|subString: 0:10 | date }}</p>
+        </div>
+      </ng-container>
+      
     </div>
   </div>
 <!-- Second part -->
+<ng-container *ngIf="showSiteInfo">
 <div class="user-content">
     <h2 class="underline title-decorator">Site Data:</h2>
     <div fxLayout="column" class="user-data">
@@ -52,7 +56,9 @@
       
     </div>
   </div>
+</ng-container>
     <!-- Third part -->
+    <ng-container *ngIf="showSettings">
     <div class="user-content" >
     <h2 class="underline title-decorator">Settings:</h2>
     <div fxLayout="row wrap" fxLayoutAlign="center center" class="user-data settings">
@@ -65,6 +71,7 @@
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="warn" (click)="logOut()"><i fxFlexAlign="center" mat-button-icon class="bi bi-door-open-fill menu_icon"></i> Log Out</button>    
     </div>
   </div>
+</ng-container>
     <!-- 
     <h1 class="underline">Site Data:</h1>
     <mat-list>
@@ -93,5 +100,5 @@
   </div>
  -->
    
-  </div>
+
 

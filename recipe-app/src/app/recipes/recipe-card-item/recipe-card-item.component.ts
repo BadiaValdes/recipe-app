@@ -16,6 +16,7 @@ import {inOutAnimationFast} from '../../animations'
 export class RecipeCardItemComponent implements OnInit {
 
   @Input() recip: Recipe;
+  
 
   mauseOver = false;
   searchText : string = "";

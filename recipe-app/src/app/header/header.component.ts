@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 
 import { ConfirmDialogServiceService } from '../service/confirm-dialog-service.service';
 
+// Site configuration
+import {routes} from '../config/routes'
+import { UserPageService } from '../service/user-page.service';
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -26,10 +31,13 @@ export class HeaderComponent implements OnInit {
 
   showUserComponents: boolean = false;
 
+  route = routes;
+
   constructor(
     private userServ: UserService,
+    private _user : UserPageService,
     private event_emitter: EventEmitterService,
-    private router: Router,
+    private _router: Router,
     private _confirmDialog: ConfirmDialogServiceService,
   ) {}
 
@@ -52,5 +60,20 @@ export class HeaderComponent implements OnInit {
 
   logOUt() {
     this.userServ.logout();   
+  }
+
+  searchRecipes(){
+      this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this._router.navigateByUrl('/recipe', { state: { recipeSearch: true, user: this.getUserDataHeader().id}}).then(_ => {
+        //this._router.routeReuseStrategy.shouldReuseRoute = () => true;
+      });
+      this._user.updateValueSubjectNext(true);
+   /*  this._router.navigateByUrl('/recipe',{ skipLocationChange: true
+
+      },).then(_ => {
+        this._router.navigateByUrl('/recipe', { state: { recipeSearch: true, user: this.getUserDataHeader().id}})
+      })
+
+      this._user.updateValueSubjectNext(true); */
   }
 }

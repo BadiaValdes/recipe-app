@@ -24,7 +24,7 @@
             <mat-list-item>
              
               <div mat-line class="login_welcome">Let's cook as</div>
-              <div mat-line class="login_mail"> {{getUserDataHeader().mail}} </div>
+              <div mat-line class="login_mail"> {{getUserDataHeader().email}} </div>
            
             </mat-list-item>
 
@@ -33,8 +33,8 @@
 
             <mat-divider style="margin: 5px"></mat-divider>        
          
-          <button mat-menu-item  class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-person-circle menu_icon"></i><span>Profile</span></button>
-          <button mat-menu-item class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-journal-richtext menu_icon"></i><span>My recipe</span></button>
+          <button mat-menu-item  class="font_menu_text"  fxLayout="center none" [routerLink]="this.route.user.url"><i mat-button-icon class="bi bi-person-circle menu_icon"></i><span>{{this.route.user.name}}</span></button>
+          <button mat-menu-item class="font_menu_text"  fxLayout="center none" (click)="searchRecipes()"><i mat-button-icon class="bi bi-journal-richtext menu_icon"></i><span>My recipe</span></button>
           <mat-divider style="margin: 5px"></mat-divider>
           <button mat-menu-item class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-box-arrow-right menu_icon"></i><span (click)="logOUt()">Log Out</span></button>
         </div>

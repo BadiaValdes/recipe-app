@@ -1,6 +1,6 @@
 .dropShadow {
     position: relative;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
  
    
@@ -25,7 +25,7 @@
 
 @media screen and (max-width: 640px){
     .dropShadow {
-        width: 80%;
+        width: 100%;
     }
 }
 

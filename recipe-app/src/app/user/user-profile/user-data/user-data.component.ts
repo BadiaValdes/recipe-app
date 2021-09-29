@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class UserDataComponent implements OnInit {
 
   @Input() userData : User;
+  @Input() showSettings?: boolean = true;
+  @Input() showSiteInfo?: boolean = true;
   userRecipe:number = 0;
   constructor(private _recipe : RecipeService, private _user: UserPageService, private _userService : UserService, private _router: Router) { }
 
@@ -22,6 +24,11 @@ export class UserDataComponent implements OnInit {
         this.userRecipe = data.length
       }
     )
+  }
+
+  getLogedUser()
+  {
+    return this._userService.getLogedUser()
   }
 
   openAvatarDialog(type : number){

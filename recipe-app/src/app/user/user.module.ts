@@ -21,7 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserBackgroundImageUpdateComponent } from './user-background-image-update/user-background-image-update.component';
 
 // Shared Module
-import {DirectiveModule} from '../directive/directive.module'
+import {DirectiveModule} from '../directive/directive.module';
+import { UserProfileSecondViewComponent } from './user-profile-second-view/user-profile-second-view.component';
+import { UserMainComponent } from './user-main/user-main.component'
+import { RecipeModule } from '../recipes/recipe.module';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import {DirectiveModule} from '../directive/directive.module'
     AvatarImageComponent,
     HeaderComponent,
     UserBackgroundImageUpdateComponent,
+    UserProfileSecondViewComponent,
+    UserMainComponent,
 
   ],
   exports:[AvatarImageComponent],
@@ -49,6 +55,7 @@ import {DirectiveModule} from '../directive/directive.module'
     MatInputModule,
     ReactiveFormsModule,
     DirectiveModule,
+   RecipeModule,
   ]
 })
 export class UserModule { }
