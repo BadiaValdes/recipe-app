@@ -1,1 +1,33 @@
-
+<ng-container *ngIf="currentUser">
+    <h4 style="text-align: center;" mat-dialog-title>Actualizar Datos</h4>
+<mat-dialog-content>
+    <form fxLayout="column" [formGroup]="userUpdateDataForm">
+        <!-- First Name -->
+        <mat-form-field appearance="legacy">
+            <mat-label>First Name</mat-label>
+            <input matInput appInputHostListener placeholder="Roger" formControlName="first_name">
+            <i matPrefix class="bi bi-fonts icon-padding"></i>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        <!-- Last Name -->
+        <mat-form-field appearance="legacy">
+            <mat-label>Last Name</mat-label>
+            <input matInput appInputHostListener placeholder="Rabbit" formControlName="last_name">
+            <i matPrefix class="bi bi-fonts icon-padding"></i>
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+         <!-- Email -->
+         <mat-form-field appearance="legacy">
+            <mat-label>Email</mat-label>
+            <input matInput appInputHostListener placeholder="rogerLOVEjessica@gmail.com" formControlName="email">
+            <i matPrefix class="bi bi-envelope-fill icon-padding"></i>
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+    </form>
+        <!-- Buttons -->
+        <div fxLayout="row" style="padding-top: 15px;">
+            <button fxFlex='50' fxFlex.lt-sm="100" mat-stroked-button color="warn" (click)="closeDialog()">Canelar</button>
+            <button fxFlex='50' fxFlex.lt-sm="100" mat-stroked-button color="primary" (click)="updateUserData()">Update</button>
+        </div>  
+</mat-dialog-content>
+</ng-container>

@@ -79,6 +79,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // event emiter Subscription
   eventSubcriber: Subscription;
 
+  // User Recipe subscription
+  loggedUserRecipe: Subscription;
+
   // Subject for debouncing method
   filterSubject: Subject<string> = new Subject<string>(); // Creates a observable variable
 
@@ -117,9 +120,16 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.breakpoint = window.innerWidth <= 400 ? 1 : 4; // Depreciated
+    //this.breakpoint = window.innerWidth <= 400 ? 1 : 4; // Depreciated.
+
     this.dataApiGet();
     this.eventDataSubcriber();
+    this._userPage.getUserRecipeSubject().subscribe((d) => {
+      console.log(d);
+      if (d != null) {
+        this.getDataFromOutsideTheBox(d);
+      }
+    });
   }
 
   reloadData() {
@@ -127,7 +137,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.dataApiGet();
   }
 
-  getDataFromOutsideTheBox(userID){
+  getDataFromOutsideTheBox(userID) {
     this.searchByUser = true;
     this.searchedUser = userID;
     this.dataApiGet();
@@ -184,15 +194,20 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    if (this.eventSubcriber) {
+    if(this.eventSubcriber){
       this.eventSubcriber.unsubscribe();
       this.eventSubcriber = null;
     }
+
 
     if (this.recipe_names_observable.observers.length > 0) {
       this.recipe_names_observable.unsubscribe();
       this.recipe_names_observable = null;
     }
+
+
+    this._userPage.userRecipeSubjectNext(null);
+    this.searchByUser = false;
   }
 
   // Depreciated

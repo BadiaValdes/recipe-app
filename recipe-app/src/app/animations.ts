@@ -6,7 +6,7 @@ import {
   // Routable animations
 export const slideInAnimation =
 trigger('routeAnimation', [
-  transition('hero <=> hero_detail', [
+  transition('* <=> *', [
     style({ position: 'relative' }),
     query(':enter, :leave', [ // General CSS for the two of the animations
       style({
@@ -22,10 +22,10 @@ trigger('routeAnimation', [
     query(':leave', animateChild()), // Says that the leave animation is a child of enter, so, it will come after
     group([
       query(':leave', [
-        animate('300ms ease-out', style({ opacity: '0%'})) // Final state of leave
+        animate('500ms ease-out', style({ opacity: '0%'})) // Final state of leave
       ]),
       query(':enter', [
-        animate('400ms ease-out', style({ opacity: '100%'}))// Final state of enter
+        animate('800ms ease-out', style({ opacity: '100%'}))// Final state of enter
       ])
     ]),
     query(':enter', animateChild()),

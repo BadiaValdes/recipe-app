@@ -63,11 +63,8 @@ export class HeaderComponent implements OnInit {
   }
 
   searchRecipes(){
-      this._router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this._router.navigateByUrl('/recipe', { state: { recipeSearch: true, user: this.getUserDataHeader().id}}).then(_ => {
-        //this._router.routeReuseStrategy.shouldReuseRoute = () => true;
-      });
-      this._user.updateValueSubjectNext(true);
+    this._user.getUserRecipe();
+      
    /*  this._router.navigateByUrl('/recipe',{ skipLocationChange: true
 
       },).then(_ => {

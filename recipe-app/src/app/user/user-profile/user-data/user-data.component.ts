@@ -39,6 +39,10 @@ export class UserDataComponent implements OnInit {
     this._user.updateUserPasswordDialog(this.userData.id)
   }
 
+  openUpdateProfileDialog(){
+    this._user.updateUserDataDialog(this.userData.id)
+  }
+
   logOut(){
     this._userService.logout()
   }
@@ -50,6 +54,8 @@ export class UserDataComponent implements OnInit {
       })
       this._user.updateValueSubjectNext(true);
   }
+
+ 
 
   
 

@@ -9,7 +9,7 @@ import {
 
 // Like a variable for the html
 import { RouterOutlet, Router } from '@angular/router';
-import { slideInAnimation } from './animations';
+import { inOutAnimation } from './animations';
 
 // Matirial
 import { MatToolbarRow } from '@angular/material/toolbar';
@@ -43,13 +43,14 @@ import { idle_time, idleTimeOut } from './config/siteConfiguration';
 import { ConfirmDialogServiceService } from './service/confirm-dialog-service.service';
 import { HostListenerInUseService } from './service/host-listener-in-use.service';
 import { take } from 'rxjs/operators';
+import { UserPageService } from './service/user-page.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   // Import the animation
-  animations: [slideInAnimation],
+  animations: [inOutAnimation],
 })
 export class AppComponent implements OnDestroy {
   route = routes;
@@ -64,16 +65,29 @@ export class AppComponent implements OnDestroy {
     private _router: Router,
     private _idle: Idle,
     private _confirmDialog: ConfirmDialogServiceService,
-    private _hostListenerInUse: HostListenerInUseService
+    private _hostListenerInUse: HostListenerInUseService,
+    private _userPage : UserPageService,
   ) {
     this._idle.setIdle(idle_time * 60);
     this._idle.setTimeout(idleTimeOut * 60);
     this._idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
+    // this._idle.onIdleStart.subscribe(_ => {
+    //   console.log("comenzo la pasion")
+    // })
+
+    // this._idle.onIdleEnd.subscribe(_ => {
+    //   console.log("Se acabo lo que se daba")
+    // })
+
+    // this._idle.onInterrupt.subscribe(_=>{
+    //   console.log("se jodio esto")
+    // })
+
     this._idle.onTimeout.subscribe(() => {
       if (this._userService.isAuth()) {
         console.log('Out of time');
-        this._userService.logout();
+        this._userService.forceLogout();
         this._confirmDialog.openDialog({
           title: 'Separado de la cocina',
           description:
@@ -83,8 +97,9 @@ export class AppComponent implements OnDestroy {
         });
       }
     });
-
+    this._userService.isAuthObservable(true)
     this._userService.isAuthSubcriber().subscribe((d) => {
+      console.log(d)
       if (d) this._idle.watch();
     });
 
@@ -112,8 +127,7 @@ export class AppComponent implements OnDestroy {
   }
 
   @HostListener('document:keyup', ['$event'])
-  hostListenerEventsKeyDown(event) {
-    console.log(event)
+  hostListenerEventsKeyDown(event) {    
       this._hostListenerInUse
         .hostListenerInUseNotObservable().pipe(take(1))
         .subscribe((data) => {
@@ -196,5 +210,13 @@ export class AppComponent implements OnDestroy {
         );
       }
     });
+  }
+
+  getUserRecipe(){
+    this._userPage.getUserRecipe();
+  }
+
+  logOut(){
+    this._userService.logout();
   }
 }

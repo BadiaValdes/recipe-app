@@ -10,7 +10,7 @@ import { from } from 'rxjs';
 // Guard
 
 const routes: Routes = [
-  { path: 'user', component: UserMainComponent,
+  { path: '', component: UserMainComponent,
   children: [
     { path: '',  component: UserProfileComponent, canActivate: [IsAuthGuard]},
     { path: ':username',  component: UserProfileSecondViewComponent},

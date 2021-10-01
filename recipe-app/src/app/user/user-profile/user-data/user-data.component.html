@@ -10,8 +10,12 @@
         {{ userData.username }}
       </p>           
       <p >
-        <span class="text-decorator">Full Name:</span> 
-        {{ userData.first_name }} {{userData.last_name}}
+        <span class="text-decorator">First Name:</span> 
+        {{ userData.first_name }} 
+      </p>        
+      <p >
+        <span class="text-decorator">Last Name:</span> 
+        {{userData.last_name}}
       </p>     
       <p >
         <span class="text-decorator">Email:</span> 
@@ -66,7 +70,7 @@
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="basic" (click)="openPasswordDialog()"><i fxFlexAlign="center" mat-button-icon class="bi bi-lock-fill menu_icon"></i> Cambiar Contraseña</button>
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="basic" (click)="openAvatarDialog(1)"><i fxFlexAlign="center" mat-button-icon class="bi bi-person-fill menu_icon"></i> Cambiar avatar</button>
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="basic" (click)="openAvatarDialog(2)"><i fxFlexAlign="center" mat-button-icon class="bi bi-image-fill menu_icon"></i> Cambiar imagen</button>
-      <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="basic"><i fxFlexAlign="center" mat-button-icon class="bi bi-pencil-square menu_icon"></i> Modificar Datos</button>
+      <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="basic" (click)="openUpdateProfileDialog()"><i fxFlexAlign="center" mat-button-icon class="bi bi-pencil-square menu_icon"></i> Modificar Datos</button>
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="warn"><i fxFlexAlign="center" mat-button-icon class="bi bi-trash-fill menu_icon"></i> Eliminar Cuenta</button>
       <button fxFlex.lt-sm="100%" fxFlex="25" fxFlex.md="40" fxFlex.lg="40" fxFlex.sm="100" [ngStyle.lt-md]="{'text-align':'left'}"  fxFlexAlign="center" mat-button color="warn" (click)="logOut()"><i fxFlexAlign="center" mat-button-icon class="bi bi-door-open-fill menu_icon"></i> Log Out</button>    
     </div>

@@ -38,15 +38,15 @@
           <mat-divider style="margin: 5px"></mat-divider>
           <button mat-menu-item class="font_menu_text"  fxLayout="center none"><i mat-button-icon class="bi bi-box-arrow-right menu_icon"></i><span (click)="logOUt()">Log Out</span></button>
         </div>
-        <button mat-menu-item routerLink="login/"  *ngIf="!isAuth">
+        <button mat-menu-item routerLink="login/" class="font_menu_text" fxLayout="center none"   *ngIf="!isAuth">
           
-          <span>Log In</span>
+          <i mat-button-icon class="bi bi-key-fill menu_icon"></i><span>Log In</span>
           
         </button>
         
         
-        <button mat-menu-item *ngIf="!isAuth">
-          <span>Sing up</span>
+        <button mat-menu-item class="font_menu_text"  fxLayout="center none" *ngIf="!isAuth">
+          <i mat-button-icon class="bi bi-box-arrow-in-right menu_icon"></i><span>Sing up</span>
         </button>
       </mat-menu>
       

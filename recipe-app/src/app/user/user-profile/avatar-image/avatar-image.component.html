@@ -1,1 +1,3 @@
-<img [src]="avatar" [ngClass]="{'avatar' : rounded, 'border' : border, 'dropShadow' : dropShadow}" [ngStyle]="{'border-color': color, ' border-width': borderStroke+'px'}" [height]="height" [width]="width">
+<!-- <div [ngClass]="{'secondSquare' : secondSquare}"> -->
+    <img [src]="avatar" (click)="navigateToTheOtherSide()" [ngClass]="{'avatar' : rounded, 'border' : border, 'dropShadow' : dropShadow}" [ngStyle]="{'border-color': color, ' border-width': borderStroke+'px'}" [height]="height" [width]="width">
+<!-- </div> -->

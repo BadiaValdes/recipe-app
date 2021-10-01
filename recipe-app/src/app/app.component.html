@@ -114,11 +114,11 @@
     fxLayout="row"
     color="primary"
     *ngIf="this.isUserAuth()"
-
+    (click)="getUserRecipe()"
     (click)="sideNavToogle()"
   >
     <span
-      class="bi bi-person-circle"
+      class="bi bi-journal-richtext "
       style="font-size: 1.4em !important; color: white;"
       fxFlexAlign="center"
     ></span>
@@ -131,35 +131,58 @@
   fxLayout="row"
   color="primary"
   *ngIf="this.isUserAuth()"
-
+  (click)="logOut()"
   (click)="sideNavToogle()"
 >
   <span
-    class="bi bi-person-circle"
+    class="bi bi-box-arrow-right  "
     style="font-size: 1.4em !important; color: white;"
     fxFlexAlign="center"
   ></span>
   <span fxFlexAlign="center" class="button-text-not-relative">LogOut</span>
 </button>
+<ng-container      *ngIf="!this.isUserAuth()">
+  <button
+  style="text-align: left"
+  mat-button
+  fxLayout="row"
+  color="primary"
 
-      <button
-      style="text-align: left"
-      mat-button
-      fxLayout="row"
-      color="primary"
-      *ngIf="!this.isUserAuth()"
-      [routerLink]="this.route.logIn.url"
-      (click)="sideNavToogle()"
-    >
-      <span
-        class="bi bi-key-fill"
-        style="font-size: 1.4em !important; color: white;"
-        fxFlexAlign="center"
-      ></span>
-      <span fxFlexAlign="center" class="button-text-not-relative">{{
-        this.route.logIn.name
-      }}</span>
-    </button>
+  (click)="sideNavToogle()"
+  [routerLink]="this.route.logIn.url"
+  
+>
+  <span
+    class="bi bi-key-fill"
+    style="font-size: 1.4em !important; color: white;"
+    fxFlexAlign="center"
+  ></span>
+  <span fxFlexAlign="center" class="button-text-not-relative">{{
+    this.route.logIn.name
+  }}</span>
+</button>
+
+<button
+style="text-align: left"
+mat-button
+fxLayout="row"
+color="primary"
+
+(click)="sideNavToogle()"
+[routerLink]="this.route.singUP.url"
+
+>
+<span
+  class="bi bi-box-arrow-in-right"
+  style="font-size: 1.4em !important; color: white;"
+  fxFlexAlign="center"
+></span>
+<span fxFlexAlign="center" class="button-text-not-relative">{{
+  this.route.singUP.name
+}}</span>
+</button>
+</ng-container>
+
     </mat-nav-list>
 
     <mat-nav-list
@@ -186,13 +209,11 @@
       <i class="icon bi bi-puzzle" fxFlexAlign="center"></i>
         <span class="button-text-not-relative" fxFlexAlign="center">{{ this.route.nomenclature.name }}</span>
       </button>
-      <button mat-button color="primary">Action</button>
-      <button mat-button color="primary">Action</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- this outlet is not named, so, only one can be present in the template-->
-    <div [@routeAnimation]="getAnimationData(routerOutlet)">
+    <div [@inOutAnimation]>
       <router-outlet #routerOutlet="outlet"></router-outlet>
     </div>
 

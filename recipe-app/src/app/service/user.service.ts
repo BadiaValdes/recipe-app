@@ -36,7 +36,7 @@ export class UserService {
   private isAut = false;
   private is_save = false;
 
-  private isAuthSubject : Subject<boolean> = new Subject<boolean>();
+  private isAuthSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
 
   private httpOptions = {
@@ -109,8 +109,8 @@ export class UserService {
     return this.isAuthSubject.next(state);
   }
 
-  public isAuthSubcriber():Observable<boolean>{
-    return this.isAuthSubject.asObservable();
+  public isAuthSubcriber(){
+    return this.isAuthSubject;
   }
 
 
@@ -214,10 +214,11 @@ export class UserService {
   }
 
   public isAdmin(){
-    if(this.userGroups())
-      return this.userGroups().find(element => element === "admin")
+    if(this.getLogedUser())
+      return this.getLogedUser().is_staff
     else
       return false
+
   }
 
   public getUserData() {

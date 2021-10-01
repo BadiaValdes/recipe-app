@@ -15,5 +15,10 @@ export const routes = {
     logIn: {
         url : '/login',
         name: 'login',
-    }
+    },
+
+    singUP: {
+        url : '/sinup',
+        name: 'SingUp',
+    },
 }
