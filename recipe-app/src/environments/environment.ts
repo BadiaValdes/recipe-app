@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://localhost:8000/api/',
-  authURL: 'http://localhost:8000/',
-  baseImgURL: 'http://localhost:8000',
+  // baseURL: 'http://localhost:8000/api/',
+  // authURL: 'http://localhost:8000/',
+  // baseImgURL: 'http://localhost:8000',  
+  baseURL: 'http://jemilio.pythonanywhere.com/api/',
+  authURL: 'http://jemilio.pythonanywhere.com/',
+  baseImgURL: 'http://jemilio.pythonanywhere.com',
 };
 
 /*
